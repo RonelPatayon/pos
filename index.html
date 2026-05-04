@@ -22,7 +22,7 @@
       max-width: 1600px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 420px;
+      grid-template-columns: 1fr 480px;
       gap: 24px;
     }
 
@@ -186,7 +186,7 @@
       background: #dce9f0;
     }
 
-    .customer-badge { 
+    .customer-badge {
       background: #e1f0f7;
       padding: 6px 12px;
       border-radius: 30px;
@@ -222,7 +222,7 @@
     .cart-items {
       flex: 1;
       padding: 1rem 1.2rem;
-      max-height: 300px;
+      max-height: 260px;
       overflow-y: auto;
       border-bottom: 1px solid #e0edf2;
     }
@@ -292,6 +292,63 @@
       border-color: #2c7da0;
     }
 
+    /* Non-cash payment section */
+    .digital-payment-section {
+      background: #f9fdfe;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 15px;
+      border: 1px solid #d4e9f2;
+    }
+
+    .qr-code-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 12px;
+      background: white;
+      border-radius: 1rem;
+    }
+
+    .qr-placeholder {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e2f0f7 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      margin-bottom: 8px;
+      border: 2px solid #2c7da0;
+    }
+
+    .qr-placeholder span {
+      font-size: 3rem;
+    }
+
+    .reference-input {
+      margin-top: 12px;
+    }
+
+    .reference-input label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1e5f7a;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .reference-input input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 60px;
+      border: 1px solid #bdd4e2;
+      outline: none;
+      font-size: 0.85rem;
+    }
+
     .cash-input {
       display: flex;
       gap: 10px;
@@ -330,7 +387,7 @@
     }
     .modal-content {
       background: white;
-      max-width: 450px;
+      max-width: 500px;
       width: 90%;
       border-radius: 2rem;
       padding: 1.8rem;
@@ -343,6 +400,8 @@
       font-family: monospace;
       white-space: pre-line;
       margin: 1rem 0;
+      max-height: 400px;
+      overflow-y: auto;
     }
     .close-modal { background: #2c7da0; border: none; padding: 8px 24px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
 
@@ -405,7 +464,7 @@
         <button class="method-btn" data-method="card">💎 Card</button>
       </div>
 
-      <!-- Cash input (only visible when cash selected) -->
+      <!-- Cash Section -->
       <div id="cashSection" style="display: block;">
         <div class="cash-input">
           <label>💵 Cash Amount</label>
@@ -414,6 +473,23 @@
         <div class="change-display">
           <span>Change / Amount due:</span>
           <span id="changeAmount">₱0.00</span>
+        </div>
+      </div>
+
+      <!-- Digital Payment Section (QR + Reference) -->
+      <div id="digitalPaymentSection" style="display: none;">
+        <div class="digital-payment-section">
+          <div class="qr-code-container" id="qrContainer">
+            <!-- Dynamic QR based on payment method -->
+          </div>
+          <div class="reference-input">
+            <label>📝 Transaction Reference Number *</label>
+            <input type="text" id="transactionRefInput" placeholder="e.g., GCash Ref No. / Last 4 digits of card" autocomplete="off">
+          </div>
+          <div class="change-display" style="margin-top: 10px;">
+            <span>💳 Payment Status:</span>
+            <span id="digitalPaymentStatus">Awaiting reference</span>
+          </div>
         </div>
       </div>
 
@@ -463,19 +539,71 @@
     { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", icon: "🧂" }
   ];
 
-  // ---------- CUSTOMER DATABASE (mock) ----------
+  // ---------- CUSTOMER DATABASE ----------
   let customers = [
     { id: 1, name: "Juan Dela Cruz", phone: "09123456789", address: "Brgy. San Isidro" },
     { id: 2, name: "Maria Santos", phone: "09234567890", address: "Poblacion" },
     { id: 3, name: "Carlos Reyes", phone: "09345678901", address: "Maharlika Village" }
   ];
-  let selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" }; // default walk-in
+  let selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" };
 
-  // cart state
   let cart = [];
   let selectedPaymentMethod = "cash";
 
-  // Helper DOM
+  // Helper: Show sample QR based on method
+  function updateQrAndReferenceField() {
+    const qrContainer = document.getElementById("qrContainer");
+    if (!qrContainer) return;
+    
+    const method = selectedPaymentMethod;
+    let qrHtml = "";
+    if (method === "gcash") {
+      qrHtml = `
+        <div class="qr-placeholder">
+          <span>📱💚</span>
+          <span style="font-size:10px; margin-top:4px;">GCash QR</span>
+        </div>
+        <div style="font-size:12px; text-align:center; color:#0c6b8f;">
+          <strong>Sample GCash QR</strong><br>
+          Scan to pay: 0999-123-4567<br>
+          <span style="font-size:10px;">(Merchant: AquaFlow Water Station)</span>
+        </div>
+      `;
+    } else if (method === "paymaya") {
+      qrHtml = `
+        <div class="qr-placeholder">
+          <span>💳🔷</span>
+          <span style="font-size:10px; margin-top:4px;">PayMaya QR</span>
+        </div>
+        <div style="font-size:12px; text-align:center; color:#0c6b8f;">
+          <strong>Sample PayMaya QR</strong><br>
+          Account: aquaflow@paymaya.com<br>
+          <span style="font-size:10px;">Scan to pay securely</span>
+        </div>
+      `;
+    } else if (method === "card") {
+      qrHtml = `
+        <div class="qr-placeholder">
+          <span>💳✨</span>
+          <span style="font-size:10px; margin-top:4px;">Card Terminal</span>
+        </div>
+        <div style="font-size:12px; text-align:center; color:#0c6b8f;">
+          <strong>Card Payment</strong><br>
+          Visa | Mastercard | JCB<br>
+          <span style="font-size:10px;">Tap / Insert card on terminal</span>
+        </div>
+      `;
+    }
+    qrContainer.innerHTML = qrHtml;
+    
+    // update reference placeholder
+    const refInput = document.getElementById("transactionRefInput");
+    if (method === "gcash") refInput.placeholder = "GCash Reference # (e.g., 1234567890)";
+    else if (method === "paymaya") refInput.placeholder = "PayMaya Transaction ID";
+    else if (method === "card") refInput.placeholder = "Last 4 digits of card / Auth Code";
+    else refInput.placeholder = "Reference Number";
+  }
+
   function renderProducts(activeCategory = "all") {
     const grid = document.getElementById("productsGrid");
     let filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
@@ -506,7 +634,7 @@
   }
 
   function removeItem(id) { cart = cart.filter(item => item.id !== id); renderCart(); }
-  function clearCart() { cart = []; renderCart(); document.getElementById("cashInput").value = "0"; updateChangeDisplay(); }
+  function clearCart() { cart = []; renderCart(); document.getElementById("cashInput").value = "0"; if(document.getElementById("transactionRefInput")) document.getElementById("transactionRefInput").value = ""; updateChangeDisplay(); }
 
   function getTotal() { return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); }
 
@@ -552,12 +680,15 @@
 
   function updateChangeDisplay() {
     const total = getTotal();
-    const cashInput = parseFloat(document.getElementById("cashInput").value) || 0;
     if (selectedPaymentMethod === "cash") {
+      const cashInput = parseFloat(document.getElementById("cashInput").value) || 0;
       const change = cashInput - total;
       if (change >= 0) document.getElementById("changeAmount").innerHTML = `₱${change.toFixed(2)} (Change)`;
       else document.getElementById("changeAmount").innerHTML = `₱${Math.abs(change).toFixed(2)} (Short)`;
     } else {
+      const ref = document.getElementById("transactionRefInput")?.value.trim();
+      const hasRef = ref && ref.length > 0;
+      document.getElementById("digitalPaymentStatus").innerHTML = hasRef ? "✅ Reference recorded" : "⚠️ Reference required";
       document.getElementById("changeAmount").innerHTML = `Via ${getPaymentLabel()} — total: ₱${total.toFixed(2)}`;
     }
   }
@@ -569,7 +700,7 @@
     return "Cash";
   }
 
-  // Customer search and selection
+  // Customer search
   function renderCustomerSearch(query) {
     const container = document.getElementById("searchResultsContainer");
     if (!query.trim()) { container.innerHTML = ""; return; }
@@ -595,41 +726,27 @@
     document.getElementById("selectedCustomerDisplay").innerHTML = "🚶 Walk-In Customer (default)";
   }
 
-  // Add new customer modal
+  // Add customer modal
   const addModal = document.getElementById("addCustomerModal");
   function openAddCustomerModal() { addModal.style.display = "flex"; }
   function closeAddCustomerModal() { addModal.style.display = "none"; }
 
-  document.getElementById("addCustomerBtn").addEventListener("click", openAddCustomerModal);
-  document.getElementById("cancelCustomerBtn").addEventListener("click", closeAddCustomerModal);
-  document.getElementById("saveCustomerBtn").addEventListener("click", () => {
-    const name = document.getElementById("newCustomerName").value.trim();
-    const phone = document.getElementById("newCustomerPhone").value.trim();
-    const address = document.getElementById("newCustomerAddress").value.trim();
-    if (!name || !phone) { alert("Please enter name and phone number."); return; }
-    const newId = customers.length + 1;
-    const newCust = { id: newId, name, phone, address: address || "" };
-    customers.push(newCust);
-    selectedCustomer = { id: newId, name, phone, address, type: "existing" };
-    document.getElementById("selectedCustomerDisplay").innerHTML = `👤 ${name} (${phone})`;
-    document.getElementById("newCustomerName").value = "";
-    document.getElementById("newCustomerPhone").value = "";
-    document.getElementById("newCustomerAddress").value = "";
-    closeAddCustomerModal();
-    alert("Customer added successfully!");
-  });
-
-  // Checkout logic with multiple payments
+  // Checkout with reference validation for non-cash
   function checkout() {
     if (cart.length === 0) { alert("Cart is empty."); return; }
     const total = getTotal();
+    
     if (selectedPaymentMethod === "cash") {
       const cashGiven = parseFloat(document.getElementById("cashInput").value) || 0;
       if (cashGiven < total) { alert(`Insufficient cash! Total ₱${total.toFixed(2)}`); return; }
       processSale(total, cashGiven, `Cash: ₱${cashGiven.toFixed(2)} | Change: ₱${(cashGiven - total).toFixed(2)}`);
     } else {
-      // For GCash, PayMaya, Card: assume full payment
-      processSale(total, total, `Payment via ${getPaymentLabel()} (Reference: ${Math.floor(Math.random()*1000000)})`);
+      const refNumber = document.getElementById("transactionRefInput")?.value.trim();
+      if (!refNumber) {
+        alert(`Please enter the transaction reference number for ${getPaymentLabel()}.`);
+        return;
+      }
+      processSale(total, total, `${getPaymentLabel()} payment | Ref: ${refNumber}`);
     }
   }
 
@@ -656,31 +773,48 @@ Thank you for choosing clean water!
 `;
     document.getElementById("receiptDetails").innerHTML = receipt.replace(/\n/g,'<br>');
     document.getElementById("receiptModal").style.display = "flex";
-    // reset cart & cash
+    
+    // Reset after sale
     cart = [];
     renderCart();
     document.getElementById("cashInput").value = "0";
-    setWalkInDefault();  // reset to walk-in after sale
+    if(document.getElementById("transactionRefInput")) document.getElementById("transactionRefInput").value = "";
+    setWalkInDefault();
     updateChangeDisplay();
   }
 
-  // Payment method switching UI
+  // Payment method switching
   function setPaymentMethod(method) {
     selectedPaymentMethod = method;
     document.querySelectorAll(".method-btn").forEach(btn => {
       if (btn.getAttribute("data-method") === method) btn.classList.add("active");
       else btn.classList.remove("active");
     });
+    
     const cashSection = document.getElementById("cashSection");
-    if (method === "cash") cashSection.style.display = "block";
-    else cashSection.style.display = "none";
+    const digitalSection = document.getElementById("digitalPaymentSection");
+    
+    if (method === "cash") {
+      cashSection.style.display = "block";
+      digitalSection.style.display = "none";
+    } else {
+      cashSection.style.display = "none";
+      digitalSection.style.display = "block";
+      updateQrAndReferenceField();
+      // attach listener for reference input to update status
+      const refInput = document.getElementById("transactionRefInput");
+      if (refInput) {
+        refInput.removeEventListener("input", updateChangeDisplay);
+        refInput.addEventListener("input", updateChangeDisplay);
+      }
+    }
     updateChangeDisplay();
   }
 
-  // Event binding
   function init() {
     renderProducts("all");
     renderCart();
+    setPaymentMethod("cash");
 
     document.querySelectorAll(".cat-btn").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -698,8 +832,28 @@ Thank you for choosing clean water!
     document.getElementById("clearCartBtn").addEventListener("click", clearCart);
     document.getElementById("checkoutBtn").addEventListener("click", checkout);
     document.getElementById("cashInput").addEventListener("input", updateChangeDisplay);
+    
     document.querySelectorAll(".method-btn").forEach(btn => {
       btn.addEventListener("click", () => setPaymentMethod(btn.getAttribute("data-method")));
+    });
+
+    document.getElementById("addCustomerBtn").addEventListener("click", openAddCustomerModal);
+    document.getElementById("cancelCustomerBtn").addEventListener("click", closeAddCustomerModal);
+    document.getElementById("saveCustomerBtn").addEventListener("click", () => {
+      const name = document.getElementById("newCustomerName").value.trim();
+      const phone = document.getElementById("newCustomerPhone").value.trim();
+      const address = document.getElementById("newCustomerAddress").value.trim();
+      if (!name || !phone) { alert("Please enter name and phone number."); return; }
+      const newId = customers.length + 1;
+      const newCust = { id: newId, name, phone, address: address || "" };
+      customers.push(newCust);
+      selectedCustomer = { id: newId, name, phone, address, type: "existing" };
+      document.getElementById("selectedCustomerDisplay").innerHTML = `👤 ${name} (${phone})`;
+      document.getElementById("newCustomerName").value = "";
+      document.getElementById("newCustomerPhone").value = "";
+      document.getElementById("newCustomerAddress").value = "";
+      closeAddCustomerModal();
+      alert("Customer added successfully!");
     });
 
     const modal = document.getElementById("receiptModal");
@@ -713,4 +867,4 @@ Thank you for choosing clean water!
   init();
 </script>
 </body>
-</html>  
+</html>
