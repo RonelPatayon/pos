@@ -1,453 +1,759 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>HRMS Dashboard | HR Management System</title>
-    <!-- Bootstrap 5 CSS + Icons + Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- jQuery (required for DataTables) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #f4f6f9;
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-        }
-        .sidebar {
-            background: linear-gradient(180deg, #0b2b3b 0%, #0a1c2a 100%);
-            min-height: 100vh;
-            box-shadow: 2px 0 12px rgba(0,0,0,0.05);
-        }
-        .sidebar .nav-link {
-            color: #cbd5e1;
-            font-weight: 500;
-            padding: 12px 20px;
-            margin: 4px 0;
-            border-radius: 12px;
-            transition: all 0.2s;
-        }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            background-color: #1e4a6b;
-            color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .sidebar .nav-link i {
-            width: 28px;
-            font-size: 1.2rem;
-        }
-        .card-stats {
-            border: none;
-            border-radius: 24px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            background: white;
-        }
-        .card-stats:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
-        }
-        .stat-icon {
-            width: 54px;
-            height: 54px;
-            background: #eef2ff;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #2c6e9e;
-        }
-        .top-navbar {
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .page-title {
-            font-weight: 700;
-            color: #1e2a3e;
-        }
-        .badge-employee {
-            background: #e9ecef;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        .footer-badge {
-            background: #ffffffdd;
-            backdrop-filter: blur(4px);
-        }
-        .dataTables_wrapper .dataTables_filter input {
-            border-radius: 40px;
-            padding-left: 20px;
-            border: 1px solid #dee2e6;
-        }
-        table.dataTable td, table.dataTable th {
-            vertical-align: middle;
-        }
-        .avatar-placeholder {
-            width: 38px;
-            height: 38px;
-            background: #e2e8f0;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #1e4a6b;
-        }
-        @media (max-width: 768px) {
-            .sidebar {
-                min-height: auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>AquaFlow POS | Water Refilling Station</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #d4e9f7 0%, #bfe0f0 100%);
+      min-height: 100vh;
+      padding: 24px 20px;
+    }
+
+    /* Main POS container grid */
+    .pos-container {
+      max-width: 1500px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      background: transparent;
+    }
+
+    /* ========== LEFT PANEL (PRODUCTS & CATALOG) ========== */
+    .products-panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 20, 30, 0.25);
+      padding: 1.5rem;
+      transition: all 0.2s;
+    }
+
+    .station-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #2c7da0;
+      padding-bottom: 0.75rem;
+    }
+
+    .station-header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0b3b4f, #1f6e8c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .station-header .date-badge {
+      background: #eaf4f9;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1e5f7a;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #cbdde6;
+      padding-bottom: 12px;
+    }
+
+    .cat-btn {
+      background: #f0f5f9;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #2c4e62;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    }
+
+    .cat-btn.active {
+      background: #2c7da0;
+      color: white;
+      box-shadow: 0 8px 14px -8px rgba(44,125,160,0.4);
+    }
+
+    .cat-btn:hover:not(.active) {
+      background: #e2edf2;
+      transform: translateY(-1px);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 18px;
+      max-height: 550px;
+      overflow-y: auto;
+      padding: 4px 4px 8px 4px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1rem 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #deedf2;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      border-color: #7fc1db;
+      box-shadow: 0 16px 22px -10px rgba(34, 98, 118, 0.2);
+    }
+
+    .product-icon {
+      font-size: 2.6rem;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-weight: 700;
+      color: #1f5068;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .product-price {
+      font-weight: 800;
+      color: #0f4c5f;
+      background: #e2f0f6;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+    }
+
+    .product-stock {
+      font-size: 0.7rem;
+      color: #548eaa;
+      margin-top: 8px;
+    }
+
+    /* ========== RIGHT PANEL (CART & CHECKOUT) ========== */
+    .cart-panel {
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+      min-height: 650px;
+    }
+
+    .cart-header {
+      background: #1e5f7a;
+      color: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 2rem 2rem 1.5rem 1.5rem;
+    }
+
+    .cart-header h2 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-items {
+      flex: 1;
+      padding: 1rem 1.2rem;
+      max-height: 420px;
+      overflow-y: auto;
+      border-bottom: 1px solid #e0edf2;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafeff;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 1rem;
+      border-left: 5px solid #2c7da0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .cart-item-info {
+      flex: 2;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      color: #1d4f66;
+    }
+
+    .cart-item-meta {
+      font-size: 0.7rem;
+      color: #5d8aa8;
+      display: flex;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty-btn {
+      background: #e9f2f7;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #1f5e78;
+      transition: 0.1s;
+    }
+
+    .qty-btn:hover {
+      background: #cbe1ec;
+    }
+
+    .item-qty {
+      font-weight: 600;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .item-price {
+      font-weight: 700;
+      width: 70px;
+      text-align: right;
+      color: #136b8c;
+    }
+
+    .remove-item {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #bb9e9e;
+      padding: 0 4px;
+      transition: 0.1s;
+    }
+
+    .remove-item:hover {
+      color: #d9534f;
+    }
+
+    .cart-summary {
+      padding: 1.2rem 1.5rem;
+      background: #f6fbfe;
+      border-radius: 1.2rem;
+      margin: 0.8rem;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .total-line {
+      font-size: 1.4rem;
+      font-weight: 800;
+      border-top: 2px dashed #bddceb;
+      padding-top: 12px;
+      margin-top: 6px;
+      color: #094c66;
+    }
+
+    .payment-section {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+
+    .cash-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .cash-input label {
+      font-weight: 600;
+      color: #1e5f7a;
+    }
+
+    .cash-input input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 60px;
+      border: 1px solid #bdd4e2;
+      font-size: 1rem;
+      outline: none;
+      background: white;
+    }
+
+    .cash-input input:focus {
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 2px rgba(44,125,160,0.2);
+    }
+
+    .change-display {
+      background: #eef3f7;
+      padding: 10px 14px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    .btn-checkout {
+      background: #2c7da0;
+      border: none;
+      padding: 14px;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-checkout:hover:not(:disabled) {
+      background: #1f6683;
+      transform: scale(0.98);
+    }
+
+    .btn-checkout:disabled {
+      background: #b7cfdb;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .btn-clear {
+      background: #f1f5f7;
+      border: 1px solid #cde1ea;
+      padding: 10px;
+      border-radius: 60px;
+      font-weight: 500;
+      cursor: pointer;
+      color: #365f74;
+    }
+
+    .btn-clear:hover {
+      background: #e6edf2;
+    }
+
+    .empty-cart-message {
+      text-align: center;
+      padding: 40px 20px;
+      color: #79a7bb;
+      font-weight: 500;
+    }
+
+    /* receipt modal simple */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      max-width: 400px;
+      width: 90%;
+      border-radius: 2rem;
+      padding: 1.8rem;
+      text-align: center;
+      font-family: monospace;
+    }
+    .receipt-text {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+      white-space: pre-line;
+    }
+    .close-modal {
+      background: #2c7da0;
+      border: none;
+      padding: 8px 24px;
+      border-radius: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 860px) {
+      .pos-container {
+        grid-template-columns: 1fr;
+      }
+      body { padding: 16px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container-fluid px-0">
-    <div class="row g-0">
-        <!-- SIDEBAR -->
-        <div class="col-md-3 col-lg-2 sidebar p-3 pt-4">
-            <div class="text-center mb-4">
-                <i class="fas fa-user-tie fs-1 text-white-50"></i>
-                <h5 class="text-white mt-2">HRMS Portal</h5>
-                <span class="badge bg-light text-dark mt-1">v2.0 · Enterprise</span>
-            </div>
-            <ul class="nav flex-column">
-                <li class="nav-item"><a href="#" class="nav-link active"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-users me-2"></i> Employees</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-clock me-2"></i> Attendance</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-file-invoice-dollar me-2"></i> Payroll</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-chart-line me-2"></i> Reports</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-calendar-alt me-2"></i> Leave</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-shield-alt me-2"></i> Security</a></li>
-            </ul>
-            <hr class="bg-secondary my-3">
-            <div class="text-center small text-white-50 mt-auto">
-                <i class="far fa-building"></i> <span>PHP & Laravel Ready</span>
-            </div>
-        </div>
-
-        <!-- MAIN CONTENT -->
-        <div class="col-md-9 col-lg-10 p-3 p-lg-4">
-            <!-- Top bar -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center top-navbar p-3 mb-4">
-                <div>
-                    <h3 class="page-title mb-0"><i class="fas fa-chart-pie me-2 text-primary"></i>HR Dashboard</h3>
-                    <span class="text-muted small">Real-time overview · STATIC DEMO (API ready)</span>
-                </div>
-                <div class="d-flex align-items-center gap-3 mt-2 mt-sm-0">
-                    <i class="fas fa-bell text-secondary fs-5"></i>
-                    <div class="dropdown">
-                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                            <div class="avatar-placeholder me-2">RP</div>
-                            <span class="fw-semibold">Ronel P.</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STATS CARDS (static data) -->
-            <div class="row g-4 mb-5">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-stats p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="text-secondary text-uppercase small fw-bold">Total Employees</span>
-                                <h2 class="mt-2 fw-bold" id="totalEmployeesCount">248</h2>
-                                <span class="badge bg-success-subtle text-success"><i class="fas fa-arrow-up"></i> +12%</span>
-                            </div>
-                            <div class="stat-icon"><i class="fas fa-user-friends"></i></div>
-                        </div>
-                        <hr class="my-2">
-                        <div class="small text-muted"><i class="far fa-calendar-check"></i> Active: 234 | On leave: 14</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-stats p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><span class="text-secondary text-uppercase small fw-bold">Present Today</span><h2 class="mt-2 fw-bold">198</h2><span class="badge bg-info">82% attendance</span></div>
-                            <div class="stat-icon"><i class="fas fa-fingerprint"></i></div>
-                        </div>
-                        <hr><div class="small text-muted">Checked-in: 198 | Late: 14</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-stats p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><span class="text-secondary text-uppercase small fw-bold">Pending Leave</span><h2 class="mt-2 fw-bold">23</h2><span class="badge bg-warning text-dark">waiting approval</span></div>
-                            <div class="stat-icon"><i class="fas fa-umbrella-beach"></i></div>
-                        </div>
-                        <hr><div class="small text-muted">This week requests: 9 new</div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-stats p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><span class="text-secondary text-uppercase small fw-bold">Monthly Payroll</span><h2 class="mt-2 fw-bold">$284K</h2><span class="badge bg-success">↑ 4.2%</span></div>
-                            <div class="stat-icon"><i class="fas fa-coins"></i></div>
-                        </div>
-                        <hr><div class="small text-muted">Net pay (May) | Est. 245 employees</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CHART ROW: Attendance & Department Distribution -->
-            <div class="row g-4 mb-5">
-                <div class="col-lg-8">
-                    <div class="card border-0 shadow-sm rounded-4 p-3">
-                        <div class="card-header bg-transparent border-0 fw-bold fs-5"><i class="fas fa-chart-line me-2 text-primary"></i> Weekly Attendance Trend (Last 7 days)</div>
-                        <div class="card-body">
-                            <canvas id="attendanceTrendChart" height="100" style="max-height: 280px; width: 100%"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
-                        <div class="card-header bg-transparent border-0 fw-bold"><i class="fas fa-chart-pie me-2 text-success"></i> Employees by Department</div>
-                        <div class="card-body">
-                            <canvas id="deptPieChart" height="200"></canvas>
-                            <div class="mt-3 small text-center text-muted">R&D, Sales, HR, Finance, Operations</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- LEAVE STATUS + RECENT EMPLOYEES (DataTable) -->
-            <div class="row g-4 mb-4">
-                <div class="col-md-5">
-                    <div class="card border-0 shadow-sm rounded-4 p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="fw-bold mb-0"><i class="fas fa-clock me-2 text-warning"></i> Upcoming Leaves</h5>
-                            <span class="badge bg-light text-dark">Next 7 days</span>
-                        </div>
-                        <div class="list-group list-group-flush" id="upcomingLeavesList">
-                            <!-- static JS will inject here -->
-                        </div>
-                        <div class="mt-2 text-end"><a href="#" class="small text-decoration-none">View all requests <i class="fas fa-arrow-right"></i></a></div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="card border-0 shadow-sm rounded-4 p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
-                            <h5 class="fw-bold"><i class="fas fa-table-list me-2"></i> Recent Employees</h5>
-                            <span class="badge bg-primary">API-ready · static demo</span>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="employeesTable" class="table table-hover align-middle" style="width:100%">
-                                <thead class="table-light">
-                                    <tr><th>ID</th><th>Full Name</th><th>Department</th><th>Position</th><th>Status</th><th>Join Date</th></tr>
-                                </thead>
-                                <tbody id="employeeTableBody">
-                                    <!-- dynamic injected with static JS data -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="alert alert-light border-0 shadow-sm rounded-4 mt-2 text-center small text-muted">
-                <i class="fas fa-database me-1"></i> Static data simulation — ready to replace with API endpoints (fetch/axios)
-            </div>
-        </div>
+<div class="pos-container">
+  <!-- LEFT: Products Area -->
+  <div class="products-panel">
+    <div class="station-header">
+      <h1>💧 AquaFlow Refilling Station</h1>
+      <div class="date-badge" id="currentDate"></div>
     </div>
+
+    <div class="category-tabs" id="categoryTabs">
+      <button class="cat-btn active" data-cat="all">All Items</button>
+      <button class="cat-btn" data-cat="bottled">💧 Bottled Water</button>
+      <button class="cat-btn" data-cat="refill">🔄 Refill (Gallon)</button>
+      <button class="cat-btn" data-cat="accessory">🧴 Accessories</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+      <!-- dynamic product cards from js -->
+    </div>
+  </div>
+
+  <!-- RIGHT: Cart / POS -->
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>🛒 Current Order</h2>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+      <div class="empty-cart-message">✨ Cart is empty. Tap products to add.</div>
+    </div>
+    <div class="cart-summary">
+      <div class="summary-line"><span>Subtotal</span><span id="subtotalAmount">₱0.00</span></div>
+      <div class="summary-line"><span>Tax (0% included)</span><span>₱0.00</span></div>
+      <div class="summary-line total-line"><span>Total</span><span id="totalAmount">₱0.00</span></div>
+    </div>
+    <div class="payment-section">
+      <div class="cash-input">
+        <label>💵 Cash</label>
+        <input type="number" id="cashInput" placeholder="0.00" step="any" value="0">
+      </div>
+      <div class="change-display">
+        <span>Change:</span>
+        <span id="changeAmount">₱0.00</span>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-checkout" id="checkoutBtn">✅ Complete Sale</button>
+        <button class="btn-clear" id="clearCartBtn">🗑 Clear Cart</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Bootstrap JS bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Receipt modal -->
+<div id="receiptModal" class="modal">
+  <div class="modal-content">
+    <h3>🧾 AquaFlow Receipt</h3>
+    <div id="receiptDetails" class="receipt-text"></div>
+    <button class="close-modal" id="closeModalBtn">Close</button>
+  </div>
+</div>
 
 <script>
-    // ---------- STATIC DATA (replace with API calls later) ----------
-    // Employee list for DataTable
-    const employeesData = [
-        { id: 1001, name: "Maria Santos", dept: "Human Resources", position: "HR Manager", status: "Active", joinDate: "2022-03-10" },
-        { id: 1002, name: "John Dela Cruz", dept: "Information Technology", position: "Senior Developer", status: "Active", joinDate: "2021-07-22" },
-        { id: 1003, name: "Andrea Gomez", dept: "Sales & Marketing", position: "Sales Lead", status: "Active", joinDate: "2023-01-15" },
-        { id: 1004, name: "Robert Lee", dept: "Finance", position: "Accountant", status: "On Leave", joinDate: "2020-11-02" },
-        { id: 1005, name: "Sofia Rivera", dept: "Operations", position: "Ops Coordinator", status: "Active", joinDate: "2022-09-05" },
-        { id: 1006, name: "James Wilson", dept: "IT", position: "System Analyst", status: "Active", joinDate: "2021-12-11" },
-        { id: 1007, name: "Patricia Ramos", dept: "Human Resources", position: "Recruiter", status: "Active", joinDate: "2023-04-18" },
-        { id: 1008, name: "Carlos Mendez", dept: "Finance", position: "Payroll Specialist", status: "Active", joinDate: "2022-02-28" },
-        { id: 1009, name: "Emily Tan", dept: "Sales", position: "Account Executive", status: "Active", joinDate: "2023-06-01" },
-        { id: 1010, name: "Daniel Cruz", dept: "IT", position: "Junior Dev", status: "Active", joinDate: "2023-10-10" }
-    ];
+  // ---------- PRODUCT DATABASE (Water Refilling Station) ----------
+  const products = [
+    { id: 1, name: "Bottled Water 500ml", price: 18, category: "bottled", stock: 150, icon: "💧" },
+    { id: 2, name: "Bottled Water 1L", price: 25, category: "bottled", stock: 120, icon: "🧊" },
+    { id: 3, name: "Mineral Water 1.5L", price: 35, category: "bottled", stock: 90, icon: "💎" },
+    { id: 4, name: "Alkaline Water 1L", price: 45, category: "bottled", stock: 70, icon: "⚡" },
+    { id: 5, name: "Gallon Refill (Standard)", price: 25, category: "refill", stock: 999, icon: "🔄" },
+    { id: 6, name: "Alkaline Gallon Refill", price: 40, category: "refill", stock: 999, icon: "💧⚡" },
+    { id: 7, name: "Mineral Gallon Refill", price: 35, category: "refill", stock: 999, icon: "🏔️" },
+    { id: 8, name: "Water Jug Cap (pcs)", price: 5, category: "accessory", stock: 200, icon: "🧴" },
+    { id: 9, name: "Carrying Handle", price: 12, category: "accessory", stock: 85, icon: "🖐️" },
+    { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", stock: 40, icon: "🧂" }
+  ];
 
-    // Upcoming Leaves (static)
-    const leavesData = [
-        { employee: "Robert Lee", type: "Sick Leave", start: "2026-05-08", end: "2026-05-10", days: 3 },
-        { employee: "Andrea Gomez", type: "Vacation", start: "2026-05-12", end: "2026-05-16", days: 5 },
-        { employee: "Sofia Rivera", type: "Personal Leave", start: "2026-05-09", end: "2026-05-09", days: 1 },
-        { employee: "James Wilson", type: "Bereavement", start: "2026-05-15", end: "2026-05-17", days: 3 },
-        { employee: "Maria Santos", type: "Conference Leave", start: "2026-05-20", end: "2026-05-22", days: 3 }
-    ];
+  // cart state: array of { id, name, price, quantity, category, icon }
+  let cart = [];
 
-    // department stats for pie chart
-    const departmentStats = {
-        "Information Technology": 28,
-        "Sales & Marketing": 34,
-        "Human Resources": 18,
-        "Finance": 22,
-        "Operations": 26
-    };
-
-    // Weekly attendance dataset (static) representing Mon-Sun present counts
-    const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    const presentData = [195, 201, 198, 205, 190, 142, 98];   // weekend lower
-
-    // ---------- Populate DataTable ----------
-    function populateEmployeeTable() {
-        const tbody = document.getElementById("employeeTableBody");
-        if(!tbody) return;
-        tbody.innerHTML = "";
-        employeesData.forEach(emp => {
-            const row = `<tr>
-                <td>${emp.id}</td>
-                <td><div class="d-flex align-items-center gap-2"><span class="avatar-placeholder" style="width:32px; height:32px; font-size:0.8rem;">${emp.name.charAt(0)}</span>${emp.name}</div></td>
-                <td>${emp.dept}</td>
-                <td>${emp.position}</td>
-                <td><span class="badge ${emp.status === 'Active' ? 'bg-success' : 'bg-warning text-dark'}">${emp.status}</span></td>
-                <td>${emp.joinDate}</td>
-            </tr>`;
-            tbody.insertAdjacentHTML('beforeend', row);
-        });
-        // initialize DataTables after DOM update
-        if($.fn.DataTable.isDataTable('#employeesTable')) {
-            $('#employeesTable').DataTable().destroy();
-        }
-        $('#employeesTable').DataTable({
-            pageLength: 5,
-            lengthMenu: [[5, 10, 25], [5, 10, 25]],
-            language: { search: "Filter:" },
-            responsive: true
-        });
-    }
-
-    // populate upcoming leaves list 
-    function renderUpcomingLeaves() {
-        const container = document.getElementById("upcomingLeavesList");
-        if(!container) return;
-        container.innerHTML = "";
-        leavesData.forEach(leave => {
-            const item = document.createElement('div');
-            item.className = "list-group-item d-flex justify-content-between align-items-start border-0 px-0 py-2";
-            item.innerHTML = `
-                <div><i class="fas fa-calendar-day me-2 text-info"></i> <strong>${leave.employee}</strong><br><small class="text-muted">${leave.type} · ${leave.start} to ${leave.end}</small></div>
-                <span class="badge bg-secondary rounded-pill">${leave.days} day(s)</span>
-            `;
-            container.appendChild(item);
-        });
-        if(leavesData.length === 0) container.innerHTML = '<div class="text-muted text-center py-3">No pending leaves</div>';
-    }
-
-    // Initialize Charts (Chart.js)
-    let attendanceChart, deptPieChart;
-
-    function initCharts() {
-        const ctxLine = document.getElementById('attendanceTrendChart').getContext('2d');
-        if(attendanceChart) attendanceChart.destroy();
-        attendanceChart = new Chart(ctxLine, {
-            type: 'line',
-            data: {
-                labels: weekDays,
-                datasets: [{
-                    label: 'Employees Present',
-                    data: presentData,
-                    borderColor: '#2c6e9e',
-                    backgroundColor: 'rgba(44,110,158,0.05)',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#1e4a6b',
-                    pointBorderColor: '#fff',
-                    pointRadius: 5,
-                    pointHoverRadius: 7,
-                    tension: 0.2,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' }, tooltip: { mode: 'index' } }
-            }
-        });
-
-        const pieCtx = document.getElementById('deptPieChart').getContext('2d');
-        if(deptPieChart) deptPieChart.destroy();
-        deptPieChart = new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: Object.keys(departmentStats),
-                datasets: [{
-                    data: Object.values(departmentStats),
-                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} employees` } } }
-            }
-        });
-    }
-
-    // Also can update counts dynamically (though static but consistent)
-    function updateStatsFromData() {
-        // compute total employees based on static list length and active status
-        const totalEmp = employeesData.length;
-        const activeCount = employeesData.filter(e => e.status === "Active").length;
-        const onLeaveCount = employeesData.filter(e => e.status === "On Leave").length;
-        document.getElementById("totalEmployeesCount").innerText = totalEmp;
-        // refine the stats card subtext
-        const subtextSpan = document.querySelector(".card-stats:first-child .small.text-muted");
-        if(subtextSpan) subtextSpan.innerHTML = `<i class="far fa-calendar-check"></i> Active: ${activeCount} | On leave: ${onLeaveCount}`;
-        
-        // present today static (198) already set, but can update later, keep as is.
-        // pending leave count: from leavesData length
-        const leaveBadgeSpan = document.querySelector(".card-stats:nth-child(3) h2.fw-bold");
-        if(leaveBadgeSpan) leaveBadgeSpan.innerText = leavesData.length;
-        const pendingSub = document.querySelector(".card-stats:nth-child(3) .small.text-muted");
-        if(pendingSub) pendingSub.innerHTML = `This week requests: ${leavesData.filter(l => l.start.includes("2026-05")).length || 3} new`;
-    }
-
-    // Additional: to simulate future API integration, all data can be swapped, but we keep easy bindings.
-    // For demonstration, we also include a console log for api readiness.
-    window.apiPlaceholder = {
-        getEmployees: () => employeesData,
-        getLeaves: () => leavesData,
-        getAttendanceTrend: () => ({ labels: weekDays, data: presentData }),
-        updateDashboard: (newData) => { console.warn("API ready: just replace static dataset with fetch"); }
-    };
-    
-    // Helper to refresh the whole dashboard dynamically (keep manual static consistency)
-    function refreshDashboard() {
-        populateEmployeeTable();     // rebuilds DataTable
-        renderUpcomingLeaves();
-        updateStatsFromData();
-        initCharts(); // reinitialize charts (avoid duplication)
-    }
-    
-    // ---- Bootstrap and execute ----
-    document.addEventListener("DOMContentLoaded", function() {
-        refreshDashboard();
-        // small polish: ensuring chart resize on window
-        window.addEventListener('resize', () => {
-            if(attendanceChart) attendanceChart.resize();
-            if(deptPieChart) deptPieChart.resize();
-        });
-        console.log("HRMS Dashboard ready — all data static, replace arrays with API calls anytime.");
+  // helper: update entire UI
+  function renderProducts(activeCategory = "all") {
+    const grid = document.getElementById("productsGrid");
+    let filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
+    grid.innerHTML = "";
+    filtered.forEach(prod => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.setAttribute("data-id", prod.id);
+      card.innerHTML = `
+        <div class="product-icon">${prod.icon}</div>
+        <div class="product-name">${prod.name}</div>
+        <div class="product-price">₱${prod.price.toFixed(2)}</div>
+        <div class="product-stock">📦 stock: ${prod.stock > 500 ? '∞' : prod.stock}</div>
+      `;
+      card.addEventListener("click", () => addToCart(prod));
+      grid.appendChild(card);
     });
-</script>
+  }
 
-<!-- Additional inline for missing counts text correction -->
+  // add product to cart (handling stock simulation, but stock just UI helper)
+  function addToCart(product) {
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        category: product.category,
+        icon: product.icon
+      });
+    }
+    renderCart();
+  }
+
+  // modify quantity / remove
+  function updateQty(id, delta) {
+    const idx = cart.findIndex(item => item.id === id);
+    if (idx === -1) return;
+    const newQty = cart[idx].quantity + delta;
+    if (newQty <= 0) {
+      cart.splice(idx, 1);
+    } else {
+      cart[idx].quantity = newQty;
+    }
+    renderCart();
+  }
+
+  function removeItem(id) {
+    cart = cart.filter(item => item.id !== id);
+    renderCart();
+  }
+
+  function clearCart() {
+    cart = [];
+    renderCart();
+    document.getElementById("cashInput").value = "0";
+    document.getElementById("changeAmount").innerText = "₱0.00";
+  }
+
+  function getTotal() {
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  }
+
+  function renderCart() {
+    const container = document.getElementById("cartItemsContainer");
+    const subSpan = document.getElementById("subtotalAmount");
+    const totalSpan = document.getElementById("totalAmount");
+    const total = getTotal();
+    subSpan.innerText = `₱${total.toFixed(2)}`;
+    totalSpan.innerText = `₱${total.toFixed(2)}`;
+
+    if (cart.length === 0) {
+      container.innerHTML = `<div class="empty-cart-message">🧺 Cart is empty. Tap products to add.</div>`;
+      updateChangeDisplay();
+      return;
+    }
+
+    container.innerHTML = "";
+    cart.forEach(item => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "cart-item";
+      itemDiv.innerHTML = `
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.icon || "💧"} ${item.name}</div>
+          <div class="cart-item-meta">₱${item.price.toFixed(2)} each</div>
+        </div>
+        <div class="cart-item-actions">
+          <button class="qty-btn" data-action="dec" data-id="${item.id}">−</button>
+          <span class="item-qty">${item.quantity}</span>
+          <button class="qty-btn" data-action="inc" data-id="${item.id}">+</button>
+          <span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span>
+          <button class="remove-item" data-action="remove" data-id="${item.id}">✕</button>
+        </div>
+      `;
+      container.appendChild(itemDiv);
+    });
+
+    // attach events dynamically
+    document.querySelectorAll(".qty-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = parseInt(btn.getAttribute("data-id"));
+        const action = btn.getAttribute("data-action");
+        if (action === "inc") updateQty(id, 1);
+        if (action === "dec") updateQty(id, -1);
+      });
+    });
+    document.querySelectorAll(".remove-item").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = parseInt(btn.getAttribute("data-id"));
+        removeItem(id);
+      });
+    });
+    updateChangeDisplay();
+  }
+
+  function updateChangeDisplay() {
+    const cash = parseFloat(document.getElementById("cashInput").value) || 0;
+    const total = getTotal();
+    const change = cash - total;
+    if (change >= 0) {
+      document.getElementById("changeAmount").innerText = `₱${change.toFixed(2)}`;
+    } else {
+      document.getElementById("changeAmount").innerText = `₱${change.toFixed(2)} (insufficient)`;
+    }
+  }
+
+  // checkout with receipt
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Cart is empty. Add items before checkout.");
+      return;
+    }
+    const total = getTotal();
+    const cashInputElem = document.getElementById("cashInput");
+    let cash = parseFloat(cashInputElem.value);
+    if (isNaN(cash)) cash = 0;
+    if (cash < total) {
+      alert(`Insufficient cash! Total is ₱${total.toFixed(2)}. Received ₱${cash.toFixed(2)}.`);
+      return;
+    }
+    const change = cash - total;
+    // Generate Receipt content
+    const now = new Date();
+    const dateStr = now.toLocaleString();
+    let itemsList = "";
+    cart.forEach(item => {
+      itemsList += `${item.name} x ${item.quantity}  = ₱${(item.price * item.quantity).toFixed(2)}\n`;
+    });
+    const receiptContent = `--------------------------------
+💧 AQUAFLOW REFILLING STATION
+📍 Purok 1, San Vicente
+📅 ${dateStr}
+--------------------------------
+ITEMS:
+${itemsList}
+--------------------------------
+TOTAL:         ₱${total.toFixed(2)}
+CASH:          ₱${cash.toFixed(2)}
+CHANGE:        ₱${change.toFixed(2)}
+--------------------------------
+Thank you for choosing clean water!
+🌊 Keep Hydrated 🌊
+`;
+
+    document.getElementById("receiptDetails").innerHTML = receiptContent.replace(/\n/g,'<br>');
+    const modal = document.getElementById("receiptModal");
+    modal.style.display = "flex";
+    // After sale clear cart and reset cash field
+    cart = [];
+    renderCart();
+    cashInputElem.value = "0";
+    updateChangeDisplay();
+  }
+
+  // Event Listeners + category + cash input
+  function init() {
+    renderProducts("all");
+    renderCart();
+
+    // category switching
+    const catBtns = document.querySelectorAll(".cat-btn");
+    catBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        catBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const cat = btn.getAttribute("data-cat");
+        renderProducts(cat);
+      });
+    });
+
+    document.getElementById("cashInput").addEventListener("input", () => updateChangeDisplay());
+    document.getElementById("clearCartBtn").addEventListener("click", clearCart);
+    document.getElementById("checkoutBtn").addEventListener("click", checkout);
+
+    // close modal
+    const modal = document.getElementById("receiptModal");
+    const closeBtn = document.getElementById("closeModalBtn");
+    closeBtn.onclick = () => { modal.style.display = "none"; };
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+    // set current date
+    const today = new Date();
+    const dateOpt = { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' };
+    document.getElementById("currentDate").innerText = today.toLocaleDateString(undefined, dateOpt);
+  }
+
+  // extra: also update change total on cart renders
+  const origRenderCart = renderCart;
+  window.renderCart = function() {
+    origRenderCart();
+    updateChangeDisplay();
+  };
+  renderCart = function() {
+    origRenderCart();
+    updateChangeDisplay();
+  }.bind(this);
+
+  // override
+  const superRender = renderCart;
+  renderCart = function() {
+    superRender();
+    updateChangeDisplay();
+  };
+  window.renderCart = renderCart;
+
+  init();
+  // patch functions to ensure change updates
+  const originalUpdate = updateQty;
+  window.updateQty = function(id, delta) { originalUpdate(id, delta); updateChangeDisplay(); };
+  updateQty = function(id, delta) { originalUpdate(id, delta); updateChangeDisplay(); };
+  removeItem = function(id) { cart = cart.filter(item => item.id !== id); renderCart(); updateChangeDisplay(); };
+  clearCart = function() { cart = []; renderCart(); updateChangeDisplay(); };
+  // reassign to ensure updated
+  window.updateQty = updateQty;
+  window.removeItem = removeItem;
+  window.clearCart = clearCart;
+  // final binding recalc
+  document.getElementById("cashInput")?.addEventListener("input", () => updateChangeDisplay());
+</script>
 </body>
 </html>
