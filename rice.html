@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>AquaFlow POS | Premium Water Refilling Station</title>
-  <!-- Font Awesome 6 (Free CDN) -->
+  <title>BigasPOS | Rice & Grocery Point of Sale</title>
+  <!-- Font Awesome 6 (Free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter + Poppins for modern look -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Inter + Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -17,12 +17,12 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #e8f4f8 0%, #d1e9f2 100%);
+      background: linear-gradient(135deg, #fdf8e7 0%, #f7f0da 100%);
       min-height: 100vh;
       padding: 28px 24px;
     }
 
-    /* modern glassmorphism + fresh aquatic theme */
+    /* warm golden & brown grocery theme */
     .pos-container {
       max-width: 1600px;
       margin: 0 auto;
@@ -31,15 +31,14 @@
       gap: 28px;
     }
 
-    /* ========== LEFT PANEL (PRODUCTS) ========== */
+    /* LEFT PANEL (PRODUCTS) */
     .products-panel {
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 248, 235, 0.96);
       backdrop-filter: blur(2px);
       border-radius: 2rem;
-      box-shadow: 0 25px 45px -12px rgba(0, 35, 50, 0.25);
+      box-shadow: 0 25px 40px -12px rgba(90, 60, 30, 0.2);
       padding: 1.8rem;
-      transition: all 0.2s;
-      border: 1px solid rgba(64, 176, 207, 0.2);
+      border: 1px solid rgba(210, 150, 75, 0.2);
     }
 
     .station-header {
@@ -49,7 +48,7 @@
       flex-wrap: wrap;
       margin-bottom: 1.8rem;
       padding-bottom: 0.85rem;
-      border-bottom: 3px solid #40b0cf;
+      border-bottom: 3px solid #c2873b;
     }
 
     .logo-area {
@@ -59,49 +58,43 @@
     }
 
     .logo-icon {
-      background: linear-gradient(145deg, #2c9cbf, #1f7a9e);
+      background: linear-gradient(145deg, #c2873b, #a5682a);
       width: 48px;
       height: 48px;
       border-radius: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 12px rgba(32, 120, 150, 0.25);
+      box-shadow: 0 6px 12px rgba(160, 100, 30, 0.3);
     }
 
     .logo-icon i {
       font-size: 26px;
       color: white;
-      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
     }
 
     .station-header h1 {
       font-size: 1.7rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #146b8a, #1c9bbf);
+      background: linear-gradient(135deg, #a5682a, #d6943e);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
     }
 
     .date-badge {
-      background: #eef6fb;
+      background: #fcf3e4;
       padding: 8px 18px;
       border-radius: 60px;
       font-size: 0.8rem;
       font-weight: 600;
-      color: #146b8a;
+      color: #a5682a;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .date-badge i {
-      font-size: 0.9rem;
-    }
-
-    /* category tabs */
+    /* category tabs rice / grocery */
     .category-tabs {
       display: flex;
       gap: 12px;
@@ -110,45 +103,36 @@
     }
 
     .cat-btn {
-      background: #f0f7fa;
+      background: #fef7ed;
       border: none;
       padding: 10px 24px;
       border-radius: 60px;
       font-weight: 600;
       font-size: 0.9rem;
       font-family: 'Inter', sans-serif;
-      color: #2c6b83;
+      color: #8b5a2b;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
-    .cat-btn i {
-      font-size: 1rem;
-    }
-
+    .cat-btn i { font-size: 1rem; }
     .cat-btn.active {
-      background: #1f8aad;
+      background: #c2873b;
       color: white;
-      box-shadow: 0 8px 18px -8px #1f8aad70;
+      box-shadow: 0 8px 18px -8px #c2873b70;
     }
 
-    .cat-btn:hover:not(.active) {
-      background: #e2f0f5;
-      transform: translateY(-2px);
-    }
-
-    /* product grid modern */
+    /* product grid */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
       max-height: 560px;
       overflow-y: auto;
-      padding: 4px 4px 8px 4px;
+      padding: 4px;
     }
 
     .product-card {
@@ -157,54 +141,35 @@
       padding: 1.2rem 0.8rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.25s;
-      border: 1px solid #e0f0f5;
-      box-shadow: 0 8px 15px rgba(0, 30, 40, 0.05);
+      transition: 0.25s;
+      border: 1px solid #f7e5d2;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.03);
     }
 
     .product-card:hover {
       transform: translateY(-6px);
-      border-color: #7fcfeb;
-      box-shadow: 0 20px 25px -12px rgba(31, 130, 160, 0.25);
-      background: #fefefe;
+      border-color: #e2b87a;
+      box-shadow: 0 16px 22px -10px rgba(180, 120, 40, 0.2);
+      background: #fffef8;
     }
 
-    .product-icon {
-      font-size: 2.8rem;
-      margin-bottom: 12px;
-      color: #1f8aad;
-    }
+    .product-icon { font-size: 2.6rem; margin-bottom: 12px; color: #c2873b; }
+    .product-name { font-weight: 700; color: #6a3e1a; margin-bottom: 8px; font-size: 1rem; }
+    .product-price { font-weight: 800; background: #f7ebdb; display: inline-block; padding: 5px 14px; border-radius: 50px; font-size: 0.9rem; color: #a1612a; }
 
-    .product-name {
-      font-weight: 700;
-      color: #145c78;
-      margin-bottom: 8px;
-      font-size: 1rem;
-    }
-
-    .product-price {
-      font-weight: 800;
-      background: #e4f2f7;
-      display: inline-block;
-      padding: 5px 14px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      color: #0d5e7c;
-    }
-
-    /* ========== RIGHT PANEL (CART) ========== */
+    /* RIGHT PANEL (CART) */
     .cart-panel {
       background: white;
       border-radius: 2rem;
-      box-shadow: 0 25px 45px -12px rgba(0, 35, 45, 0.3);
+      box-shadow: 0 25px 40px -12px rgba(60, 40, 20, 0.25);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      border: 1px solid rgba(64, 176, 207, 0.3);
+      border: 1px solid #f3e1cc;
     }
 
     .cart-header {
-      background: linear-gradient(105deg, #146b8a 0%, #1e8bb0 100%);
+      background: linear-gradient(105deg, #a5682a, #c2873b);
       padding: 1.3rem 1.6rem;
     }
 
@@ -217,16 +182,16 @@
       color: white;
     }
 
-    /* customer area */
+    /* customer section */
     .customer-section {
       padding: 1.2rem 1.4rem;
-      background: #f9feff;
-      border-bottom: 1px solid #daecf2;
+      background: #fffcf5;
+      border-bottom: 1px solid #f0e1cf;
     }
 
     .customer-label {
       font-weight: 700;
-      color: #146b8a;
+      color: #a5682a;
       font-size: 0.8rem;
       margin-bottom: 10px;
       display: flex;
@@ -245,44 +210,39 @@
       flex: 2;
       padding: 11px 15px;
       border-radius: 60px;
-      border: 1px solid #cde3ec;
+      border: 1px solid #eedbcb;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
-      transition: 0.2s;
     }
 
     .customer-control input:focus {
-      border-color: #1f8aad;
+      border-color: #c2873b;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(31,138,173,0.1);
+      box-shadow: 0 0 0 3px rgba(194,135,59,0.1);
     }
 
     .customer-control button {
-      background: #eef5f9;
+      background: #faf0e4;
       border: none;
       padding: 8px 18px;
       border-radius: 60px;
       font-weight: 600;
       font-size: 0.8rem;
       cursor: pointer;
-      color: #146b8a;
+      color: #a5682a;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: 0.2s;
     }
 
-    .customer-control button:hover {
-      background: #deedf4;
-    }
-
+    .customer-control button:hover { background: #f3e4d4; }
     .customer-badge {
-      background: #e2f0f6;
+      background: #f9efE2;
       padding: 8px 14px;
       border-radius: 60px;
       font-size: 0.75rem;
       font-weight: 600;
-      color: #0f5c78;
+      color: #a1612a;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -291,35 +251,29 @@
     .search-results {
       background: white;
       border-radius: 20px;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
       max-height: 180px;
       overflow-y: auto;
       margin-top: 8px;
-      z-index: 20;
-      position: relative;
     }
 
     .search-result-item {
       padding: 10px 14px;
       cursor: pointer;
-      border-bottom: 1px solid #e7f0f4;
+      border-bottom: 1px solid #f0e2d4;
       font-size: 0.85rem;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .search-result-item i {
-      color: #1f8aad;
-      width: 20px;
-    }
-
-    .search-result-item:hover { background: #eef7fc; }
+    .search-result-item i { color: #c2873b; width: 20px; }
+    .search-result-item:hover { background: #fff4e8; }
 
     /* cart items */
     .cart-items {
       padding: 1rem 1.2rem;
-      max-height: 270px;
+      max-height: 260px;
       overflow-y: auto;
       background: #ffffff;
     }
@@ -328,45 +282,38 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fbfeff;
+      background: #fffcf8;
       margin-bottom: 12px;
       padding: 12px 12px;
       border-radius: 1.2rem;
-      border-left: 6px solid #40b0cf;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border-left: 6px solid #e2b87a;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
 
     .cart-item-info { flex: 2; }
-    .cart-item-name { font-weight: 700; color: #115e7a; display: flex; align-items: center; gap: 8px; }
-    .cart-item-meta { font-size: 0.7rem; color: #6f9eb3; margin-top: 4px; }
+    .cart-item-name { font-weight: 700; color: #6a3e1a; display: flex; align-items: center; gap: 8px; }
+    .cart-item-meta { font-size: 0.7rem; color: #b88d5e; margin-top: 4px; }
 
-    .cart-item-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .cart-item-actions { display: flex; align-items: center; gap: 12px; }
     .qty-btn {
-      background: #e8f2f7;
+      background: #f6ede3;
       border: none;
       width: 30px;
       height: 30px;
       border-radius: 40px;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
-      color: #146b8a;
-      transition: 0.1s;
+      color: #a5682a;
     }
-
-    .qty-btn:hover { background: #cde3ec; }
-    .item-price { font-weight: 800; color: #1f7595; min-width: 70px; text-align: right; }
-    .remove-item { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #b8cdd9; padding: 0 4px; }
-    .remove-item:hover { color: #e25c5c; }
+    .qty-btn:hover { background: #e7d7c8; }
+    .item-price { font-weight: 800; color: #b2722a; min-width: 70px; text-align: right; }
+    .remove-item { background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #cfb595; }
+    .remove-item:hover { color: #e86b3e; }
 
     .cart-summary {
       padding: 1rem 1.2rem;
-      background: #f6fcfd;
+      background: #fef9f2;
       margin: 0.6rem;
       border-radius: 1.5rem;
     }
@@ -376,41 +323,36 @@
       justify-content: space-between;
       margin-bottom: 8px;
       font-weight: 500;
-      color: #2e6a81;
+      color: #7b542e;
     }
-
     .total-line {
       font-size: 1.4rem;
       font-weight: 800;
-      border-top: 2px solid #cae1ec;
+      border-top: 2px solid #eedbcb;
       padding-top: 12px;
       margin-top: 6px;
-      color: #0e5a77;
+      color: #a5682a;
     }
 
-    /* payment methods modern */
+    /* payment methods */
     .payment-methods {
       padding: 0 1.2rem;
     }
-
     .method-title {
       font-size: 0.8rem;
       font-weight: 700;
-      color: #146b8a;
+      color: #a5682a;
       margin-bottom: 12px;
-      letter-spacing: 0.3px;
     }
-
     .method-buttons {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
-
     .method-btn {
-      background: #f2f8fb;
-      border: 1px solid #d3e6ef;
+      background: #fcf3e8;
+      border: 1px solid #e7d3bf;
       padding: 8px 18px;
       border-radius: 50px;
       font-weight: 600;
@@ -419,26 +361,20 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: 0.2s;
-      color: #2c6b83;
+      color: #8b5a2b;
     }
-
     .method-btn.active {
-      background: #1f8aad;
+      background: #c2873b;
       color: white;
-      border-color: #1f8aad;
-      box-shadow: 0 4px 10px rgba(31,138,173,0.3);
+      border-color: #c2873b;
     }
-
-    /* digital payment block */
     .digital-payment-section {
-      background: #f6fbfd;
+      background: #fff9f2;
       border-radius: 1.2rem;
       padding: 1rem;
       margin-bottom: 16px;
-      border: 1px solid #cee6f0;
+      border: 1px solid #eedbcb;
     }
-
     .qr-code-container {
       display: flex;
       flex-direction: column;
@@ -448,42 +384,36 @@
       padding: 14px;
       border-radius: 1.2rem;
     }
-
     .qr-placeholder {
       width: 110px;
       height: 110px;
-      background: linear-gradient(145deg, #eef8fe, #e0f0f8);
+      background: #fff8ef;
       border-radius: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       margin-bottom: 8px;
-      border: 1px solid #bddbe8;
+      border: 1px solid #e7cfb8;
     }
-
-    .qr-placeholder i { font-size: 3rem; color: #1f8aad; margin-bottom: 6px; }
-
+    .qr-placeholder i { font-size: 3rem; color: #c2873b; margin-bottom: 6px; }
     .reference-input input {
       width: 100%;
       padding: 12px 14px;
       border-radius: 60px;
-      border: 1px solid #cde3ec;
+      border: 1px solid #eedbcb;
       font-size: 0.85rem;
     }
-
     .cash-input {
       display: flex;
       gap: 12px;
       align-items: center;
       margin-bottom: 14px;
     }
-
-    .cash-input label { font-weight: 700; color: #146b8a; }
-    .cash-input input { flex: 1; padding: 12px; border-radius: 60px; border: 1px solid #cde3ec; }
-
+    .cash-input label { font-weight: 700; color: #a5682a; }
+    .cash-input input { flex: 1; padding: 12px; border-radius: 60px; border: 1px solid #eedbcb; }
     .change-display {
-      background: #e9f4f9;
+      background: #fef4e8;
       padding: 10px 16px;
       border-radius: 60px;
       display: flex;
@@ -491,16 +421,14 @@
       font-weight: 600;
       margin-bottom: 18px;
     }
-
     .action-buttons {
       display: flex;
       gap: 12px;
       flex-direction: column;
       padding-bottom: 1.6rem;
     }
-
     .btn-checkout {
-      background: linear-gradient(95deg, #1f8aad, #107090);
+      background: linear-gradient(95deg, #c2873b, #a5682a);
       border: none;
       padding: 14px;
       border-radius: 60px;
@@ -512,14 +440,11 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      transition: 0.2s;
     }
-
-    .btn-checkout:hover:not(:disabled) { background: #0f6888; transform: scale(0.98); }
-    .btn-checkout:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-checkout:hover { background: #a5682a; transform: scale(0.98); }
     .btn-clear {
-      background: #f0f6fa;
-      border: 1px solid #cde1ea;
+      background: #fcf3e8;
+      border: 1px solid #eedbcb;
       padding: 11px;
       border-radius: 60px;
       font-weight: 600;
@@ -528,10 +453,8 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      color: #365f74;
+      color: #7b542e;
     }
-
-    /* modals */
     .modal {
       display: none;
       position: fixed;
@@ -542,18 +465,15 @@
       justify-content: center;
       z-index: 1000;
     }
-
     .modal-content {
       background: white;
       max-width: 460px;
       width: 90%;
       border-radius: 2rem;
       padding: 1.8rem;
-      text-align: center; 
     }
-
     .receipt-text {
-      background: #fafeff;
+      background: #fffef7;
       padding: 1rem;
       border-radius: 1rem;
       font-family: 'Courier New', monospace;
@@ -562,47 +482,42 @@
       max-height: 400px;
       overflow-y: auto;
     }
+    .close-modal { background: #c2873b; border: none; padding: 10px 26px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
 
-    .close-modal { background: #1f8aad; border: none; padding: 10px 26px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
-
-    @media (max-width: 900px) {
-      .pos-container { grid-template-columns: 1fr; }
-      body { padding: 16px; }
-    }
+    @media (max-width: 900px) { .pos-container { grid-template-columns: 1fr; } body { padding: 16px; } }
   </style>
 </head>
 <body>
 
 <div class="pos-container">
-  <!-- LEFT PANEL: PRODUCTS -->
+  <!-- LEFT PANEL: Rice & Grocery items -->
   <div class="products-panel">
     <div class="station-header">
       <div class="logo-area">
-        <div class="logo-icon"><i class="fas fa-tint"></i></div>
-        <h1>AquaFlow Refilling Station</h1>
+        <div class="logo-icon"><i class="fas fa-bag-shopping"></i></div>
+        <h1>Bigas & Paninda POS</h1>
       </div>
       <div class="date-badge"><i class="far fa-calendar-alt"></i> <span id="currentDate"></span></div>
     </div>
 
     <div class="category-tabs" id="categoryTabs">
-      <button class="cat-btn active" data-cat="all"><i class="fas fa-layer-group"></i> All</button>
-      <button class="cat-btn" data-cat="bottled"><i class="fas fa-bottle-water"></i> Bottled</button>
-      <button class="cat-btn" data-cat="refill"><i class="fas fa-arrows-rotate"></i> Refill</button>
-      <button class="cat-btn" data-cat="accessory"><i class="fas fa-hand-peace"></i> Accessories</button>
+      <button class="cat-btn active" data-cat="all"><i class="fas fa-store"></i> All</button>
+      <button class="cat-btn" data-cat="rice"><i class="fas fa-seedling"></i> Rice Varieties</button>
+      <button class="cat-btn" data-cat="grocery"><i class="fas fa-canned-food"></i> Grocery</button>
+      <button class="cat-btn" data-cat="essentials"><i class="fas fa-egg"></i> Essentials</button>
     </div>
 
     <div class="products-grid" id="productsGrid"></div>
   </div>
 
-  <!-- RIGHT PANEL: CART & CHECKOUT -->
+  <!-- RIGHT PANEL: CART + CUSTOMER + PAYMENT -->
   <div class="cart-panel">
     <div class="cart-header">
-      <h2><i class="fas fa-cash-register"></i> POS Terminal</h2>
+      <h2><i class="fas fa-cash-register"></i> Retail Counter</h2>
     </div>
 
-    <!-- Customer area -->
     <div class="customer-section">
-      <div class="customer-label"><i class="fas fa-user-circle"></i> Customer information</div>
+      <div class="customer-label"><i class="fas fa-user-friends"></i> Customer Info</div>
       <div class="customer-control">
         <input type="text" id="customerSearchInput" placeholder="Search by name or phone...">
         <button id="searchCustomerBtn"><i class="fas fa-search"></i> Search</button>
@@ -612,18 +527,15 @@
       <div id="selectedCustomerDisplay" class="customer-badge"><i class="fas fa-person-walking-arrow-right"></i> Walk-In Customer (default)</div>
     </div>
 
-    <!-- Cart items -->
     <div class="cart-items" id="cartItemsContainer">
-      <div style="text-align:center; padding:30px; color:#8cb3c4;"><i class="fas fa-shopping-cart"></i> Cart is empty</div>
+      <div style="text-align:center; padding:30px; color:#b88d5e;"><i class="fas fa-shopping-basket"></i> Cart empty</div>
     </div>
 
-    <!-- Summary -->
     <div class="cart-summary">
       <div class="summary-line"><span><i class="fas fa-receipt"></i> Subtotal</span><span id="subtotalAmount">₱0.00</span></div>
-      <div class="summary-line total-line"><span><i class="fas fa-coins"></i> Total</span><span id="totalAmount">₱0.00</span></div>
+      <div class="summary-line total-line"><span><i class="fas fa-sack-dollar"></i> Total</span><span id="totalAmount">₱0.00</span></div>
     </div>
 
-    <!-- Payment section -->
     <div class="payment-methods">
       <div class="method-title"><i class="fas fa-credit-card"></i> Payment method</div>
       <div class="method-buttons" id="paymentMethodsContainer">
@@ -633,23 +545,15 @@
         <button class="method-btn" data-method="card"><i class="fas fa-credit-card"></i> Card</button>
       </div>
 
-      <!-- Cash section -->
       <div id="cashSection">
-        <div class="cash-input">
-          <label><i class="fas fa-coins"></i> Cash amount</label>
-          <input type="number" id="cashInput" placeholder="0.00" step="any" value="0">
-        </div>
+        <div class="cash-input"><label><i class="fas fa-coins"></i> Cash amount</label><input type="number" id="cashInput" placeholder="0.00" step="any" value="0"></div>
         <div class="change-display"><span><i class="fas fa-exchange-alt"></i> Change / Status</span><span id="changeAmount">₱0.00</span></div>
       </div>
 
-      <!-- Digital payment (QR + Ref) -->
       <div id="digitalPaymentSection" style="display: none;">
         <div class="digital-payment-section">
           <div class="qr-code-container" id="qrContainer"></div>
-          <div class="reference-input">
-            <label><i class="fas fa-hashtag"></i> Transaction Reference *</label>
-            <input type="text" id="transactionRefInput" placeholder="Enter reference number">
-          </div>
+          <div class="reference-input"><label><i class="fas fa-hashtag"></i> Transaction Reference *</label><input type="text" id="transactionRefInput" placeholder="Enter reference number"></div>
           <div class="change-display"><span><i class="fas fa-check-circle"></i> Payment status</span><span id="digitalPaymentStatus">Awaiting reference</span></div>
         </div>
       </div>
@@ -663,52 +567,35 @@
 </div>
 
 <!-- Receipt Modal -->
-<div id="receiptModal" class="modal">
-  <div class="modal-content">
-    <h3 style=" gap:10px;"><i class="fas fa-receipt"></i> AquaFlow Receipt</h3>
-    <div id="receiptDetails" class="receipt-text"></div>
-    <button class="close-modal" id="closeModalBtn"><i class="fas fa-print"></i> Close</button>
-  </div> 
-</div>
- 
+<div id="receiptModal" class="modal"><div class="modal-content"><h3><i class="fas fa-receipt"></i> BigasPOS Receipt</h3><div id="receiptDetails" class="receipt-text"></div><button class="close-modal" id="closeModalBtn"><i class="fas fa-print"></i> Close</button></div></div>
 <!-- Add Customer Modal -->
-<div id="addCustomerModal" class="modal">
-  <div class="modal-content">
-    <h3><i class="fas fa-user-plus"></i> New Customer</h3>
-    <input type="text" id="newCustomerName" placeholder="Full name" style="width:100%; padding:12px; margin:12px 0; border-radius:60px; border:1px solid #ccc;">
-    <input type="text" id="newCustomerPhone" placeholder="Phone number" style="width:100%; padding:12px; margin:12px 0; border-radius:60px; border:1px solid #ccc;">
-    <input type="text" id="newCustomerAddress" placeholder="Address (optional)" style="width:100%; padding:12px; margin:12px 0; border-radius:60px; border:1px solid #ccc;">
-    <div style="display:flex; gap:12px;">
-      <button id="saveCustomerBtn" style="flex:1; background:#1f8aad; color:white; border:none; border-radius:60px; padding:12px;"><i class="fas fa-save"></i> Save</button>
-      <button id="cancelCustomerBtn" style="flex:1; background:#eef3f7; border:none; border-radius:60px;"><i class="fas fa-times"></i> Cancel</button>
-    </div>
-  </div>
-</div>
+<div id="addCustomerModal" class="modal"><div class="modal-content"><h3><i class="fas fa-user-plus"></i> New Customer</h3><input type="text" id="newCustomerName" placeholder="Full name" style="width:100%; padding:12px; margin:12px 0; border-radius:60px;"><input type="text" id="newCustomerPhone" placeholder="Phone number" style="width:100%; padding:12px; margin:12px 0; border-radius:60px;"><input type="text" id="newCustomerAddress" placeholder="Address (optional)" style="width:100%; padding:12px; margin:12px 0; border-radius:60px;"><div style="display:flex; gap:12px;"><button id="saveCustomerBtn" style="flex:1; background:#c2873b; color:white; border:none; border-radius:60px; padding:12px;"><i class="fas fa-save"></i> Save</button><button id="cancelCustomerBtn" style="flex:1; background:#faf0e4; border:none; border-radius:60px;"><i class="fas fa-times"></i> Cancel</button></div></div></div>
 
 <script>
-  // product catalog
+  // Rice & Grocery Product Catalog
   const products = [
-    { id: 1, name: "Bottled Water 500ml", price: 18, category: "bottled", icon: "fa-bottle-water" },
-    { id: 2, name: "Bottled Water 1L", price: 25, category: "bottled", icon: "fa-droplet" },
-    { id: 3, name: "Mineral Water 1.5L", price: 35, category: "bottled", icon: "fa-gem" },
-    { id: 4, name: "Alkaline Water 1L", price: 45, category: "bottled", icon: "fa-bolt" },
-    { id: 5, name: "Gallon Refill (Std)", price: 25, category: "refill", icon: "fa-rotate-right" },
-    { id: 6, name: "Alkaline Gallon Refill", price: 40, category: "refill", icon: "fa-bolt-lightning" },
-    { id: 7, name: "Mineral Gallon Refill", price: 35, category: "refill", icon: "fa-mountain" },
-    { id: 8, name: "Water Jug Cap", price: 5, category: "accessory", icon: "fa-plug" },
-    { id: 9, name: "Carrying Handle", price: 12, category: "accessory", icon: "fa-hand-peace" },
-    { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", icon: "fa-bucket" }
+    { id: 1, name: "Premium Jasmine Rice (1kg)", price: 62, category: "rice", icon: "fa-seedling" },
+    { id: 2, name: "Sinandomeng Rice (1kg)", price: 55, category: "rice", icon: "fa-leaf" },
+    { id: 3, name: "Dinorado Rice (1kg)", price: 68, category: "rice", icon: "fa-tree" },
+    { id: 4, name: "Brown Rice (1kg)", price: 70, category: "rice", icon: "fa-wheat-awn" },
+    { id: 5, name: "Cooking Oil (1L)", price: 95, category: "grocery", icon: "fa-oil-can" },
+    { id: 6, name: "White Sugar (1kg)", price: 75, category: "grocery", icon: "fa-cube" },
+    { id: 7, name: "Salt (500g)", price: 18, category: "essentials", icon: "fa-mortar-pestle" },
+    { id: 8, name: "Eggs (1 tray/30pcs)", price: 210, category: "essentials", icon: "fa-egg" },
+    { id: 9, name: "Canned Sardines (4pcs)", price: 120, category: "grocery", icon: "fa-fish" },
+    { id: 10, name: "Instant Noodles (pack)", price: 12, category: "grocery", icon: "fa-utensils" },
+    { id: 11, name: "Garlic (250g)", price: 45, category: "essentials", icon: "fa-pepper-hot" },
+    { id: 12, name: "Onion (250g)", price: 38, category: "essentials", icon: "fa-circle" }
   ];
 
   let customers = [
-    { id: 1, name: "Juan Dela Cruz", phone: "09123456789", address: "San Isidro" },
-    { id: 2, name: "Maria Santos", phone: "09234567890", address: "Poblacion" }
+    { id: 1, name: "Alma Reyes", phone: "09123456789", address: "Purok 3 Bayan" },
+    { id: 2, name: "Ramon Cruz", phone: "09234567890", address: "Palengke Area" }
   ];
   let selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" };
   let cart = [];
   let selectedPaymentMethod = "cash";
 
-  // helpers
   function renderProducts(activeCat = "all") {
     const grid = document.getElementById("productsGrid");
     const filtered = activeCat === "all" ? products : products.filter(p => p.category === activeCat);
@@ -746,9 +633,9 @@
   function renderCart() {
     const container = document.getElementById("cartItemsContainer");
     const total = getTotal();
-    document.getElementById("subtotalAmount").innerText = `₱${total.toFixed(2)}`;
-    document.getElementById("totalAmount").innerText = `₱${total.toFixed(2)}`;
-    if (cart.length === 0) { container.innerHTML = `<div style="text-align:center; padding:30px; color:#8cb3c4;"><i class="fas fa-shopping-cart"></i> Cart is empty</div>`; updateChangeDisplay(); return; }
+    document.getElementById("subtotalAmount").innerHTML = `₱${total.toFixed(2)}`;
+    document.getElementById("totalAmount").innerHTML = `₱${total.toFixed(2)}`;
+    if (cart.length === 0) { container.innerHTML = `<div style="text-align:center; padding:30px; color:#b88d5e;"><i class="fas fa-shopping-basket"></i> Cart empty</div>`; updateChangeDisplay(); return; }
     container.innerHTML = cart.map(item => `
       <div class="cart-item">
         <div class="cart-item-info"><div class="cart-item-name"><i class="fas ${item.icon}"></i> ${item.name}</div><div class="cart-item-meta">₱${item.price.toFixed(2)} each</div></div>
@@ -761,12 +648,8 @@
         </div>
       </div>
     `).join("");
-    document.querySelectorAll(".qty-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const delta = parseInt(btn.dataset.delta); updateQty(id, delta); });
-    });
-    document.querySelectorAll(".remove-item").forEach(btn => {
-      btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const idx = cart.findIndex(i => i.id === id); if(idx !== -1) cart.splice(idx,1); renderCart(); });
-    });
+    document.querySelectorAll(".qty-btn").forEach(btn => btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const delta = parseInt(btn.dataset.delta); updateQty(id, delta); }));
+    document.querySelectorAll(".remove-item").forEach(btn => btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const idx = cart.findIndex(i => i.id === id); if(idx !== -1) cart.splice(idx,1); renderCart(); }));
     updateChangeDisplay();
   }
 
@@ -787,8 +670,7 @@
     selectedPaymentMethod = method;
     document.querySelectorAll(".method-btn").forEach(btn => btn.classList.remove("active"));
     document.querySelector(`.method-btn[data-method="${method}"]`).classList.add("active");
-    const cashDiv = document.getElementById("cashSection");
-    const digitalDiv = document.getElementById("digitalPaymentSection");
+    const cashDiv = document.getElementById("cashSection"), digitalDiv = document.getElementById("digitalPaymentSection");
     if (method === "cash") { cashDiv.style.display = "block"; digitalDiv.style.display = "none"; }
     else { cashDiv.style.display = "none"; digitalDiv.style.display = "block"; updateQrByMethod(method); }
     updateChangeDisplay();
@@ -796,13 +678,13 @@
 
   function updateQrByMethod(method) {
     const container = document.getElementById("qrContainer");
-    if (method === "gcash") container.innerHTML = `<div class="qr-placeholder"><i class="fab fa-gcash fa-3x"></i><span style="font-size:11px;">GCash QR</span></div><div style="font-size:12px;text-align:center;">Scan: 0999-123-4567<br>AquaFlow Merchant</div>`;
-    else if (method === "paymaya") container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-mobile-alt fa-3x"></i><span>PayMaya QR</span></div><div style="font-size:12px;text-align:center;">aquaflow@paymaya.com</div>`;
-    else container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-credit-card fa-3x"></i><span>Card Terminal</span></div><div style="font-size:12px;text-align:center;">Tap / Insert Card</div>`;
+    if (method === "gcash") container.innerHTML = `<div class="qr-placeholder"><i class="fab fa-gcash fa-3x"></i><span>GCash QR</span></div><div style="font-size:12px;">Scan: 0912-345-6789<br>BigasStore</div>`;
+    else if (method === "paymaya") container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-mobile-alt fa-3x"></i><span>PayMaya</span></div><div style="font-size:12px;">bigas.pos@paymaya.com</div>`;
+    else container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-credit-card fa-3x"></i><span>Card</span></div><div style="font-size:12px;">Tap / Insert card</div>`;
   }
 
   function checkout() {
-    if (cart.length === 0) return alert("Cart is empty");
+    if (cart.length === 0) return alert("Cart empty. Add items first.");
     const total = getTotal();
     if (selectedPaymentMethod === "cash") {
       const cashGiven = parseFloat(document.getElementById("cashInput").value) || 0;
@@ -817,22 +699,23 @@
 
   function processSale(total, paid, details) {
     const now = new Date();
-    const itemsDetail = cart.map(i => `${i.name} x ${i.quantity} = ₱${(i.price*i.quantity).toFixed(2)}`).join("\n");
-    const cust = selectedCustomer.type === "walkin" ? "Walk-In Customer" : `${selectedCustomer.name} | ${selectedCustomer.phone}`;
+    const itemsList = cart.map(i => `${i.name} x ${i.quantity} = ₱${(i.price*i.quantity).toFixed(2)}`).join("\n");
+    const custInfo = selectedCustomer.type === "walkin" ? "Walk-In Customer" : `${selectedCustomer.name} | ${selectedCustomer.phone}`;
     const receipt = `--------------------------------
-💧 AQUAFLOW REFILLING STATION
-📍 22 Waterlane St., San Vicente
+🍚 BIGAS & PANINDA STORE 🥫
+📍 88 Palengke St., Bayan
 📅 ${now.toLocaleString()}
 --------------------------------
-CUSTOMER: ${cust}
+CUSTOMER: ${custInfo}
 --------------------------------
-${itemsDetail}
+${itemsList}
 --------------------------------
 TOTAL:        ₱${total.toFixed(2)}
 PAYMENT:      ${details}
 AMOUNT PAID:  ₱${paid.toFixed(2)}
 --------------------------------
-Thank you! Stay hydrated 🌊
+Salamat at magbalik!
+🌾 BigasPOS
 `;
     document.getElementById("receiptDetails").innerHTML = receipt.replace(/\n/g,'<br>');
     document.getElementById("receiptModal").style.display = "flex";
@@ -843,9 +726,15 @@ Thank you! Stay hydrated 🌊
   }
 
   function setWalkInDefault() { selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" }; document.getElementById("selectedCustomerDisplay").innerHTML = `<i class="fas fa-person-walking-arrow-right"></i> Walk-In Customer (default)`; }
-  function renderCustomerSearch(q) { /* simplified but functional */ const container=document.getElementById("searchResultsContainer"); if(!q.trim()){container.innerHTML="";return;} const filtered=customers.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())||c.phone.includes(q)); if(!filtered.length){container.innerHTML="<div class='search-result-item'>No results</div>";return;} container.innerHTML=filtered.map(c=>`<div class='search-result-item' data-id='${c.id}' data-name='${c.name}' data-phone='${c.phone}'><i class='fas fa-user'></i> ${c.name} - ${c.phone}</div>`).join(""); document.querySelectorAll(".search-result-item").forEach(el=>{el.addEventListener("click",()=>{selectedCustomer={id:parseInt(el.dataset.id),name:el.dataset.name,phone:el.dataset.phone,type:"existing"}; document.getElementById("selectedCustomerDisplay").innerHTML=`<i class='fas fa-user-check'></i> ${el.dataset.name} (${el.dataset.phone})`; container.innerHTML=""; document.getElementById("customerSearchInput").value="";});}); }
+  function renderCustomerSearch(q) {
+    const container = document.getElementById("searchResultsContainer");
+    if (!q.trim()) { container.innerHTML = ""; return; }
+    const filtered = customers.filter(c => c.name.toLowerCase().includes(q.toLowerCase()) || c.phone.includes(q));
+    if (!filtered.length) { container.innerHTML = "<div class='search-result-item'>No results found</div>"; return; }
+    container.innerHTML = filtered.map(c => `<div class='search-result-item' data-id='${c.id}' data-name='${c.name}' data-phone='${c.phone}'><i class='fas fa-user'></i> ${c.name} - ${c.phone}</div>`).join("");
+    document.querySelectorAll(".search-result-item").forEach(el => el.addEventListener("click", () => { selectedCustomer = { id: parseInt(el.dataset.id), name: el.dataset.name, phone: el.dataset.phone, type: "existing" }; document.getElementById("selectedCustomerDisplay").innerHTML = `<i class='fas fa-user-check'></i> ${el.dataset.name} (${el.dataset.phone})`; container.innerHTML = ""; document.getElementById("customerSearchInput").value = ""; }));
+  }
 
-  // init modals & events
   function init() {
     renderProducts("all"); renderCart();
     document.querySelectorAll(".cat-btn").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderProducts(btn.dataset.cat); }));
@@ -857,8 +746,9 @@ Thank you! Stay hydrated 🌊
     document.querySelectorAll(".method-btn").forEach(btn=>btn.addEventListener("click",()=>setPaymentMethod(btn.dataset.method)));
     document.getElementById("addCustomerBtn").addEventListener("click",()=>document.getElementById("addCustomerModal").style.display="flex");
     document.getElementById("cancelCustomerBtn").addEventListener("click",()=>document.getElementById("addCustomerModal").style.display="none");
-    document.getElementById("saveCustomerBtn").addEventListener("click",()=>{ let name=document.getElementById("newCustomerName").value.trim(), phone=document.getElementById("newCustomerPhone").value.trim(); if(!name||!phone) return alert("Enter name & phone"); let newId=customers.length+1; customers.push({id:newId,name,phone,address:document.getElementById("newCustomerAddress").value}); selectedCustomer={id:newId,name,phone,type:"existing"}; document.getElementById("selectedCustomerDisplay").innerHTML=`<i class='fas fa-user-check'></i> ${name} (${phone})`; document.getElementById("addCustomerModal").style.display="none"; document.getElementById("newCustomerName").value=""; document.getElementById("newCustomerPhone").value=""; alert("Customer added"); });
-    const modal=document.getElementById("receiptModal"), closeBtn=document.getElementById("closeModalBtn"); closeBtn.onclick=()=>modal.style.display="none"; window.onclick=(e)=>{if(e.target===modal)modal.style.display="none";};
+    document.getElementById("saveCustomerBtn").addEventListener("click",()=>{ let name=document.getElementById("newCustomerName").value.trim(), phone=document.getElementById("newCustomerPhone").value.trim(); if(!name||!phone) return alert("Name and phone required"); let newId=customers.length+1; customers.push({id:newId,name,phone,address:document.getElementById("newCustomerAddress").value}); selectedCustomer={id:newId,name,phone,type:"existing"}; document.getElementById("selectedCustomerDisplay").innerHTML=`<i class='fas fa-user-check'></i> ${name} (${phone})`; document.getElementById("addCustomerModal").style.display="none"; document.getElementById("newCustomerName").value=""; document.getElementById("newCustomerPhone").value=""; alert("Customer added"); });
+    const modal=document.getElementById("receiptModal"), closeBtn=document.getElementById("closeModalBtn");
+    closeBtn.onclick=()=>modal.style.display="none"; window.onclick=(e)=>{if(e.target===modal)modal.style.display="none";};
     document.getElementById("currentDate").innerText=new Date().toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});
     setWalkInDefault(); setPaymentMethod("cash");
   }
