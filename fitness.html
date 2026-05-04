@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>DormiSuite | Boarding House Billing + POS Hybrid</title>
+  <title>IronFit Gym | Fitness Billing + POS Hybrid</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
@@ -13,7 +13,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #eef2f5 0%, #e0e8ef 100%);
+      background: linear-gradient(135deg, #14181c 0%, #1e2a2e 100%);
       min-height: 100vh;
       padding: 24px 20px;
     }
@@ -22,20 +22,21 @@
       max-width: 1600px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 420px;
+      grid-template-columns: 1fr 440px;
       gap: 24px;
     }
 
-    /* LEFT PANEL - Tenant & Invoice Builder */
-    .tenant-panel {
-      background: white;
+    /* LEFT PANEL - Member & Plan Builder */
+    .member-panel {
+      background: #1e2a2e;
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
       overflow: hidden;
+      border: 1px solid #3a4a50;
     }
 
     .panel-header {
-      background: linear-gradient(105deg, #2c5a6e, #1f3f4e);
+      background: linear-gradient(105deg, #e53935, #b71c1c);
       padding: 1.2rem 1.5rem;
       color: white;
       display: flex;
@@ -47,65 +48,60 @@
     .panel-header h2 { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; }
     .date-badge { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 40px; font-size: 0.75rem; }
 
-    /* Tenant Selector */
-    .tenant-selector {
+    /* Member Selector */
+    .member-selector {
       padding: 1.2rem 1.5rem;
-      background: #f9fbfd;
-      border-bottom: 1px solid #e2e8f0;
+      background: #25353a;
+      border-bottom: 1px solid #3a4a50;
     }
+    .member-search { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+    .member-search input { flex: 2; padding: 12px 16px; border-radius: 60px; border: none; background: #2f4248; color: white; font-size: 0.9rem; }
+    .member-search input::placeholder { color: #8aaab3; }
+    .member-search button { background: #e53935; border: none; padding: 0 20px; border-radius: 60px; font-weight: 600; cursor: pointer; color: white; display: flex; align-items: center; gap: 8px; }
+    .member-badge { background: #2f4248; padding: 10px 16px; border-radius: 60px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: #ffcdb0; }
 
-    .tenant-search {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 12px 0;
-    }
-    .tenant-search input { flex: 2; padding: 12px 16px; border-radius: 60px; border: 1px solid #cbd5e1; font-size: 0.9rem; }
-    .tenant-search button { background: #eef2f6; border: none; padding: 0 20px; border-radius: 60px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-    .tenant-badge { background: #e6f0f5; padding: 10px 16px; border-radius: 60px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: #1f3f4e; }
-
-    /* Billing Items Section (Recurring + One-time) */
-    .billing-items {
+    /* Plans & Services */
+    .plans-section {
       padding: 1.2rem 1.5rem;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid #3a4a50;
     }
-    .section-title { font-weight: 700; color: #2c5a6e; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-    .items-grid {
+    .section-title { font-weight: 700; color: #ffcdb0; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+    .plans-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 12px;
       margin-bottom: 1.5rem;
     }
-    .bill-item-card {
-      background: #f8fafc;
+    .plan-card {
+      background: #25353a;
       border-radius: 1rem;
       padding: 12px;
       text-align: center;
       cursor: pointer;
       transition: 0.2s;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #3a4a50;
     }
-    .bill-item-card:hover { background: #eef4f8; transform: translateY(-2px); border-color: #2c5a6e; }
-    .bill-icon { font-size: 1.6rem; color: #2c5a6e; margin-bottom: 6px; }
-    .bill-name { font-weight: 600; font-size: 0.85rem; }
-    .bill-price { font-weight: 700; color: #2c5a6e; font-size: 0.8rem; margin-top: 4px; }
+    .plan-card:hover { background: #e53935; transform: translateY(-2px); border-color: #e53935; }
+    .plan-icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .plan-name { font-weight: 600; font-size: 0.85rem; color: white; }
+    .plan-price { font-weight: 700; color: #ffcdb0; font-size: 0.8rem; margin-top: 4px; }
 
-    /* Variable item adder */
-    .variable-item {
+    /* Custom Add-on */
+    .custom-addon {
       display: flex;
       gap: 10px;
       margin-top: 12px;
       flex-wrap: wrap;
       align-items: center;
     }
-    .variable-item input { flex: 2; padding: 10px 14px; border-radius: 60px; border: 1px solid #cbd5e1; }
-    .variable-item select { padding: 10px 14px; border-radius: 60px; border: 1px solid #cbd5e1; background: white; }
-    .btn-add { background: #2c5a6e; color: white; border: none; padding: 10px 20px; border-radius: 60px; font-weight: 600; cursor: pointer; }
+    .custom-addon input { flex: 2; padding: 10px 14px; border-radius: 60px; border: none; background: #2f4248; color: white; }
+    .custom-addon input::placeholder { color: #8aaab3; }
+    .btn-add { background: #e53935; color: white; border: none; padding: 10px 20px; border-radius: 60px; font-weight: 600; cursor: pointer; }
 
-    /* Invoice Items List */
+    /* Current Invoice Items */
     .invoice-items {
       padding: 1.2rem 1.5rem;
-      background: #ffffff;
+      background: #1e2a2e;
       max-height: 280px;
       overflow-y: auto;
     }
@@ -114,35 +110,33 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #edf2f7;
+      border-bottom: 1px solid #3a4a50;
     }
-    .invoice-row-detail { flex: 2; }
-    .invoice-name { font-weight: 600; font-size: 0.9rem; }
-    .invoice-meta { font-size: 0.7rem; color: #7f8c8d; }
+    .invoice-name { font-weight: 600; font-size: 0.9rem; color: white; }
+    .invoice-meta { font-size: 0.7rem; color: #8aaab3; }
     .invoice-actions { display: flex; align-items: center; gap: 12px; }
-    .inv-qty-btn { background: #eef2f6; border: none; width: 28px; height: 28px; border-radius: 30px; cursor: pointer; font-weight: bold; }
-    .inv-remove { background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 1rem; }
-    .inv-remove:hover { color: #e53e3e; }
+    .inv-qty-btn { background: #2f4248; border: none; width: 28px; height: 28px; border-radius: 30px; cursor: pointer; color: white; font-weight: bold; }
+    .inv-remove { background: none; border: none; color: #8aaab3; cursor: pointer; }
 
-    /* Summary & Checkout */
     .invoice-summary {
       padding: 1rem 1.5rem;
-      background: #f8fafc;
-      border-top: 2px solid #e2e8f0;
+      background: #25353a;
+      border-top: 2px solid #3a4a50;
     }
-    .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
-    .total-due { font-size: 1.5rem; font-weight: 800; color: #2c5a6e; border-top: 2px dashed #cbd5e1; padding-top: 12px; margin-top: 6px; }
+    .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; color: #ffcdb0; }
+    .total-due { font-size: 1.5rem; font-weight: 800; color: #e53935; border-top: 2px dashed #3a4a50; padding-top: 12px; margin-top: 6px; }
 
-    /* RIGHT PANEL - POS + Payment */
+    /* RIGHT PANEL - Payment Terminal */
     .payment-panel {
-      background: white;
+      background: #1e2a2e;
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      border: 1px solid #3a4a50;
     }
-    .payment-header { background: #1f3f4e; padding: 1.2rem; color: white; }
+    .payment-header { background: #b71c1c; padding: 1.2rem; color: white; }
     .payment-header h3 { display: flex; align-items: center; gap: 10px; }
 
     .method-buttons {
@@ -150,63 +144,66 @@
       gap: 12px;
       flex-wrap: wrap;
       padding: 1rem 1.2rem;
-      background: #fefcf9;
-      border-bottom: 1px solid #e2e8f0;
+      background: #25353a;
+      border-bottom: 1px solid #3a4a50;
     }
     .method-btn {
-      background: #eef2f6;
+      background: #2f4248;
       border: none;
       padding: 8px 18px;
       border-radius: 40px;
       font-weight: 600;
       cursor: pointer;
+      color: white;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
-    .method-btn.active { background: #2c5a6e; color: white; }
+    .method-btn.active { background: #e53935; color: white; }
 
     .cash-section, .digital-section { padding: 1rem 1.2rem; }
     .cash-input { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
-    .cash-input input { flex: 1; padding: 12px; border-radius: 60px; border: 1px solid #cbd5e1; }
+    .cash-input label { color: #ffcdb0; font-weight: 600; }
+    .cash-input input { flex: 1; padding: 12px; border-radius: 60px; border: none; background: #2f4248; color: white; }
     .qr-placeholder {
-      background: #f1f5f9;
+      background: #25353a;
       border-radius: 1rem;
       padding: 16px;
       text-align: center;
       margin-bottom: 12px;
+      color: white;
     }
-    .reference-input input { width: 100%; padding: 12px; border-radius: 60px; border: 1px solid #cbd5e1; }
-    .change-display { background: #ecfdf5; padding: 12px; border-radius: 60px; display: flex; justify-content: space-between; margin: 12px 0; font-weight: 600; }
+    .reference-input input { width: 100%; padding: 12px; border-radius: 60px; border: none; background: #2f4248; color: white; }
+    .change-display { background: #2f4248; padding: 12px; border-radius: 60px; display: flex; justify-content: space-between; margin: 12px 0; font-weight: 600; color: #ffcdb0; }
 
     .action-buttons { padding: 1rem 1.2rem 1.5rem; display: flex; flex-direction: column; gap: 12px; }
-    .btn-pay { background: #2c5a6e; color: white; border: none; padding: 14px; border-radius: 60px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .btn-clear { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; border-radius: 60px; font-weight: 600; cursor: pointer; }
+    .btn-pay { background: #e53935; color: white; border: none; padding: 14px; border-radius: 60px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .btn-clear { background: #2f4248; border: 1px solid #3a4a50; padding: 10px; border-radius: 60px; font-weight: 600; cursor: pointer; color: #ffcdb0; }
 
-    /* Transaction History (compact) */
     .history-preview {
       padding: 1rem 1.2rem;
-      background: #fefcf9;
-      border-top: 1px solid #e2e8f0;
+      background: #25353a;
+      border-top: 1px solid #3a4a50;
       max-height: 200px;
       overflow-y: auto;
     }
-    .history-item { font-size: 0.7rem; padding: 6px 0; border-bottom: 1px solid #edf2f7; display: flex; justify-content: space-between; }
+    .history-item { font-size: 0.7rem; padding: 6px 0; border-bottom: 1px solid #3a4a50; display: flex; justify-content: space-between; color: #8aaab3; }
 
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.7);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
-    .modal-content { background: white; max-width: 480px; width: 90%; border-radius: 2rem; padding: 1.5rem; }
-    .receipt-text { background: #f8fafc; padding: 1rem; border-radius: 1rem; font-family: monospace; font-size: 0.75rem; white-space: pre-line; max-height: 400px; overflow-y: auto; }
-    .close-modal { background: #2c5a6e; border: none; padding: 10px; border-radius: 40px; color: white; font-weight: bold; margin-top: 12px; width: 100%; cursor: pointer; }
-    .small-text { font-size: 0.7rem; color: #5a6e7c; }
+    .modal-content { background: #1e2a2e; max-width: 480px; width: 90%; border-radius: 2rem; padding: 1.5rem; color: white; border: 1px solid #e53935; }
+    .receipt-text { background: #25353a; padding: 1rem; border-radius: 1rem; font-family: monospace; font-size: 0.75rem; white-space: pre-line; color: #ffcdb0; }
+    .close-modal { background: #e53935; border: none; padding: 10px; border-radius: 40px; color: white; font-weight: bold; margin-top: 12px; width: 100%; cursor: pointer; }
+    .small-text { font-size: 0.7rem; color: #8aaab3; }
+    input, select { outline: none; }
 
     @media (max-width: 1000px) { .dashboard { grid-template-columns: 1fr; } }
   </style>
@@ -214,39 +211,39 @@
 <body>
 
 <div class="dashboard">
-  <!-- LEFT: Tenant & Invoice Builder (Billing System) -->
-  <div class="tenant-panel">
+  <!-- LEFT: Member & Plan Builder -->
+  <div class="member-panel">
     <div class="panel-header">
-      <h2><i class="fas fa-building"></i> DormiSuite · Billing + POS</h2>
+      <h2><i class="fas fa-dumbbell"></i> IronFit Gym · Billing + POS</h2>
       <div class="date-badge"><i class="far fa-calendar-alt"></i> <span id="currentDate"></span></div>
     </div>
 
-    <div class="tenant-selector">
-      <div class="section-title"><i class="fas fa-user-circle"></i> Select Tenant</div>
-      <div class="tenant-search">
-        <input type="text" id="tenantSearchInput" placeholder="Search by name, room or phone...">
-        <button id="searchTenantBtn"><i class="fas fa-search"></i> Search</button>
-        <button id="newTenantBtn"><i class="fas fa-user-plus"></i> New Tenant</button>
+    <div class="member-selector">
+      <div class="section-title"><i class="fas fa-user-circle"></i> Member Information</div>
+      <div class="member-search">
+        <input type="text" id="memberSearchInput" placeholder="Search by name, phone or ID...">
+        <button id="searchMemberBtn"><i class="fas fa-search"></i> Search</button>
+        <button id="newMemberBtn"><i class="fas fa-user-plus"></i> New Member</button>
       </div>
-      <div id="searchResultsContainer" style="background:white; border-radius:1rem; margin-top:8px;"></div>
-      <div id="selectedTenantDisplay" class="tenant-badge"><i class="fas fa-user"></i> No tenant selected (Walk-In / New)</div>
+      <div id="searchResultsContainer" style="background:#25353a; border-radius:1rem; margin-top:8px;"></div>
+      <div id="selectedMemberDisplay" class="member-badge"><i class="fas fa-user"></i> No member selected (Walk-In / New)</div>
     </div>
 
-    <div class="billing-items">
-      <div class="section-title"><i class="fas fa-tags"></i> Add Billing Items</div>
-      <div class="items-grid" id="billingItemsGrid"></div>
+    <div class="plans-section">
+      <div class="section-title"><i class="fas fa-tags"></i> Membership Plans & Services</div>
+      <div class="plans-grid" id="plansGrid"></div>
       
-      <div class="variable-item">
-        <input type="text" id="customItemName" placeholder="Custom item (e.g., Electric Bill)">
+      <div class="custom-addon">
+        <input type="text" id="customItemName" placeholder="Custom item (e.g., Personal Training)">
         <input type="number" id="customItemAmount" placeholder="Amount" step="any">
         <button id="addCustomItemBtn" class="btn-add"><i class="fas fa-plus"></i> Add</button>
       </div>
     </div>
 
     <div class="invoice-items">
-      <div class="section-title"><i class="fas fa-receipt"></i> Current Invoice Items</div>
+      <div class="section-title"><i class="fas fa-receipt"></i> Current Invoice / Cart</div>
       <div id="invoiceItemsList">
-        <div style="text-align:center; padding:20px; color:#94a3b8;">No items added. Click items above to build invoice.</div>
+        <div style="text-align:center; padding:20px; color:#8aaab3;">No items added. Click plans above to build invoice.</div>
       </div>
     </div>
 
@@ -256,7 +253,7 @@
     </div>
   </div>
 
-  <!-- RIGHT: Payment & POS Terminal -->
+  <!-- RIGHT: Payment Terminal -->
   <div class="payment-panel">
     <div class="payment-header">
       <h3><i class="fas fa-cash-register"></i> Payment Terminal</h3>
@@ -286,7 +283,7 @@
 
     <div class="action-buttons">
       <button class="btn-pay" id="processPaymentBtn"><i class="fas fa-receipt"></i> Process Payment & Print Receipt</button>
-      <button class="btn-clear" id="clearInvoiceBtn"><i class="fas fa-trash-alt"></i> Clear All Invoice Items</button>
+      <button class="btn-clear" id="clearInvoiceBtn"><i class="fas fa-trash-alt"></i> Clear All Items</button>
     </div>
 
     <div class="history-preview">
@@ -297,61 +294,57 @@
 </div>
 
 <!-- Receipt Modal -->
-<div id="receiptModal" class="modal"><div class="modal-content"><h3><i class="fas fa-receipt"></i> DormiSuite Receipt</h3><div id="receiptContent" class="receipt-text"></div><button class="close-modal" id="closeReceiptBtn">Close</button></div></div>
+<div id="receiptModal" class="modal"><div class="modal-content"><h3><i class="fas fa-receipt"></i> IronFit Gym Receipt</h3><div id="receiptContent" class="receipt-text"></div><button class="close-modal" id="closeReceiptBtn">Close</button></div></div>
 
-<!-- Add/Edit Tenant Modal -->
-<div id="tenantModal" class="modal"><div class="modal-content"><h3 id="tenantModalTitle"><i class="fas fa-user-plus"></i> Tenant Information</h3><input type="text" id="tenantName" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; border-radius:60px;"><input type="text" id="tenantPhone" placeholder="Phone Number" style="width:100%; padding:12px; margin:10px 0; border-radius:60px;"><input type="text" id="tenantRoom" placeholder="Room / Bed #" style="width:100%; padding:12px; margin:10px 0; border-radius:60px;"><div style="display:flex; gap:12px;"><button id="saveTenantBtn" style="flex:1; background:#2c5a6e; color:white; border:none; border-radius:60px; padding:12px;"><i class="fas fa-save"></i> Save</button><button id="closeTenantModalBtn" style="flex:1; background:#eef2f6; border:none; border-radius:60px;">Cancel</button></div></div></div>
+<!-- Member Modal -->
+<div id="memberModal" class="modal"><div class="modal-content"><h3 id="memberModalTitle"><i class="fas fa-user-plus"></i> Member Information</h3><input type="text" id="memberName" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; border-radius:60px; background:#2f4248; color:white; border:none;"><input type="text" id="memberPhone" placeholder="Phone Number" style="width:100%; padding:12px; margin:10px 0; border-radius:60px; background:#2f4248; color:white; border:none;"><input type="text" id="memberId" placeholder="Member ID / Birthday" style="width:100%; padding:12px; margin:10px 0; border-radius:60px; background:#2f4248; color:white; border:none;"><div style="display:flex; gap:12px;"><button id="saveMemberBtn" style="flex:1; background:#e53935; color:white; border:none; border-radius:60px; padding:12px;"><i class="fas fa-save"></i> Save</button><button id="closeMemberModalBtn" style="flex:1; background:#2f4248; border:none; border-radius:60px; color:white;">Cancel</button></div></div></div>
 
 <script>
-  // ---------- DATA MODELS ----------
-  let tenants = [
-    { id: 1, name: "Maria Santos", phone: "09123456789", room: "Room 101" },
-    { id: 2, name: "John Dela Cruz", phone: "09234567890", room: "Room 205" },
-    { id: 3, name: "Rica Flores", phone: "09345678901", room: "Dorm Bed A" }
+  // ---------- FITNESS GYM DATA ----------
+  let members = [
+    { id: 1, name: "Marcus Alvarez", phone: "09123456789", memberId: "MF-001" },
+    { id: 2, name: "Sofia Reyes", phone: "09234567890", memberId: "MF-002" },
+    { id: 3, name: "James Cruz", phone: "09345678901", memberId: "MF-003" }
   ];
-  let selectedTenant = { id: null, name: "Walk-In / New Tenant", type: "walkin" };
+  let selectedMember = { id: null, name: "Walk-In / New Member", type: "walkin" };
 
-  // Billing Catalog (reusable)
-  const billingCatalog = [
-    { id: "rent_single", name: "🏠 Single Room (Monthly)", price: 3500, type: "recurring" },
-    { id: "rent_shared", name: "🛏️ Shared Room (Monthly)", price: 2500, type: "recurring" },
-    { id: "wifi", name: "📶 WiFi Internet", price: 500, type: "recurring" },
-    { id: "water_base", name: "💧 Water Bill (Base)", price: 200, type: "utility" },
-    { id: "elec_deposit", name: "⚡ Electricity Deposit", price: 1000, type: "deposit" },
-    { id: "late_penalty", name: "⏰ Late Payment Penalty", price: 150, type: "penalty" },
-    { id: "parking", name: "🚗 Parking Fee", price: 300, type: "addon" },
-    { id: "laundry", name: "🧺 Laundry Service", price: 80, type: "service" }
+  // Membership Plans & Services Catalog
+  const gymCatalog = [
+    { id: "basic_monthly", name: "💪 Basic Monthly", price: 1200, type: "membership", duration: "30 days" },
+    { id: "premium_monthly", name: "🏆 Premium Monthly", price: 2200, type: "membership", duration: "30 days + classes" },
+    { id: "quarterly", name: "📅 Quarterly (3 months)", price: 3200, type: "membership", duration: "save 10%" },
+    { id: "annual", name: "🌟 Annual Membership", price: 12000, type: "membership", duration: "best value" },
+    { id: "day_pass", name: "🎫 Day Pass", price: 150, type: "casual", duration: "single use" },
+    { id: "pt_session", name: "🎯 Personal Training (1hr)", price: 500, type: "service", duration: "1-on-1" },
+    { id: "class_yoga", name: "🧘 Yoga Class (drop-in)", price: 200, type: "class", duration: "per session" },
+    { id: "class_zumba", name: "💃 Zumba Class", price: 180, type: "class", duration: "per session" },
+    { id: "locker_rental", name: "🔒 Locker Rental", price: 300, type: "addon", duration: "monthly" },
+    { id: "towel_service", name: "🧼 Towel Service", price: 50, type: "addon", duration: "per visit" }
   ];
 
-  // Current invoice items (billing lines)
-  let currentInvoice = []; // each: { id, name, price, quantity, type, custom? }
-
-  // Transaction history (receipts)
-  let transactions = []; // { date, tenant, items, total, paymentMethod, reference, amountPaid }
-
+  let currentInvoice = []; // { id, name, price, quantity }
+  let transactions = []; // history
   let selectedPaymentMethod = "cash";
 
-  // Helper functions
   function formatCurrency(amt) { return `₱${amt.toFixed(2)}`; }
-
   function getInvoiceTotal() { return currentInvoice.reduce((sum, i) => sum + (i.price * i.quantity), 0); }
 
-  function renderBillingCatalog() {
-    const grid = document.getElementById("billingItemsGrid");
+  function renderGymCatalog() {
+    const grid = document.getElementById("plansGrid");
     if (!grid) return;
-    grid.innerHTML = billingCatalog.map(item => `
-      <div class="bill-item-card" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-        <div class="bill-icon"><i class="fas ${item.type === 'recurring' ? 'fa-home' : item.type === 'utility' ? 'fa-bolt' : 'fa-tag'}"></i></div>
-        <div class="bill-name">${item.name}</div>
-        <div class="bill-price">${formatCurrency(item.price)}</div>
-        <div class="small-text">${item.type}</div>
+    grid.innerHTML = gymCatalog.map(item => `
+      <div class="plan-card" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+        <div class="plan-icon"><i class="fas ${item.type === 'membership' ? 'fa-calendar-alt' : item.type === 'class' ? 'fa-users' : 'fa-heartbeat'}"></i></div>
+        <div class="plan-name">${item.name}</div>
+        <div class="plan-price">${formatCurrency(item.price)}</div>
+        <div class="small-text">${item.duration}</div>
       </div>
     `).join("");
-    document.querySelectorAll(".bill-item-card").forEach(card => {
+    document.querySelectorAll(".plan-card").forEach(card => {
       card.addEventListener("click", () => {
         const name = card.getAttribute("data-name");
         const price = parseFloat(card.getAttribute("data-price"));
-        addInvoiceItem({ id: Date.now() + Math.random(), name, price, quantity: 1, custom: false });
+        addInvoiceItem({ id: Date.now() + Math.random(), name, price, quantity: 1 });
       });
     });
   }
@@ -383,7 +376,7 @@
     document.getElementById("invoiceTotal").innerHTML = formatCurrency(total);
 
     if (currentInvoice.length === 0) {
-      container.innerHTML = `<div style="text-align:center; padding:20px; color:#94a3b8;">No items added. Click items above to build invoice.</div>`;
+      container.innerHTML = `<div style="text-align:center; padding:20px; color:#8aaab3;">No items added. Click plans above to build invoice.</div>`;
       return;
     }
     container.innerHTML = currentInvoice.map((item, idx) => `
@@ -394,9 +387,9 @@
         </div>
         <div class="invoice-actions">
           <button class="inv-qty-btn" data-action="dec" data-index="${idx}"><i class="fas fa-minus"></i></button>
-          <span style="min-width: 28px; text-align: center;">${item.quantity}</span>
+          <span style="min-width: 28px; text-align: center; color:white;">${item.quantity}</span>
           <button class="inv-qty-btn" data-action="inc" data-index="${idx}"><i class="fas fa-plus"></i></button>
-          <span style="min-width: 75px; text-align: right; font-weight: 700;">${formatCurrency(item.price * item.quantity)}</span>
+          <span style="min-width: 75px; text-align: right; font-weight: 700; color:#ffcdb0;">${formatCurrency(item.price * item.quantity)}</span>
           <button class="inv-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
@@ -417,7 +410,6 @@
     updatePaymentDisplay();
   }
 
-  // Payment display & validation
   function updatePaymentDisplay() {
     const total = getInvoiceTotal();
     if (selectedPaymentMethod === "cash") {
@@ -442,15 +434,15 @@
       cashDiv.style.display = "none";
       digitalDiv.style.display = "block";
       const qrDiv = document.getElementById("qrPlaceholder");
-      if (method === "gcash") qrDiv.innerHTML = `<i class="fab fa-gcash fa-3x"></i><div>Scan GCash QR: 0912-345-6789<br>DormiSuite</div>`;
-      else if (method === "paymaya") qrDiv.innerHTML = `<i class="fas fa-mobile-alt fa-3x"></i><div>PayMaya: dormi@paymayabiz.com</div>`;
+      if (method === "gcash") qrDiv.innerHTML = `<i class="fab fa-gcash fa-3x"></i><div>Scan GCash QR: 0912-345-6789<br>IronFit Gym</div>`;
+      else if (method === "paymaya") qrDiv.innerHTML = `<i class="fas fa-mobile-alt fa-3x"></i><div>PayMaya: ironfit@paymaya.com</div>`;
       else qrDiv.innerHTML = `<i class="fas fa-credit-card fa-3x"></i><div>Card Terminal - Tap/Insert</div>`;
     }
     updatePaymentDisplay();
   }
 
   function processPayment() {
-    if (currentInvoice.length === 0) { alert("No billing items to pay. Add items first."); return; }
+    if (currentInvoice.length === 0) { alert("No items to pay. Add membership or services first."); return; }
     const total = getInvoiceTotal();
     if (total <= 0) { alert("Invalid total amount."); return; }
 
@@ -467,11 +459,10 @@
       paymentDetails = `${selectedPaymentMethod.toUpperCase()} payment | Ref: ${ref}`;
     }
 
-    // Record transaction
     const transaction = {
       id: Date.now(),
       date: new Date().toLocaleString(),
-      tenant: selectedTenant.type === "walkin" ? "Walk-In / New Tenant" : `${selectedTenant.name} (${selectedTenant.room || selectedTenant.phone})`,
+      member: selectedMember.type === "walkin" ? "Walk-In / New Member" : `${selectedMember.name} (${selectedMember.memberId || selectedMember.phone})`,
       items: [...currentInvoice],
       total: total,
       paymentMethod: selectedPaymentMethod,
@@ -482,12 +473,10 @@
     transactions.unshift(transaction);
     renderTransactionHistory();
 
-    // Generate receipt
     const receipt = generateReceipt(transaction);
     document.getElementById("receiptContent").innerHTML = receipt.replace(/\n/g,'<br>');
     document.getElementById("receiptModal").style.display = "flex";
 
-    // Reset invoice
     currentInvoice = [];
     renderInvoiceList();
     document.getElementById("cashAmount").value = "0";
@@ -498,21 +487,21 @@
   function generateReceipt(txn) {
     const itemsText = txn.items.map(i => `${i.name} x ${i.quantity} = ${formatCurrency(i.price * i.quantity)}`).join("\n");
     return `================================
-🏠 DORMI SUITE - BOARDING HOUSE
-📍 22 Dormitory St., University Area
+🏋️ IRONFIT GYM - FITNESS CENTER
+📍 22 Strength Ave., Metro
 📅 ${txn.date}
 ================================
-TENANT: ${txn.tenant}
+MEMBER: ${txn.member}
 ================================
 ${itemsText}
 --------------------------------
 TOTAL DUE:      ${formatCurrency(txn.total)}
 PAYMENT:        ${txn.paymentMethod.toUpperCase()}
-${txn.paymentMethod !== "cash" ? `REFERENCE: ${txn.reference}` : `CASH: ${formatCurrency(txn.amountPaid)}`}
+${txn.paymentMethod !== "cash" ? `REFERENCE: ${txn.reference}` : `CASH: ${formatCurrency(txn.amountPaud || txn.amountPaid)}`}
 ${txn.paymentMethod === "cash" ? `CHANGE: ${formatCurrency(txn.change)}` : ""}
 ================================
-Paid on time? Thank you!
-🏡 DormiSuite - Smart Boarding Mgmt
+Get stronger every day! 💪
+IronFit Gym - No Pain, No Gain!
 `;
   }
 
@@ -521,80 +510,78 @@ Paid on time? Thank you!
     if (transactions.length === 0) { container.innerHTML = "<div class='small-text' style='text-align:center;'>No transactions yet</div>"; return; }
     container.innerHTML = transactions.slice(0, 5).map(t => `
       <div class="history-item">
-        <span><i class="fas fa-receipt"></i> ${new Date(t.date).toLocaleTimeString()} - ${t.tenant.substring(0, 20)}</span>
+        <span><i class="fas fa-receipt"></i> ${new Date(t.date).toLocaleTimeString()} - ${t.member.substring(0, 18)}</span>
         <span><strong>${formatCurrency(t.total)}</strong> (${t.paymentMethod})</span>
       </div>
     `).join("");
   }
 
-  // Tenant search and management
-  function renderTenantSearch(query) {
+  // Member search and management
+  function renderMemberSearch(query) {
     const container = document.getElementById("searchResultsContainer");
     if (!query.trim()) { container.innerHTML = ""; return; }
-    const filtered = tenants.filter(t => t.name.toLowerCase().includes(query.toLowerCase()) || t.phone.includes(query) || (t.room && t.room.toLowerCase().includes(query.toLowerCase())));
-    if (filtered.length === 0) { container.innerHTML = "<div class='search-result-item' style='padding:10px;'>No tenants found. Add new.</div>"; return; }
-    container.innerHTML = filtered.map(t => `<div class="search-result-item" style="padding:12px; cursor:pointer; border-bottom:1px solid #e2e8f0;" data-id="${t.id}" data-name="${t.name}" data-phone="${t.phone}" data-room="${t.room}"><i class="fas fa-user"></i> ${t.name} · ${t.room || t.phone}</div>`).join("");
+    const filtered = members.filter(m => m.name.toLowerCase().includes(query.toLowerCase()) || m.phone.includes(query) || (m.memberId && m.memberId.toLowerCase().includes(query.toLowerCase())));
+    if (filtered.length === 0) { container.innerHTML = "<div style='padding:10px; color:#8aaab3;'>No members found. Add new.</div>"; return; }
+    container.innerHTML = filtered.map(m => `<div class="search-result-item" style="padding:12px; cursor:pointer; border-bottom:1px solid #3a4a50; color:white;" data-id="${m.id}" data-name="${m.name}" data-phone="${m.phone}" data-memberid="${m.memberId}"><i class="fas fa-user"></i> ${m.name} · ${m.memberId || m.phone}</div>`).join("");
     document.querySelectorAll(".search-result-item").forEach(el => {
       el.addEventListener("click", () => {
-        selectedTenant = { id: parseInt(el.dataset.id), name: el.dataset.name, phone: el.dataset.phone, room: el.dataset.room, type: "existing" };
-        document.getElementById("selectedTenantDisplay").innerHTML = `<i class="fas fa-user-check"></i> ${selectedTenant.name} (${selectedTenant.room || selectedTenant.phone})`;
+        selectedMember = { id: parseInt(el.dataset.id), name: el.dataset.name, phone: el.dataset.phone, memberId: el.dataset.memberid, type: "existing" };
+        document.getElementById("selectedMemberDisplay").innerHTML = `<i class="fas fa-user-check"></i> ${selectedMember.name} (${selectedMember.memberId || selectedMember.phone})`;
         container.innerHTML = "";
-        document.getElementById("tenantSearchInput").value = "";
+        document.getElementById("memberSearchInput").value = "";
       });
     });
   }
 
-  let tenantModal = document.getElementById("tenantModal");
-  function openTenantModal() { tenantModal.style.display = "flex"; }
-  function closeTenantModal() { tenantModal.style.display = "none"; document.getElementById("tenantName").value = ""; document.getElementById("tenantPhone").value = ""; document.getElementById("tenantRoom").value = ""; }
+  let memberModal = document.getElementById("memberModal");
+  function openMemberModal() { memberModal.style.display = "flex"; }
+  function closeMemberModal() { memberModal.style.display = "none"; document.getElementById("memberName").value = ""; document.getElementById("memberPhone").value = ""; document.getElementById("memberId").value = ""; }
 
-  document.getElementById("newTenantBtn").addEventListener("click", openTenantModal);
-  document.getElementById("closeTenantModalBtn").addEventListener("click", closeTenantModal);
-  document.getElementById("saveTenantBtn").addEventListener("click", () => {
-    const name = document.getElementById("tenantName").value.trim();
-    const phone = document.getElementById("tenantPhone").value.trim();
-    const room = document.getElementById("tenantRoom").value.trim();
+  document.getElementById("newMemberBtn").addEventListener("click", openMemberModal);
+  document.getElementById("closeMemberModalBtn").addEventListener("click", closeMemberModal);
+  document.getElementById("saveMemberBtn").addEventListener("click", () => {
+    const name = document.getElementById("memberName").value.trim();
+    const phone = document.getElementById("memberPhone").value.trim();
+    const memberId = document.getElementById("memberId").value.trim();
     if (!name || !phone) { alert("Name and phone are required"); return; }
-    const newId = tenants.length + 1;
-    const newTenant = { id: newId, name, phone, room: room || "Unassigned" };
-    tenants.push(newTenant);
-    selectedTenant = { ...newTenant, type: "existing" };
-    document.getElementById("selectedTenantDisplay").innerHTML = `<i class="fas fa-user-check"></i> ${selectedTenant.name} (${selectedTenant.room})`;
-    closeTenantModal();
-    alert("Tenant added successfully");
+    const newId = members.length + 1;
+    const newMember = { id: newId, name, phone, memberId: memberId || `MF-${String(newId).padStart(3,'0')}` };
+    members.push(newMember);
+    selectedMember = { ...newMember, type: "existing" };
+    document.getElementById("selectedMemberDisplay").innerHTML = `<i class="fas fa-user-check"></i> ${selectedMember.name} (${selectedMember.memberId})`;
+    closeMemberModal();
+    alert("Member added successfully");
   });
 
-  // Custom item adder
   document.getElementById("addCustomItemBtn").addEventListener("click", () => {
     const name = document.getElementById("customItemName").value.trim();
     const amount = parseFloat(document.getElementById("customItemAmount").value);
     if (!name || isNaN(amount) || amount <= 0) { alert("Enter valid name and amount"); return; }
-    addInvoiceItem({ id: Date.now(), name, price: amount, quantity: 1, custom: true });
+    addInvoiceItem({ id: Date.now(), name, price: amount, quantity: 1 });
     document.getElementById("customItemName").value = "";
     document.getElementById("customItemAmount").value = "";
   });
 
   function setWalkInDefault() {
-    selectedTenant = { id: null, name: "Walk-In / New Tenant", type: "walkin" };
-    document.getElementById("selectedTenantDisplay").innerHTML = `<i class="fas fa-user"></i> No tenant selected (Walk-In / New)`;
+    selectedMember = { id: null, name: "Walk-In / New Member", type: "walkin" };
+    document.getElementById("selectedMemberDisplay").innerHTML = `<i class="fas fa-user"></i> No member selected (Walk-In / New)`;
   }
 
-  // Event bindings
   function init() {
-    renderBillingCatalog();
+    renderGymCatalog();
     renderInvoiceList();
     renderTransactionHistory();
     setWalkInDefault();
 
-    document.getElementById("searchTenantBtn").addEventListener("click", () => renderTenantSearch(document.getElementById("tenantSearchInput").value));
-    document.getElementById("tenantSearchInput").addEventListener("keyup", (e) => renderTenantSearch(e.target.value));
+    document.getElementById("searchMemberBtn").addEventListener("click", () => renderMemberSearch(document.getElementById("memberSearchInput").value));
+    document.getElementById("memberSearchInput").addEventListener("keyup", (e) => renderMemberSearch(e.target.value));
     document.getElementById("processPaymentBtn").addEventListener("click", processPayment);
     document.getElementById("clearInvoiceBtn").addEventListener("click", () => { currentInvoice = []; renderInvoiceList(); });
     document.getElementById("cashAmount").addEventListener("input", updatePaymentDisplay);
     document.getElementById("refNumber").addEventListener("input", updatePaymentDisplay);
     document.querySelectorAll(".method-btn").forEach(btn => btn.addEventListener("click", () => setPaymentMethod(btn.getAttribute("data-method"))));
     document.getElementById("closeReceiptBtn").addEventListener("click", () => document.getElementById("receiptModal").style.display = "none");
-    window.onclick = (e) => { if (e.target === document.getElementById("receiptModal")) document.getElementById("receiptModal").style.display = "none"; if (e.target === tenantModal) tenantModal.style.display = "none"; };
+    window.onclick = (e) => { if (e.target === document.getElementById("receiptModal")) document.getElementById("receiptModal").style.display = "none"; if (e.target === memberModal) memberModal.style.display = "none"; };
     document.getElementById("currentDate").innerText = new Date().toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
     setPaymentMethod("cash");
   }
