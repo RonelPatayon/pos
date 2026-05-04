@@ -3,152 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>AquaFlow POS Pro | Water Refilling Station</title>
+  <title>AquaFlow POS | Premium Water Refilling Station</title>
+  <!-- Font Awesome 6 (Free CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter + Poppins for modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background: linear-gradient(145deg, #d4e9f7 0%, #bfe0f0 100%);
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e8f4f8 0%, #d1e9f2 100%);
       min-height: 100vh;
-      padding: 24px 20px;
+      padding: 28px 24px;
     }
 
+    /* modern glassmorphism + fresh aquatic theme */
     .pos-container {
       max-width: 1600px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 480px;
-      gap: 24px;
+      grid-template-columns: 1fr 460px;
+      gap: 28px;
     }
 
-    /* LEFT PANEL */
+    /* ========== LEFT PANEL (PRODUCTS) ========== */
     .products-panel {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(2px);
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 20, 30, 0.25);
-      padding: 1.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 35, 50, 0.25);
+      padding: 1.8rem;
+      transition: all 0.2s;
+      border: 1px solid rgba(64, 176, 207, 0.2);
     }
 
     .station-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid #2c7da0;
-      padding-bottom: 0.75rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 3px solid #40b0cf;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      background: linear-gradient(145deg, #2c9cbf, #1f7a9e);
+      width: 48px;
+      height: 48px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 12px rgba(32, 120, 150, 0.25);
+    }
+
+    .logo-icon i {
+      font-size: 26px;
+      color: white;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
     }
 
     .station-header h1 {
       font-size: 1.7rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #0b3b4f, #1f6e8c);
+      font-weight: 800;
+      background: linear-gradient(135deg, #146b8a, #1c9bbf);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
+      letter-spacing: -0.3px;
     }
 
     .date-badge {
-      background: #eaf4f9;
-      padding: 6px 14px;
-      border-radius: 40px;
+      background: #eef6fb;
+      padding: 8px 18px;
+      border-radius: 60px;
       font-size: 0.8rem;
-      font-weight: 500;
-      color: #1e5f7a;
+      font-weight: 600;
+      color: #146b8a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
+    .date-badge i {
+      font-size: 0.9rem;
+    }
+
+    /* category tabs */
     .category-tabs {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
-      border-bottom: 1px solid #cbdde6;
-      padding-bottom: 12px;
+      margin-bottom: 28px;
     }
 
     .cat-btn {
-      background: #f0f5f9;
+      background: #f0f7fa;
       border: none;
-      padding: 8px 20px;
-      border-radius: 40px;
+      padding: 10px 24px;
+      border-radius: 60px;
       font-weight: 600;
       font-size: 0.9rem;
-      color: #2c4e62;
+      font-family: 'Inter', sans-serif;
+      color: #2c6b83;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .cat-btn i {
+      font-size: 1rem;
     }
 
     .cat-btn.active {
-      background: #2c7da0;
+      background: #1f8aad;
       color: white;
+      box-shadow: 0 8px 18px -8px #1f8aad70;
     }
 
+    .cat-btn:hover:not(.active) {
+      background: #e2f0f5;
+      transform: translateY(-2px);
+    }
+
+    /* product grid modern */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 18px;
-      max-height: 550px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      max-height: 560px;
       overflow-y: auto;
-      padding: 4px;
+      padding: 4px 4px 8px 4px;
     }
 
     .product-card {
       background: white;
       border-radius: 1.5rem;
-      padding: 1rem 0.75rem;
+      padding: 1.2rem 0.8rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #deedf2;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.03);
+      transition: all 0.25s;
+      border: 1px solid #e0f0f5;
+      box-shadow: 0 8px 15px rgba(0, 30, 40, 0.05);
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      border-color: #7fc1db;
-      box-shadow: 0 16px 22px -10px rgba(34, 98, 118, 0.2);
+      transform: translateY(-6px);
+      border-color: #7fcfeb;
+      box-shadow: 0 20px 25px -12px rgba(31, 130, 160, 0.25);
+      background: #fefefe;
     }
 
-    .product-icon { font-size: 2.6rem; margin-bottom: 8px; }
-    .product-name { font-weight: 700; color: #1f5068; margin-bottom: 6px; font-size: 1rem; }
-    .product-price { font-weight: 800; color: #0f4c5f; background: #e2f0f6; display: inline-block; padding: 4px 10px; border-radius: 40px; font-size: 0.9rem; }
+    .product-icon {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      color: #1f8aad;
+    }
 
-    /* RIGHT PANEL */
+    .product-name {
+      font-weight: 700;
+      color: #145c78;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .product-price {
+      font-weight: 800;
+      background: #e4f2f7;
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: #0d5e7c;
+    }
+
+    /* ========== RIGHT PANEL (CART) ========== */
     .cart-panel {
       background: white;
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 45px -12px rgba(0, 35, 45, 0.3);
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(64, 176, 207, 0.3);
     }
 
     .cart-header {
-      background: #1e5f7a;
-      color: white;
-      padding: 1.2rem 1.5rem;
-      border-radius: 2rem 2rem 1.5rem 1.5rem;
+      background: linear-gradient(105deg, #146b8a 0%, #1e8bb0 100%);
+      padding: 1.3rem 1.6rem;
     }
 
-    .cart-header h2 { font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+    .cart-header h2 {
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: white;
+    }
 
-    /* Customer Section */
+    /* customer area */
     .customer-section {
-      padding: 1rem 1.2rem;
-      background: #f8fcfd;
-      border-bottom: 1px solid #d4e4ec;
+      padding: 1.2rem 1.4rem;
+      background: #f9feff;
+      border-bottom: 1px solid #daecf2;
     }
 
     .customer-label {
       font-weight: 700;
-      color: #1e5f7a;
+      color: #146b8a;
       font-size: 0.8rem;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -158,223 +238,300 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .customer-control input {
       flex: 2;
-      padding: 10px 12px;
-      border-radius: 40px;
-      border: 1px solid #c7dde8;
-      outline: none;
+      padding: 11px 15px;
+      border-radius: 60px;
+      border: 1px solid #cde3ec;
+      font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
-    }
-
-    .customer-control button, .add-customer-btn {
-      background: #eef3f7;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.8rem;
-      color: #1f6683;
       transition: 0.2s;
     }
 
-    .customer-control button:hover, .add-customer-btn:hover {
-      background: #dce9f0;
+    .customer-control input:focus {
+      border-color: #1f8aad;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(31,138,173,0.1);
     }
 
-    .customer-badge {
-      background: #e1f0f7;
-      padding: 6px 12px;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #0c6b8f;
+    .customer-control button {
+      background: #eef5f9;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #146b8a;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: 0.2s;
+    }
+
+    .customer-control button:hover {
+      background: #deedf4;
+    }
+
+    .customer-badge {
+      background: #e2f0f6;
+      padding: 8px 14px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0f5c78;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .search-results {
       background: white;
-      border-radius: 16px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
       max-height: 180px;
       overflow-y: auto;
-      margin-top: 6px;
+      margin-top: 8px;
+      z-index: 20;
       position: relative;
-      z-index: 10;
     }
 
     .search-result-item {
-      padding: 8px 12px;
+      padding: 10px 14px;
       cursor: pointer;
-      border-bottom: 1px solid #ecf3f7;
+      border-bottom: 1px solid #e7f0f4;
       font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .search-result-item:hover { background: #e9f2f8; }
+    .search-result-item i {
+      color: #1f8aad;
+      width: 20px;
+    }
 
-    /* Cart Items */
+    .search-result-item:hover { background: #eef7fc; }
+
+    /* cart items */
     .cart-items {
-      flex: 1;
       padding: 1rem 1.2rem;
-      max-height: 260px;
+      max-height: 270px;
       overflow-y: auto;
-      border-bottom: 1px solid #e0edf2;
+      background: #ffffff;
     }
 
     .cart-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fafeff;
+      background: #fbfeff;
       margin-bottom: 12px;
-      padding: 10px 12px;
-      border-radius: 1rem;
-      border-left: 5px solid #2c7da0;
+      padding: 12px 12px;
+      border-radius: 1.2rem;
+      border-left: 6px solid #40b0cf;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     .cart-item-info { flex: 2; }
-    .cart-item-name { font-weight: 700; color: #1d4f66; }
-    .cart-item-meta { font-size: 0.7rem; color: #5d8aa8; }
-    .cart-item-actions { display: flex; align-items: center; gap: 10px; }
-    .qty-btn { background: #e9f2f7; border: none; width: 28px; height: 28px; border-radius: 30px; font-weight: bold; cursor: pointer; }
-    .remove-item { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #bb9e9e; }
-    .remove-item:hover { color: #d9534f; }
+    .cart-item-name { font-weight: 700; color: #115e7a; display: flex; align-items: center; gap: 8px; }
+    .cart-item-meta { font-size: 0.7rem; color: #6f9eb3; margin-top: 4px; }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .qty-btn {
+      background: #e8f2f7;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 40px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #146b8a;
+      transition: 0.1s;
+    }
+
+    .qty-btn:hover { background: #cde3ec; }
+    .item-price { font-weight: 800; color: #1f7595; min-width: 70px; text-align: right; }
+    .remove-item { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #b8cdd9; padding: 0 4px; }
+    .remove-item:hover { color: #e25c5c; }
 
     .cart-summary {
       padding: 1rem 1.2rem;
-      background: #f6fbfe;
-      margin: 0.5rem;
-      border-radius: 1.2rem;
+      background: #f6fcfd;
+      margin: 0.6rem;
+      border-radius: 1.5rem;
     }
 
-    .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
-    .total-line { font-size: 1.3rem; font-weight: 800; border-top: 2px dashed #bddceb; padding-top: 10px; margin-top: 6px; color: #094c66; }
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #2e6a81;
+    }
 
-    /* Payment Methods */
+    .total-line {
+      font-size: 1.4rem;
+      font-weight: 800;
+      border-top: 2px solid #cae1ec;
+      padding-top: 12px;
+      margin-top: 6px;
+      color: #0e5a77;
+    }
+
+    /* payment methods modern */
     .payment-methods {
       padding: 0 1.2rem;
     }
 
     .method-title {
       font-size: 0.8rem;
-      font-weight: 600;
-      color: #1e5f7a;
-      margin-bottom: 8px;
+      font-weight: 700;
+      color: #146b8a;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
     }
 
     .method-buttons {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .method-btn {
-      background: #eff5f8;
-      border: 1px solid #cde1ea;
-      padding: 8px 16px;
-      border-radius: 40px;
+      background: #f2f8fb;
+      border: 1px solid #d3e6ef;
+      padding: 8px 18px;
+      border-radius: 50px;
       font-weight: 600;
       font-size: 0.8rem;
       cursor: pointer;
-      transition: 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+      color: #2c6b83;
     }
 
     .method-btn.active {
-      background: #2c7da0;
+      background: #1f8aad;
       color: white;
-      border-color: #2c7da0;
+      border-color: #1f8aad;
+      box-shadow: 0 4px 10px rgba(31,138,173,0.3);
     }
 
-    /* Non-cash payment section */
+    /* digital payment block */
     .digital-payment-section {
-      background: #f9fdfe;
-      border-radius: 1rem;
+      background: #f6fbfd;
+      border-radius: 1.2rem;
       padding: 1rem;
-      margin-bottom: 15px;
-      border: 1px solid #d4e9f2;
+      margin-bottom: 16px;
+      border: 1px solid #cee6f0;
     }
 
     .qr-code-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 15px;
-      padding: 12px;
+      margin-bottom: 14px;
       background: white;
-      border-radius: 1rem;
+      padding: 14px;
+      border-radius: 1.2rem;
     }
 
     .qr-placeholder {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e2f0f7 100%);
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(145deg, #eef8fe, #e0f0f8);
+      border-radius: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-radius: 1rem;
       margin-bottom: 8px;
-      border: 2px solid #2c7da0;
+      border: 1px solid #bddbe8;
     }
 
-    .qr-placeholder span {
-      font-size: 3rem;
-    }
-
-    .reference-input {
-      margin-top: 12px;
-    }
-
-    .reference-input label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #1e5f7a;
-      display: block;
-      margin-bottom: 6px;
-    }
+    .qr-placeholder i { font-size: 3rem; color: #1f8aad; margin-bottom: 6px; }
 
     .reference-input input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border-radius: 60px;
-      border: 1px solid #bdd4e2;
-      outline: none;
+      border: 1px solid #cde3ec;
       font-size: 0.85rem;
     }
 
     .cash-input {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .cash-input label { font-weight: 600; color: #1e5f7a; font-size: 0.85rem; }
-    .cash-input input { flex: 1; padding: 10px 12px; border-radius: 60px; border: 1px solid #bdd4e2; outline: none; }
+    .cash-input label { font-weight: 700; color: #146b8a; }
+    .cash-input input { flex: 1; padding: 12px; border-radius: 60px; border: 1px solid #cde3ec; }
 
     .change-display {
-      background: #eef3f7;
-      padding: 8px 14px;
-      border-radius: 50px;
+      background: #e9f4f9;
+      padding: 10px 16px;
+      border-radius: 60px;
       display: flex;
       justify-content: space-between;
       font-weight: 600;
-      margin-bottom: 15px;
-      font-size: 0.9rem;
+      margin-bottom: 18px;
     }
 
-    .action-buttons { display: flex; gap: 12px; flex-direction: column; padding-bottom: 1.5rem; }
-    .btn-checkout { background: #2c7da0; border: none; padding: 14px; border-radius: 60px; font-weight: 800; color: white; cursor: pointer; }
-    .btn-checkout:disabled { background: #b7cfdb; cursor: not-allowed; }
-    .btn-clear { background: #f1f5f7; border: 1px solid #cde1ea; padding: 10px; border-radius: 60px; cursor: pointer; }
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+      padding-bottom: 1.6rem;
+    }
 
+    .btn-checkout {
+      background: linear-gradient(95deg, #1f8aad, #107090);
+      border: none;
+      padding: 14px;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: 0.2s;
+    }
+
+    .btn-checkout:hover:not(:disabled) { background: #0f6888; transform: scale(0.98); }
+    .btn-checkout:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-clear {
+      background: #f0f6fa;
+      border: 1px solid #cde1ea;
+      padding: 11px;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #365f74;
+    }
+
+    /* modals */
     .modal {
       display: none;
       position: fixed;
@@ -385,117 +542,121 @@
       justify-content: center;
       z-index: 1000;
     }
+
     .modal-content {
       background: white;
-      max-width: 500px;
+      max-width: 460px;
       width: 90%;
       border-radius: 2rem;
       padding: 1.8rem;
+      text-align: left;
     }
+
     .receipt-text {
-      background: #f8fafc;
+      background: #fafeff;
       padding: 1rem;
       border-radius: 1rem;
+      font-family: 'Courier New', monospace;
       font-size: 0.8rem;
-      font-family: monospace;
       white-space: pre-line;
-      margin: 1rem 0;
       max-height: 400px;
       overflow-y: auto;
     }
-    .close-modal { background: #2c7da0; border: none; padding: 8px 24px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
 
-    @media (max-width: 860px) { .pos-container { grid-template-columns: 1fr; } }
+    .close-modal { background: #1f8aad; border: none; padding: 10px 26px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
+
+    @media (max-width: 900px) {
+      .pos-container { grid-template-columns: 1fr; }
+      body { padding: 16px; }
+    }
   </style>
 </head>
 <body>
 
 <div class="pos-container">
-  <!-- LEFT PANEL: Products -->
+  <!-- LEFT PANEL: PRODUCTS -->
   <div class="products-panel">
     <div class="station-header">
-      <h1>💧 AquaFlow Refilling Station</h1>
-      <div class="date-badge" id="currentDate"></div>
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-tint"></i></div>
+        <h1>AquaFlow Refilling Station</h1>
+      </div>
+      <div class="date-badge"><i class="far fa-calendar-alt"></i> <span id="currentDate"></span></div>
     </div>
+
     <div class="category-tabs" id="categoryTabs">
-      <button class="cat-btn active" data-cat="all">All Items</button>
-      <button class="cat-btn" data-cat="bottled">💧 Bottled</button>
-      <button class="cat-btn" data-cat="refill">🔄 Refill</button>
-      <button class="cat-btn" data-cat="accessory">🧴 Accessories</button>
+      <button class="cat-btn active" data-cat="all"><i class="fas fa-layer-group"></i> All</button>
+      <button class="cat-btn" data-cat="bottled"><i class="fas fa-bottle-water"></i> Bottled</button>
+      <button class="cat-btn" data-cat="refill"><i class="fas fa-arrows-rotate"></i> Refill</button>
+      <button class="cat-btn" data-cat="accessory"><i class="fas fa-hand-peace"></i> Accessories</button>
     </div>
+
     <div class="products-grid" id="productsGrid"></div>
   </div>
 
-  <!-- RIGHT PANEL: Cart + Customer + Payment -->
+  <!-- RIGHT PANEL: CART & CHECKOUT -->
   <div class="cart-panel">
     <div class="cart-header">
-      <h2>🛒 POS Terminal</h2>
+      <h2><i class="fas fa-cash-register"></i> POS Terminal</h2>
     </div>
 
-    <!-- CUSTOMER MANAGEMENT -->
+    <!-- Customer area -->
     <div class="customer-section">
-      <div class="customer-label">👤 Customer Info</div>
+      <div class="customer-label"><i class="fas fa-user-circle"></i> Customer information</div>
       <div class="customer-control">
         <input type="text" id="customerSearchInput" placeholder="Search by name or phone...">
-        <button id="searchCustomerBtn">🔍 Search</button>
-        <button id="addCustomerBtn">+ New</button>
+        <button id="searchCustomerBtn"><i class="fas fa-search"></i> Search</button>
+        <button id="addCustomerBtn"><i class="fas fa-user-plus"></i> New</button>
       </div>
-      <div id="searchResultsContainer" style="position: relative;"></div>
-      <div id="selectedCustomerDisplay" class="customer-badge">🚶 Walk-In Customer (default)</div>
+      <div id="searchResultsContainer"></div>
+      <div id="selectedCustomerDisplay" class="customer-badge"><i class="fas fa-person-walking-arrow-right"></i> Walk-In Customer (default)</div>
     </div>
 
-    <!-- CART ITEMS -->
+    <!-- Cart items -->
     <div class="cart-items" id="cartItemsContainer">
-      <div class="empty-cart-message" style="text-align:center; padding:20px;">✨ Cart empty</div>
+      <div style="text-align:center; padding:30px; color:#8cb3c4;"><i class="fas fa-shopping-cart"></i> Cart is empty</div>
     </div>
 
+    <!-- Summary -->
     <div class="cart-summary">
-      <div class="summary-line"><span>Subtotal</span><span id="subtotalAmount">₱0.00</span></div>
-      <div class="summary-line total-line"><span>Total</span><span id="totalAmount">₱0.00</span></div>
+      <div class="summary-line"><span><i class="fas fa-receipt"></i> Subtotal</span><span id="subtotalAmount">₱0.00</span></div>
+      <div class="summary-line total-line"><span><i class="fas fa-coins"></i> Total</span><span id="totalAmount">₱0.00</span></div>
     </div>
 
-    <!-- PAYMENT METHODS -->
+    <!-- Payment section -->
     <div class="payment-methods">
-      <div class="method-title">💳 Payment Method</div>
+      <div class="method-title"><i class="fas fa-credit-card"></i> Payment method</div>
       <div class="method-buttons" id="paymentMethodsContainer">
-        <button class="method-btn active" data-method="cash">💵 Cash</button>
-        <button class="method-btn" data-method="gcash">📱 GCash</button>
-        <button class="method-btn" data-method="paymaya">💳 PayMaya</button>
-        <button class="method-btn" data-method="card">💎 Card</button>
+        <button class="method-btn active" data-method="cash"><i class="fas fa-money-bill-wave"></i> Cash</button>
+        <button class="method-btn" data-method="gcash"><i class="fab fa-gcash"></i> GCash</button>
+        <button class="method-btn" data-method="paymaya"><i class="fas fa-mobile-alt"></i> PayMaya</button>
+        <button class="method-btn" data-method="card"><i class="fas fa-credit-card"></i> Card</button>
       </div>
 
-      <!-- Cash Section -->
-      <div id="cashSection" style="display: block;">
+      <!-- Cash section -->
+      <div id="cashSection">
         <div class="cash-input">
-          <label>💵 Cash Amount</label>
+          <label><i class="fas fa-coins"></i> Cash amount</label>
           <input type="number" id="cashInput" placeholder="0.00" step="any" value="0">
         </div>
-        <div class="change-display">
-          <span>Change / Amount due:</span>
-          <span id="changeAmount">₱0.00</span>
-        </div>
+        <div class="change-display"><span><i class="fas fa-exchange-alt"></i> Change / Status</span><span id="changeAmount">₱0.00</span></div>
       </div>
 
-      <!-- Digital Payment Section (QR + Reference) -->
+      <!-- Digital payment (QR + Ref) -->
       <div id="digitalPaymentSection" style="display: none;">
         <div class="digital-payment-section">
-          <div class="qr-code-container" id="qrContainer">
-            <!-- Dynamic QR based on payment method -->
-          </div>
+          <div class="qr-code-container" id="qrContainer"></div>
           <div class="reference-input">
-            <label>📝 Transaction Reference Number *</label>
-            <input type="text" id="transactionRefInput" placeholder="e.g., GCash Ref No. / Last 4 digits of card" autocomplete="off">
+            <label><i class="fas fa-hashtag"></i> Transaction Reference *</label>
+            <input type="text" id="transactionRefInput" placeholder="Enter reference number">
           </div>
-          <div class="change-display" style="margin-top: 10px;">
-            <span>💳 Payment Status:</span>
-            <span id="digitalPaymentStatus">Awaiting reference</span>
-          </div>
+          <div class="change-display"><span><i class="fas fa-check-circle"></i> Payment status</span><span id="digitalPaymentStatus">Awaiting reference</span></div>
         </div>
       </div>
 
       <div class="action-buttons">
-        <button class="btn-checkout" id="checkoutBtn">✅ Complete Sale</button>
-        <button class="btn-clear" id="clearCartBtn">🗑 Clear Cart</button>
+        <button class="btn-checkout" id="checkoutBtn"><i class="fas fa-check-double"></i> Complete Sale</button>
+        <button class="btn-clear" id="clearCartBtn"><i class="fas fa-trash-alt"></i> Clear Cart</button>
       </div>
     </div>
   </div>
@@ -504,176 +665,107 @@
 <!-- Receipt Modal -->
 <div id="receiptModal" class="modal">
   <div class="modal-content">
-    <h3>🧾 AquaFlow Receipt</h3>
+    <h3 style="display:flex; gap:10px;"><i class="fas fa-receipt"></i> AquaFlow Receipt</h3>
     <div id="receiptDetails" class="receipt-text"></div>
-    <button class="close-modal" id="closeModalBtn">Close</button>
+    <button class="close-modal" id="closeModalBtn"><i class="fas fa-print"></i> Close</button>
   </div>
 </div>
 
 <!-- Add Customer Modal -->
 <div id="addCustomerModal" class="modal">
   <div class="modal-content">
-    <h3>➕ Add New Customer</h3>
-    <input type="text" id="newCustomerName" placeholder="Full Name" style="width:100%; padding:10px; margin:10px 0; border-radius:60px; border:1px solid #ccc;">
-    <input type="text" id="newCustomerPhone" placeholder="Phone Number" style="width:100%; padding:10px; margin:10px 0; border-radius:60px; border:1px solid #ccc;">
-    <input type="text" id="newCustomerAddress" placeholder="Address (optional)" style="width:100%; padding:10px; margin:10px 0; border-radius:60px; border:1px solid #ccc;">
-    <div style="display:flex; gap:10px; margin-top:10px;">
-      <button id="saveCustomerBtn" style="flex:1; padding:10px; background:#2c7da0; color:white; border:none; border-radius:40px;">Save</button>
-      <button id="cancelCustomerBtn" style="flex:1; padding:10px; background:#eef3f7; border:none; border-radius:40px;">Cancel</button>
+    <h3><i class="fas fa-user-plus"></i> New Customer</h3>
+    <input type="text" id="newCustomerName" placeholder="Full name" style="width:100%; padding:12px; margin:12px 0; border-radius:60px; border:1px solid #ccc;">
+    <input type="text" id="newCustomerPhone" placeholder="Phone number" style="width:100%; padding:12px; margin:12px 0; border-radius:60px; border:1px solid #ccc;">
+    <input type="text" id="newCustomerAddress" placeholder="Address (optional)" style="width:100%; padding:12px; margin:12px 0; border-radius:60px; border:1px solid #ccc;">
+    <div style="display:flex; gap:12px;">
+      <button id="saveCustomerBtn" style="flex:1; background:#1f8aad; color:white; border:none; border-radius:60px; padding:12px;"><i class="fas fa-save"></i> Save</button>
+      <button id="cancelCustomerBtn" style="flex:1; background:#eef3f7; border:none; border-radius:60px;"><i class="fas fa-times"></i> Cancel</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ---------- PRODUCTS ----------
+  // product catalog
   const products = [
-    { id: 1, name: "Bottled Water 500ml", price: 18, category: "bottled", icon: "💧" },
-    { id: 2, name: "Bottled Water 1L", price: 25, category: "bottled", icon: "🧊" },
-    { id: 3, name: "Mineral Water 1.5L", price: 35, category: "bottled", icon: "💎" },
-    { id: 4, name: "Alkaline Water 1L", price: 45, category: "bottled", icon: "⚡" },
-    { id: 5, name: "Gallon Refill (Standard)", price: 25, category: "refill", icon: "🔄" },
-    { id: 6, name: "Alkaline Gallon Refill", price: 40, category: "refill", icon: "💧⚡" },
-    { id: 7, name: "Mineral Gallon Refill", price: 35, category: "refill", icon: "🏔️" },
-    { id: 8, name: "Water Jug Cap (pcs)", price: 5, category: "accessory", icon: "🧴" },
-    { id: 9, name: "Carrying Handle", price: 12, category: "accessory", icon: "🖐️" },
-    { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", icon: "🧂" }
+    { id: 1, name: "Bottled Water 500ml", price: 18, category: "bottled", icon: "fa-bottle-water" },
+    { id: 2, name: "Bottled Water 1L", price: 25, category: "bottled", icon: "fa-droplet" },
+    { id: 3, name: "Mineral Water 1.5L", price: 35, category: "bottled", icon: "fa-gem" },
+    { id: 4, name: "Alkaline Water 1L", price: 45, category: "bottled", icon: "fa-bolt" },
+    { id: 5, name: "Gallon Refill (Std)", price: 25, category: "refill", icon: "fa-rotate-right" },
+    { id: 6, name: "Alkaline Gallon Refill", price: 40, category: "refill", icon: "fa-bolt-lightning" },
+    { id: 7, name: "Mineral Gallon Refill", price: 35, category: "refill", icon: "fa-mountain" },
+    { id: 8, name: "Water Jug Cap", price: 5, category: "accessory", icon: "fa-plug" },
+    { id: 9, name: "Carrying Handle", price: 12, category: "accessory", icon: "fa-hand-peace" },
+    { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", icon: "fa-bucket" }
   ];
 
-  // ---------- CUSTOMER DATABASE ----------
   let customers = [
-    { id: 1, name: "Juan Dela Cruz", phone: "09123456789", address: "Brgy. San Isidro" },
-    { id: 2, name: "Maria Santos", phone: "09234567890", address: "Poblacion" },
-    { id: 3, name: "Carlos Reyes", phone: "09345678901", address: "Maharlika Village" }
+    { id: 1, name: "Juan Dela Cruz", phone: "09123456789", address: "San Isidro" },
+    { id: 2, name: "Maria Santos", phone: "09234567890", address: "Poblacion" }
   ];
   let selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" };
-
   let cart = [];
   let selectedPaymentMethod = "cash";
 
-  // Helper: Show sample QR based on method
-  function updateQrAndReferenceField() {
-    const qrContainer = document.getElementById("qrContainer");
-    if (!qrContainer) return;
-    
-    const method = selectedPaymentMethod;
-    let qrHtml = "";
-    if (method === "gcash") {
-      qrHtml = `
-        <div class="qr-placeholder">
-          <span>📱💚</span>
-          <span style="font-size:10px; margin-top:4px;">GCash QR</span>
-        </div>
-        <div style="font-size:12px; text-align:center; color:#0c6b8f;">
-          <strong>Sample GCash QR</strong><br>
-          Scan to pay: 0999-123-4567<br>
-          <span style="font-size:10px;">(Merchant: AquaFlow Water Station)</span>
-        </div>
-      `;
-    } else if (method === "paymaya") {
-      qrHtml = `
-        <div class="qr-placeholder">
-          <span>💳🔷</span>
-          <span style="font-size:10px; margin-top:4px;">PayMaya QR</span>
-        </div>
-        <div style="font-size:12px; text-align:center; color:#0c6b8f;">
-          <strong>Sample PayMaya QR</strong><br>
-          Account: aquaflow@paymaya.com<br>
-          <span style="font-size:10px;">Scan to pay securely</span>
-        </div>
-      `;
-    } else if (method === "card") {
-      qrHtml = `
-        <div class="qr-placeholder">
-          <span>💳✨</span>
-          <span style="font-size:10px; margin-top:4px;">Card Terminal</span>
-        </div>
-        <div style="font-size:12px; text-align:center; color:#0c6b8f;">
-          <strong>Card Payment</strong><br>
-          Visa | Mastercard | JCB<br>
-          <span style="font-size:10px;">Tap / Insert card on terminal</span>
-        </div>
-      `;
-    }
-    qrContainer.innerHTML = qrHtml;
-    
-    // update reference placeholder
-    const refInput = document.getElementById("transactionRefInput");
-    if (method === "gcash") refInput.placeholder = "GCash Reference # (e.g., 1234567890)";
-    else if (method === "paymaya") refInput.placeholder = "PayMaya Transaction ID";
-    else if (method === "card") refInput.placeholder = "Last 4 digits of card / Auth Code";
-    else refInput.placeholder = "Reference Number";
-  }
-
-  function renderProducts(activeCategory = "all") {
+  // helpers
+  function renderProducts(activeCat = "all") {
     const grid = document.getElementById("productsGrid");
-    let filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
-    grid.innerHTML = "";
-    filtered.forEach(prod => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.innerHTML = `<div class="product-icon">${prod.icon}</div><div class="product-name">${prod.name}</div><div class="product-price">₱${prod.price.toFixed(2)}</div>`;
-      card.addEventListener("click", () => addToCart(prod));
-      grid.appendChild(card);
+    const filtered = activeCat === "all" ? products : products.filter(p => p.category === activeCat);
+    grid.innerHTML = filtered.map(prod => `
+      <div class="product-card" data-id="${prod.id}">
+        <div class="product-icon"><i class="fas ${prod.icon}"></i></div>
+        <div class="product-name">${prod.name}</div>
+        <div class="product-price">₱${prod.price.toFixed(2)}</div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".product-card").forEach(card => {
+      const id = parseInt(card.dataset.id);
+      const product = products.find(p => p.id === id);
+      card.addEventListener("click", () => addToCart(product));
     });
   }
 
   function addToCart(product) {
-    const existing = cart.find(item => item.id === product.id);
-    if (existing) existing.quantity += 1;
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) existing.quantity++;
     else cart.push({ ...product, quantity: 1 });
     renderCart();
   }
 
   function updateQty(id, delta) {
-    const idx = cart.findIndex(item => item.id === id);
+    const idx = cart.findIndex(i => i.id === id);
     if (idx === -1) return;
-    const newQty = cart[idx].quantity + delta;
-    if (newQty <= 0) cart.splice(idx, 1);
-    else cart[idx].quantity = newQty;
+    cart[idx].quantity += delta;
+    if (cart[idx].quantity <= 0) cart.splice(idx, 1);
     renderCart();
   }
 
-  function removeItem(id) { cart = cart.filter(item => item.id !== id); renderCart(); }
-  function clearCart() { cart = []; renderCart(); document.getElementById("cashInput").value = "0"; if(document.getElementById("transactionRefInput")) document.getElementById("transactionRefInput").value = ""; updateChangeDisplay(); }
-
-  function getTotal() { return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); }
+  function getTotal() { return cart.reduce((s, i) => s + i.price * i.quantity, 0); }
 
   function renderCart() {
     const container = document.getElementById("cartItemsContainer");
-    const subSpan = document.getElementById("subtotalAmount");
-    const totalSpan = document.getElementById("totalAmount");
     const total = getTotal();
-    subSpan.innerText = `₱${total.toFixed(2)}`;
-    totalSpan.innerText = `₱${total.toFixed(2)}`;
-
-    if (cart.length === 0) {
-      container.innerHTML = `<div class="empty-cart-message" style="text-align:center; padding:20px;">🧺 Cart is empty</div>`;
-      updateChangeDisplay();
-      return;
-    }
-    container.innerHTML = "";
-    cart.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "cart-item";
-      div.innerHTML = `
-        <div class="cart-item-info"><div class="cart-item-name">${item.icon || "💧"} ${item.name}</div><div class="cart-item-meta">₱${item.price.toFixed(2)} each</div></div>
-        <div class="cart-item-actions"><button class="qty-btn" data-action="dec" data-id="${item.id}">−</button><span class="item-qty">${item.quantity}</span><button class="qty-btn" data-action="inc" data-id="${item.id}">+</button><span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span><button class="remove-item" data-action="remove" data-id="${item.id}">✕</button></div>
-      `;
-      container.appendChild(div);
-    });
+    document.getElementById("subtotalAmount").innerText = `₱${total.toFixed(2)}`;
+    document.getElementById("totalAmount").innerText = `₱${total.toFixed(2)}`;
+    if (cart.length === 0) { container.innerHTML = `<div style="text-align:center; padding:30px; color:#8cb3c4;"><i class="fas fa-shopping-cart"></i> Cart is empty</div>`; updateChangeDisplay(); return; }
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-info"><div class="cart-item-name"><i class="fas ${item.icon}"></i> ${item.name}</div><div class="cart-item-meta">₱${item.price.toFixed(2)} each</div></div>
+        <div class="cart-item-actions">
+          <button class="qty-btn" data-id="${item.id}" data-delta="-1"><i class="fas fa-minus"></i></button>
+          <span class="item-qty">${item.quantity}</span>
+          <button class="qty-btn" data-id="${item.id}" data-delta="1"><i class="fas fa-plus"></i></button>
+          <span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span>
+          <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash-can"></i></button>
+        </div>
+      </div>
+    `).join("");
     document.querySelectorAll(".qty-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const id = parseInt(btn.getAttribute("data-id"));
-        const action = btn.getAttribute("data-action");
-        if (action === "inc") updateQty(id, 1);
-        if (action === "dec") updateQty(id, -1);
-      });
+      btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const delta = parseInt(btn.dataset.delta); updateQty(id, delta); });
     });
     document.querySelectorAll(".remove-item").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const id = parseInt(btn.getAttribute("data-id"));
-        removeItem(id);
-      });
+      btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const idx = cart.findIndex(i => i.id === id); if(idx !== -1) cart.splice(idx,1); renderCart(); });
     });
     updateChangeDisplay();
   }
@@ -681,189 +773,95 @@
   function updateChangeDisplay() {
     const total = getTotal();
     if (selectedPaymentMethod === "cash") {
-      const cashInput = parseFloat(document.getElementById("cashInput").value) || 0;
-      const change = cashInput - total;
-      if (change >= 0) document.getElementById("changeAmount").innerHTML = `₱${change.toFixed(2)} (Change)`;
-      else document.getElementById("changeAmount").innerHTML = `₱${Math.abs(change).toFixed(2)} (Short)`;
+      const cash = parseFloat(document.getElementById("cashInput")?.value) || 0;
+      const diff = cash - total;
+      document.getElementById("changeAmount").innerHTML = diff >= 0 ? `₱${diff.toFixed(2)} change` : `₱${Math.abs(diff).toFixed(2)} short`;
     } else {
       const ref = document.getElementById("transactionRefInput")?.value.trim();
-      const hasRef = ref && ref.length > 0;
-      document.getElementById("digitalPaymentStatus").innerHTML = hasRef ? "✅ Reference recorded" : "⚠️ Reference required";
-      document.getElementById("changeAmount").innerHTML = `Via ${getPaymentLabel()} — total: ₱${total.toFixed(2)}`;
+      document.getElementById("digitalPaymentStatus").innerHTML = ref ? "<i class='fas fa-check-circle'></i> Reference OK" : "<i class='fas fa-exclamation-triangle'></i> Reference required";
+      document.getElementById("changeAmount").innerHTML = `Total: ₱${total.toFixed(2)} (${selectedPaymentMethod.toUpperCase()})`;
     }
   }
 
-  function getPaymentLabel() {
-    if (selectedPaymentMethod === "gcash") return "GCash";
-    if (selectedPaymentMethod === "paymaya") return "PayMaya";
-    if (selectedPaymentMethod === "card") return "Card";
-    return "Cash";
+  function setPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll(".method-btn").forEach(btn => btn.classList.remove("active"));
+    document.querySelector(`.method-btn[data-method="${method}"]`).classList.add("active");
+    const cashDiv = document.getElementById("cashSection");
+    const digitalDiv = document.getElementById("digitalPaymentSection");
+    if (method === "cash") { cashDiv.style.display = "block"; digitalDiv.style.display = "none"; }
+    else { cashDiv.style.display = "none"; digitalDiv.style.display = "block"; updateQrByMethod(method); }
+    updateChangeDisplay();
   }
 
-  // Customer search
-  function renderCustomerSearch(query) {
-    const container = document.getElementById("searchResultsContainer");
-    if (!query.trim()) { container.innerHTML = ""; return; }
-    const filtered = customers.filter(c => c.name.toLowerCase().includes(query.toLowerCase()) || c.phone.includes(query));
-    if (filtered.length === 0) { container.innerHTML = "<div class='search-result-item'>No customers found. Tap 'Add New'</div>"; return; }
-    container.innerHTML = filtered.map(c => `<div class="search-result-item" data-id="${c.id}" data-name="${c.name}" data-phone="${c.phone}" data-address="${c.address || ''}">${c.name} - ${c.phone}</div>`).join('');
-    document.querySelectorAll('.search-result-item').forEach(el => {
-      el.addEventListener('click', () => {
-        const id = parseInt(el.getAttribute('data-id'));
-        const name = el.getAttribute('data-name');
-        const phone = el.getAttribute('data-phone');
-        const address = el.getAttribute('data-address');
-        selectedCustomer = { id, name, phone, address, type: "existing" };
-        document.getElementById("selectedCustomerDisplay").innerHTML = `👤 ${name} (${phone})`;
-        document.getElementById("customerSearchInput").value = "";
-        container.innerHTML = "";
-      });
-    });
+  function updateQrByMethod(method) {
+    const container = document.getElementById("qrContainer");
+    if (method === "gcash") container.innerHTML = `<div class="qr-placeholder"><i class="fab fa-gcash fa-3x"></i><span style="font-size:11px;">GCash QR</span></div><div style="font-size:12px;text-align:center;">Scan: 0999-123-4567<br>AquaFlow Merchant</div>`;
+    else if (method === "paymaya") container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-mobile-alt fa-3x"></i><span>PayMaya QR</span></div><div style="font-size:12px;text-align:center;">aquaflow@paymaya.com</div>`;
+    else container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-credit-card fa-3x"></i><span>Card Terminal</span></div><div style="font-size:12px;text-align:center;">Tap / Insert Card</div>`;
   }
 
-  function setWalkInDefault() {
-    selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" };
-    document.getElementById("selectedCustomerDisplay").innerHTML = "🚶 Walk-In Customer (default)";
-  }
-
-  // Add customer modal
-  const addModal = document.getElementById("addCustomerModal");
-  function openAddCustomerModal() { addModal.style.display = "flex"; }
-  function closeAddCustomerModal() { addModal.style.display = "none"; }
-
-  // Checkout with reference validation for non-cash
   function checkout() {
-    if (cart.length === 0) { alert("Cart is empty."); return; }
+    if (cart.length === 0) return alert("Cart is empty");
     const total = getTotal();
-    
     if (selectedPaymentMethod === "cash") {
       const cashGiven = parseFloat(document.getElementById("cashInput").value) || 0;
-      if (cashGiven < total) { alert(`Insufficient cash! Total ₱${total.toFixed(2)}`); return; }
+      if (cashGiven < total) return alert(`Insufficient cash. Total: ₱${total.toFixed(2)}`);
       processSale(total, cashGiven, `Cash: ₱${cashGiven.toFixed(2)} | Change: ₱${(cashGiven - total).toFixed(2)}`);
     } else {
-      const refNumber = document.getElementById("transactionRefInput")?.value.trim();
-      if (!refNumber) {
-        alert(`Please enter the transaction reference number for ${getPaymentLabel()}.`);
-        return;
-      }
-      processSale(total, total, `${getPaymentLabel()} payment | Ref: ${refNumber}`);
+      const ref = document.getElementById("transactionRefInput").value.trim();
+      if (!ref) return alert(`Please provide transaction reference for ${selectedPaymentMethod.toUpperCase()}`);
+      processSale(total, total, `${selectedPaymentMethod.toUpperCase()} payment | Ref: ${ref}`);
     }
   }
 
-  function processSale(total, amountPaid, paymentDetail) {
+  function processSale(total, paid, details) {
     const now = new Date();
-    const dateStr = now.toLocaleString();
-    let itemsList = cart.map(item => `${item.name} x ${item.quantity} = ₱${(item.price * item.quantity).toFixed(2)}`).join("\n");
-    const customerInfo = selectedCustomer.type === "walkin" ? "Walk-In Customer" : `${selectedCustomer.name} | ${selectedCustomer.phone}`;
+    const itemsDetail = cart.map(i => `${i.name} x ${i.quantity} = ₱${(i.price*i.quantity).toFixed(2)}`).join("\n");
+    const cust = selectedCustomer.type === "walkin" ? "Walk-In Customer" : `${selectedCustomer.name} | ${selectedCustomer.phone}`;
     const receipt = `--------------------------------
 💧 AQUAFLOW REFILLING STATION
-📍 #22 Waterlane St., San Vicente
-📅 ${dateStr}
+📍 22 Waterlane St., San Vicente
+📅 ${now.toLocaleString()}
 --------------------------------
-CUSTOMER: ${customerInfo}
+CUSTOMER: ${cust}
 --------------------------------
-${itemsList}
+${itemsDetail}
 --------------------------------
 TOTAL:        ₱${total.toFixed(2)}
-PAYMENT:      ${paymentDetail}
-AMOUNT PAID:  ₱${amountPaid.toFixed(2)}
+PAYMENT:      ${details}
+AMOUNT PAID:  ₱${paid.toFixed(2)}
 --------------------------------
-Thank you for choosing clean water!
-🌊 Keep Hydrated 🌊
+Thank you! Stay hydrated 🌊
 `;
     document.getElementById("receiptDetails").innerHTML = receipt.replace(/\n/g,'<br>');
     document.getElementById("receiptModal").style.display = "flex";
-    
-    // Reset after sale
-    cart = [];
-    renderCart();
+    cart = []; renderCart();
     document.getElementById("cashInput").value = "0";
-    if(document.getElementById("transactionRefInput")) document.getElementById("transactionRefInput").value = "";
+    if (document.getElementById("transactionRefInput")) document.getElementById("transactionRefInput").value = "";
     setWalkInDefault();
-    updateChangeDisplay();
   }
 
-  // Payment method switching
-  function setPaymentMethod(method) {
-    selectedPaymentMethod = method;
-    document.querySelectorAll(".method-btn").forEach(btn => {
-      if (btn.getAttribute("data-method") === method) btn.classList.add("active");
-      else btn.classList.remove("active");
-    });
-    
-    const cashSection = document.getElementById("cashSection");
-    const digitalSection = document.getElementById("digitalPaymentSection");
-    
-    if (method === "cash") {
-      cashSection.style.display = "block";
-      digitalSection.style.display = "none";
-    } else {
-      cashSection.style.display = "none";
-      digitalSection.style.display = "block";
-      updateQrAndReferenceField();
-      // attach listener for reference input to update status
-      const refInput = document.getElementById("transactionRefInput");
-      if (refInput) {
-        refInput.removeEventListener("input", updateChangeDisplay);
-        refInput.addEventListener("input", updateChangeDisplay);
-      }
-    }
-    updateChangeDisplay();
-  }
+  function setWalkInDefault() { selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" }; document.getElementById("selectedCustomerDisplay").innerHTML = `<i class="fas fa-person-walking-arrow-right"></i> Walk-In Customer (default)`; }
+  function renderCustomerSearch(q) { /* simplified but functional */ const container=document.getElementById("searchResultsContainer"); if(!q.trim()){container.innerHTML="";return;} const filtered=customers.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())||c.phone.includes(q)); if(!filtered.length){container.innerHTML="<div class='search-result-item'>No results</div>";return;} container.innerHTML=filtered.map(c=>`<div class='search-result-item' data-id='${c.id}' data-name='${c.name}' data-phone='${c.phone}'><i class='fas fa-user'></i> ${c.name} - ${c.phone}</div>`).join(""); document.querySelectorAll(".search-result-item").forEach(el=>{el.addEventListener("click",()=>{selectedCustomer={id:parseInt(el.dataset.id),name:el.dataset.name,phone:el.dataset.phone,type:"existing"}; document.getElementById("selectedCustomerDisplay").innerHTML=`<i class='fas fa-user-check'></i> ${el.dataset.name} (${el.dataset.phone})`; container.innerHTML=""; document.getElementById("customerSearchInput").value="";});}); }
 
+  // init modals & events
   function init() {
-    renderProducts("all");
-    renderCart();
-    setPaymentMethod("cash");
-
-    document.querySelectorAll(".cat-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderProducts(btn.getAttribute("data-cat"));
-      });
-    });
-
-    document.getElementById("searchCustomerBtn").addEventListener("click", () => {
-      const query = document.getElementById("customerSearchInput").value;
-      renderCustomerSearch(query);
-    });
-    document.getElementById("customerSearchInput").addEventListener("keyup", (e) => renderCustomerSearch(e.target.value));
-    document.getElementById("clearCartBtn").addEventListener("click", clearCart);
-    document.getElementById("checkoutBtn").addEventListener("click", checkout);
-    document.getElementById("cashInput").addEventListener("input", updateChangeDisplay);
-    
-    document.querySelectorAll(".method-btn").forEach(btn => {
-      btn.addEventListener("click", () => setPaymentMethod(btn.getAttribute("data-method")));
-    });
-
-    document.getElementById("addCustomerBtn").addEventListener("click", openAddCustomerModal);
-    document.getElementById("cancelCustomerBtn").addEventListener("click", closeAddCustomerModal);
-    document.getElementById("saveCustomerBtn").addEventListener("click", () => {
-      const name = document.getElementById("newCustomerName").value.trim();
-      const phone = document.getElementById("newCustomerPhone").value.trim();
-      const address = document.getElementById("newCustomerAddress").value.trim();
-      if (!name || !phone) { alert("Please enter name and phone number."); return; }
-      const newId = customers.length + 1;
-      const newCust = { id: newId, name, phone, address: address || "" };
-      customers.push(newCust);
-      selectedCustomer = { id: newId, name, phone, address, type: "existing" };
-      document.getElementById("selectedCustomerDisplay").innerHTML = `👤 ${name} (${phone})`;
-      document.getElementById("newCustomerName").value = "";
-      document.getElementById("newCustomerPhone").value = "";
-      document.getElementById("newCustomerAddress").value = "";
-      closeAddCustomerModal();
-      alert("Customer added successfully!");
-    });
-
-    const modal = document.getElementById("receiptModal");
-    const closeBtn = document.getElementById("closeModalBtn");
-    closeBtn.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
-    document.getElementById("currentDate").innerText = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' });
-    setWalkInDefault();
+    renderProducts("all"); renderCart();
+    document.querySelectorAll(".cat-btn").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderProducts(btn.dataset.cat); }));
+    document.getElementById("searchCustomerBtn").addEventListener("click",()=>renderCustomerSearch(document.getElementById("customerSearchInput").value));
+    document.getElementById("customerSearchInput").addEventListener("keyup",e=>renderCustomerSearch(e.target.value));
+    document.getElementById("clearCartBtn").addEventListener("click",()=>{cart=[]; renderCart();});
+    document.getElementById("checkoutBtn").addEventListener("click",checkout);
+    document.getElementById("cashInput").addEventListener("input",updateChangeDisplay);
+    document.querySelectorAll(".method-btn").forEach(btn=>btn.addEventListener("click",()=>setPaymentMethod(btn.dataset.method)));
+    document.getElementById("addCustomerBtn").addEventListener("click",()=>document.getElementById("addCustomerModal").style.display="flex");
+    document.getElementById("cancelCustomerBtn").addEventListener("click",()=>document.getElementById("addCustomerModal").style.display="none");
+    document.getElementById("saveCustomerBtn").addEventListener("click",()=>{ let name=document.getElementById("newCustomerName").value.trim(), phone=document.getElementById("newCustomerPhone").value.trim(); if(!name||!phone) return alert("Enter name & phone"); let newId=customers.length+1; customers.push({id:newId,name,phone,address:document.getElementById("newCustomerAddress").value}); selectedCustomer={id:newId,name,phone,type:"existing"}; document.getElementById("selectedCustomerDisplay").innerHTML=`<i class='fas fa-user-check'></i> ${name} (${phone})`; document.getElementById("addCustomerModal").style.display="none"; document.getElementById("newCustomerName").value=""; document.getElementById("newCustomerPhone").value=""; alert("Customer added"); });
+    const modal=document.getElementById("receiptModal"), closeBtn=document.getElementById("closeModalBtn"); closeBtn.onclick=()=>modal.style.display="none"; window.onclick=(e)=>{if(e.target===modal)modal.style.display="none";};
+    document.getElementById("currentDate").innerText=new Date().toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});
+    setWalkInDefault(); setPaymentMethod("cash");
   }
-
   init();
 </script>
 </body>
