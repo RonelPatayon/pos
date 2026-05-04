@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>AquaFlow POS | Water Refilling Station</title>
+  <title>AquaFlow POS Pro | Water Refilling Station</title>
   <style>
     * {
       margin: 0;
@@ -18,24 +18,21 @@
       padding: 24px 20px;
     }
 
-    /* Main POS container grid */
     .pos-container {
-      max-width: 1500px;
+      max-width: 1600px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr 420px;
       gap: 24px;
-      background: transparent;
     }
 
-    /* ========== LEFT PANEL (PRODUCTS & CATALOG) ========== */
+    /* LEFT PANEL */
     .products-panel {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(2px);
       border-radius: 2rem;
       box-shadow: 0 20px 35px -12px rgba(0, 20, 30, 0.25);
       padding: 1.5rem;
-      transition: all 0.2s;
     }
 
     .station-header {
@@ -55,10 +52,9 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
     }
 
-    .station-header .date-badge {
+    .date-badge {
       background: #eaf4f9;
       padding: 6px 14px;
       border-radius: 40px;
@@ -85,19 +81,12 @@
       font-size: 0.9rem;
       color: #2c4e62;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+      transition: all 0.2s;
     }
 
     .cat-btn.active {
       background: #2c7da0;
       color: white;
-      box-shadow: 0 8px 14px -8px rgba(44,125,160,0.4);
-    }
-
-    .cat-btn:hover:not(.active) {
-      background: #e2edf2;
-      transform: translateY(-1px);
     }
 
     .products-grid {
@@ -106,7 +95,7 @@
       gap: 18px;
       max-height: 550px;
       overflow-y: auto;
-      padding: 4px 4px 8px 4px;
+      padding: 4px;
     }
 
     .product-card {
@@ -126,43 +115,17 @@
       box-shadow: 0 16px 22px -10px rgba(34, 98, 118, 0.2);
     }
 
-    .product-icon {
-      font-size: 2.6rem;
-      margin-bottom: 8px;
-    }
+    .product-icon { font-size: 2.6rem; margin-bottom: 8px; }
+    .product-name { font-weight: 700; color: #1f5068; margin-bottom: 6px; font-size: 1rem; }
+    .product-price { font-weight: 800; color: #0f4c5f; background: #e2f0f6; display: inline-block; padding: 4px 10px; border-radius: 40px; font-size: 0.9rem; }
 
-    .product-name {
-      font-weight: 700;
-      color: #1f5068;
-      margin-bottom: 6px;
-      font-size: 1rem;
-    }
-
-    .product-price {
-      font-weight: 800;
-      color: #0f4c5f;
-      background: #e2f0f6;
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 40px;
-      font-size: 0.9rem;
-    }
-
-    .product-stock {
-      font-size: 0.7rem;
-      color: #548eaa;
-      margin-top: 8px;
-    }
-
-    /* ========== RIGHT PANEL (CART & CHECKOUT) ========== */
+    /* RIGHT PANEL */
     .cart-panel {
       background: white;
       border-radius: 2rem;
       box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
-      height: fit-content;
-      min-height: 650px;
     }
 
     .cart-header {
@@ -172,17 +135,94 @@
       border-radius: 2rem 2rem 1.5rem 1.5rem;
     }
 
-    .cart-header h2 {
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .cart-header h2 { font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+
+    /* Customer Section */
+    .customer-section {
+      padding: 1rem 1.2rem;
+      background: #f8fcfd;
+      border-bottom: 1px solid #d4e4ec;
     }
 
+    .customer-label {
+      font-weight: 700;
+      color: #1e5f7a;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .customer-control {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .customer-control input {
+      flex: 2;
+      padding: 10px 12px;
+      border-radius: 40px;
+      border: 1px solid #c7dde8;
+      outline: none;
+      font-size: 0.85rem;
+    }
+
+    .customer-control button, .add-customer-btn {
+      background: #eef3f7;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #1f6683;
+      transition: 0.2s;
+    }
+
+    .customer-control button:hover, .add-customer-btn:hover {
+      background: #dce9f0;
+    }
+
+    .customer-badge {
+      background: #e1f0f7;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #0c6b8f;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .search-results {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      max-height: 180px;
+      overflow-y: auto;
+      margin-top: 6px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-result-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid #ecf3f7;
+      font-size: 0.85rem;
+    }
+
+    .search-result-item:hover { background: #e9f2f8; }
+
+    /* Cart Items */
     .cart-items {
       flex: 1;
       padding: 1rem 1.2rem;
-      max-height: 420px;
+      max-height: 300px;
       overflow-y: auto;
       border-bottom: 1px solid #e0edf2;
     }
@@ -196,195 +236,88 @@
       padding: 10px 12px;
       border-radius: 1rem;
       border-left: 5px solid #2c7da0;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
-    .cart-item-info {
-      flex: 2;
-    }
-
-    .cart-item-name {
-      font-weight: 700;
-      color: #1d4f66;
-    }
-
-    .cart-item-meta {
-      font-size: 0.7rem;
-      color: #5d8aa8;
-      display: flex;
-      gap: 12px;
-      margin-top: 4px;
-    }
-
-    .cart-item-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .qty-btn {
-      background: #e9f2f7;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: #1f5e78;
-      transition: 0.1s;
-    }
-
-    .qty-btn:hover {
-      background: #cbe1ec;
-    }
-
-    .item-qty {
-      font-weight: 600;
-      min-width: 28px;
-      text-align: center;
-    }
-
-    .item-price {
-      font-weight: 700;
-      width: 70px;
-      text-align: right;
-      color: #136b8c;
-    }
-
-    .remove-item {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: #bb9e9e;
-      padding: 0 4px;
-      transition: 0.1s;
-    }
-
-    .remove-item:hover {
-      color: #d9534f;
-    }
+    .cart-item-info { flex: 2; }
+    .cart-item-name { font-weight: 700; color: #1d4f66; }
+    .cart-item-meta { font-size: 0.7rem; color: #5d8aa8; }
+    .cart-item-actions { display: flex; align-items: center; gap: 10px; }
+    .qty-btn { background: #e9f2f7; border: none; width: 28px; height: 28px; border-radius: 30px; font-weight: bold; cursor: pointer; }
+    .remove-item { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #bb9e9e; }
+    .remove-item:hover { color: #d9534f; }
 
     .cart-summary {
-      padding: 1.2rem 1.5rem;
+      padding: 1rem 1.2rem;
       background: #f6fbfe;
+      margin: 0.5rem;
       border-radius: 1.2rem;
-      margin: 0.8rem;
     }
 
-    .summary-line {
+    .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
+    .total-line { font-size: 1.3rem; font-weight: 800; border-top: 2px dashed #bddceb; padding-top: 10px; margin-top: 6px; color: #094c66; }
+
+    /* Payment Methods */
+    .payment-methods {
+      padding: 0 1.2rem;
+    }
+
+    .method-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e5f7a;
+      margin-bottom: 8px;
+    }
+
+    .method-buttons {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      font-weight: 500;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
     }
 
-    .total-line {
-      font-size: 1.4rem;
-      font-weight: 800;
-      border-top: 2px dashed #bddceb;
-      padding-top: 12px;
-      margin-top: 6px;
-      color: #094c66;
+    .method-btn {
+      background: #eff5f8;
+      border: 1px solid #cde1ea;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.1s;
     }
 
-    .payment-section {
-      padding: 0 1.5rem 1.5rem 1.5rem;
+    .method-btn.active {
+      background: #2c7da0;
+      color: white;
+      border-color: #2c7da0;
     }
 
     .cash-input {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
       align-items: center;
+      margin-bottom: 12px;
     }
 
-    .cash-input label {
-      font-weight: 600;
-      color: #1e5f7a;
-    }
-
-    .cash-input input {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 60px;
-      border: 1px solid #bdd4e2;
-      font-size: 1rem;
-      outline: none;
-      background: white;
-    }
-
-    .cash-input input:focus {
-      border-color: #2c7da0;
-      box-shadow: 0 0 0 2px rgba(44,125,160,0.2);
-    }
+    .cash-input label { font-weight: 600; color: #1e5f7a; font-size: 0.85rem; }
+    .cash-input input { flex: 1; padding: 10px 12px; border-radius: 60px; border: 1px solid #bdd4e2; outline: none; }
 
     .change-display {
       background: #eef3f7;
-      padding: 10px 14px;
+      padding: 8px 14px;
       border-radius: 50px;
-      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
     }
 
-    .action-buttons {
-      display: flex;
-      gap: 12px;
-      flex-direction: column;
-    }
+    .action-buttons { display: flex; gap: 12px; flex-direction: column; padding-bottom: 1.5rem; }
+    .btn-checkout { background: #2c7da0; border: none; padding: 14px; border-radius: 60px; font-weight: 800; color: white; cursor: pointer; }
+    .btn-checkout:disabled { background: #b7cfdb; cursor: not-allowed; }
+    .btn-clear { background: #f1f5f7; border: 1px solid #cde1ea; padding: 10px; border-radius: 60px; cursor: pointer; }
 
-    .btn-checkout {
-      background: #2c7da0;
-      border: none;
-      padding: 14px;
-      border-radius: 60px;
-      font-weight: 800;
-      font-size: 1rem;
-      color: white;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-checkout:hover:not(:disabled) {
-      background: #1f6683;
-      transform: scale(0.98);
-    }
-
-    .btn-checkout:disabled {
-      background: #b7cfdb;
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    .btn-clear {
-      background: #f1f5f7;
-      border: 1px solid #cde1ea;
-      padding: 10px;
-      border-radius: 60px;
-      font-weight: 500;
-      cursor: pointer;
-      color: #365f74;
-    }
-
-    .btn-clear:hover {
-      background: #e6edf2;
-    }
-
-    .empty-cart-message {
-      text-align: center;
-      padding: 40px 20px;
-      color: #79a7bb;
-      font-weight: 500;
-    }
-
-    /* receipt modal simple */
     .modal {
       display: none;
       position: fixed;
@@ -397,84 +330,93 @@
     }
     .modal-content {
       background: white;
-      max-width: 400px;
+      max-width: 450px;
       width: 90%;
       border-radius: 2rem;
       padding: 1.8rem;
-      text-align: center;
-      font-family: monospace;
     }
     .receipt-text {
       background: #f8fafc;
       padding: 1rem;
       border-radius: 1rem;
-      text-align: left;
-      font-size: 0.9rem;
-      margin: 1rem 0;
+      font-size: 0.8rem;
+      font-family: monospace;
       white-space: pre-line;
+      margin: 1rem 0;
     }
-    .close-modal {
-      background: #2c7da0;
-      border: none;
-      padding: 8px 24px;
-      border-radius: 40px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    .close-modal { background: #2c7da0; border: none; padding: 8px 24px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
 
-    @media (max-width: 860px) {
-      .pos-container {
-        grid-template-columns: 1fr;
-      }
-      body { padding: 16px; }
-    }
+    @media (max-width: 860px) { .pos-container { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
 <div class="pos-container">
-  <!-- LEFT: Products Area -->
+  <!-- LEFT PANEL: Products -->
   <div class="products-panel">
     <div class="station-header">
       <h1>💧 AquaFlow Refilling Station</h1>
       <div class="date-badge" id="currentDate"></div>
     </div>
-
     <div class="category-tabs" id="categoryTabs">
       <button class="cat-btn active" data-cat="all">All Items</button>
-      <button class="cat-btn" data-cat="bottled">💧 Bottled Water</button>
-      <button class="cat-btn" data-cat="refill">🔄 Refill (Gallon)</button>
+      <button class="cat-btn" data-cat="bottled">💧 Bottled</button>
+      <button class="cat-btn" data-cat="refill">🔄 Refill</button>
       <button class="cat-btn" data-cat="accessory">🧴 Accessories</button>
     </div>
-
-    <div class="products-grid" id="productsGrid">
-      <!-- dynamic product cards from js -->
-    </div>
+    <div class="products-grid" id="productsGrid"></div>
   </div>
 
-  <!-- RIGHT: Cart / POS -->
+  <!-- RIGHT PANEL: Cart + Customer + Payment -->
   <div class="cart-panel">
     <div class="cart-header">
-      <h2>🛒 Current Order</h2>
+      <h2>🛒 POS Terminal</h2>
     </div>
+
+    <!-- CUSTOMER MANAGEMENT -->
+    <div class="customer-section">
+      <div class="customer-label">👤 Customer Info</div>
+      <div class="customer-control">
+        <input type="text" id="customerSearchInput" placeholder="Search by name or phone...">
+        <button id="searchCustomerBtn">🔍 Search</button>
+        <button id="addCustomerBtn">+ New</button>
+      </div>
+      <div id="searchResultsContainer" style="position: relative;"></div>
+      <div id="selectedCustomerDisplay" class="customer-badge">🚶 Walk-In Customer (default)</div>
+    </div>
+
+    <!-- CART ITEMS -->
     <div class="cart-items" id="cartItemsContainer">
-      <div class="empty-cart-message">✨ Cart is empty. Tap products to add.</div>
+      <div class="empty-cart-message" style="text-align:center; padding:20px;">✨ Cart empty</div>
     </div>
+
     <div class="cart-summary">
       <div class="summary-line"><span>Subtotal</span><span id="subtotalAmount">₱0.00</span></div>
-      <div class="summary-line"><span>Tax (0% included)</span><span>₱0.00</span></div>
       <div class="summary-line total-line"><span>Total</span><span id="totalAmount">₱0.00</span></div>
     </div>
-    <div class="payment-section">
-      <div class="cash-input">
-        <label>💵 Cash</label>
-        <input type="number" id="cashInput" placeholder="0.00" step="any" value="0">
+
+    <!-- PAYMENT METHODS -->
+    <div class="payment-methods">
+      <div class="method-title">💳 Payment Method</div>
+      <div class="method-buttons" id="paymentMethodsContainer">
+        <button class="method-btn active" data-method="cash">💵 Cash</button>
+        <button class="method-btn" data-method="gcash">📱 GCash</button>
+        <button class="method-btn" data-method="paymaya">💳 PayMaya</button>
+        <button class="method-btn" data-method="card">💎 Card</button>
       </div>
-      <div class="change-display">
-        <span>Change:</span>
-        <span id="changeAmount">₱0.00</span>
+
+      <!-- Cash input (only visible when cash selected) -->
+      <div id="cashSection" style="display: block;">
+        <div class="cash-input">
+          <label>💵 Cash Amount</label>
+          <input type="number" id="cashInput" placeholder="0.00" step="any" value="0">
+        </div>
+        <div class="change-display">
+          <span>Change / Amount due:</span>
+          <span id="changeAmount">₱0.00</span>
+        </div>
       </div>
+
       <div class="action-buttons">
         <button class="btn-checkout" id="checkoutBtn">✅ Complete Sale</button>
         <button class="btn-clear" id="clearCartBtn">🗑 Clear Cart</button>
@@ -483,7 +425,7 @@
   </div>
 </div>
 
-<!-- Receipt modal -->
+<!-- Receipt Modal -->
 <div id="receiptModal" class="modal">
   <div class="modal-content">
     <h3>🧾 AquaFlow Receipt</h3>
@@ -492,25 +434,48 @@
   </div>
 </div>
 
+<!-- Add Customer Modal -->
+<div id="addCustomerModal" class="modal">
+  <div class="modal-content">
+    <h3>➕ Add New Customer</h3>
+    <input type="text" id="newCustomerName" placeholder="Full Name" style="width:100%; padding:10px; margin:10px 0; border-radius:60px; border:1px solid #ccc;">
+    <input type="text" id="newCustomerPhone" placeholder="Phone Number" style="width:100%; padding:10px; margin:10px 0; border-radius:60px; border:1px solid #ccc;">
+    <input type="text" id="newCustomerAddress" placeholder="Address (optional)" style="width:100%; padding:10px; margin:10px 0; border-radius:60px; border:1px solid #ccc;">
+    <div style="display:flex; gap:10px; margin-top:10px;">
+      <button id="saveCustomerBtn" style="flex:1; padding:10px; background:#2c7da0; color:white; border:none; border-radius:40px;">Save</button>
+      <button id="cancelCustomerBtn" style="flex:1; padding:10px; background:#eef3f7; border:none; border-radius:40px;">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ---------- PRODUCT DATABASE (Water Refilling Station) ----------
+  // ---------- PRODUCTS ----------
   const products = [
-    { id: 1, name: "Bottled Water 500ml", price: 18, category: "bottled", stock: 150, icon: "💧" },
-    { id: 2, name: "Bottled Water 1L", price: 25, category: "bottled", stock: 120, icon: "🧊" },
-    { id: 3, name: "Mineral Water 1.5L", price: 35, category: "bottled", stock: 90, icon: "💎" },
-    { id: 4, name: "Alkaline Water 1L", price: 45, category: "bottled", stock: 70, icon: "⚡" },
-    { id: 5, name: "Gallon Refill (Standard)", price: 25, category: "refill", stock: 999, icon: "🔄" },
-    { id: 6, name: "Alkaline Gallon Refill", price: 40, category: "refill", stock: 999, icon: "💧⚡" },
-    { id: 7, name: "Mineral Gallon Refill", price: 35, category: "refill", stock: 999, icon: "🏔️" },
-    { id: 8, name: "Water Jug Cap (pcs)", price: 5, category: "accessory", stock: 200, icon: "🧴" },
-    { id: 9, name: "Carrying Handle", price: 12, category: "accessory", stock: 85, icon: "🖐️" },
-    { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", stock: 40, icon: "🧂" }
+    { id: 1, name: "Bottled Water 500ml", price: 18, category: "bottled", icon: "💧" },
+    { id: 2, name: "Bottled Water 1L", price: 25, category: "bottled", icon: "🧊" },
+    { id: 3, name: "Mineral Water 1.5L", price: 35, category: "bottled", icon: "💎" },
+    { id: 4, name: "Alkaline Water 1L", price: 45, category: "bottled", icon: "⚡" },
+    { id: 5, name: "Gallon Refill (Standard)", price: 25, category: "refill", icon: "🔄" },
+    { id: 6, name: "Alkaline Gallon Refill", price: 40, category: "refill", icon: "💧⚡" },
+    { id: 7, name: "Mineral Gallon Refill", price: 35, category: "refill", icon: "🏔️" },
+    { id: 8, name: "Water Jug Cap (pcs)", price: 5, category: "accessory", icon: "🧴" },
+    { id: 9, name: "Carrying Handle", price: 12, category: "accessory", icon: "🖐️" },
+    { id: 10, name: "5-Gallon Empty Bottle", price: 120, category: "accessory", icon: "🧂" }
   ];
 
-  // cart state: array of { id, name, price, quantity, category, icon }
-  let cart = [];
+  // ---------- CUSTOMER DATABASE (mock) ----------
+  let customers = [
+    { id: 1, name: "Juan Dela Cruz", phone: "09123456789", address: "Brgy. San Isidro" },
+    { id: 2, name: "Maria Santos", phone: "09234567890", address: "Poblacion" },
+    { id: 3, name: "Carlos Reyes", phone: "09345678901", address: "Maharlika Village" }
+  ];
+  let selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" }; // default walk-in
 
-  // helper: update entire UI
+  // cart state
+  let cart = [];
+  let selectedPaymentMethod = "cash";
+
+  // Helper DOM
   function renderProducts(activeCategory = "all") {
     const grid = document.getElementById("productsGrid");
     let filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
@@ -518,64 +483,32 @@
     filtered.forEach(prod => {
       const card = document.createElement("div");
       card.className = "product-card";
-      card.setAttribute("data-id", prod.id);
-      card.innerHTML = `
-        <div class="product-icon">${prod.icon}</div>
-        <div class="product-name">${prod.name}</div>
-        <div class="product-price">₱${prod.price.toFixed(2)}</div>
-        <div class="product-stock">📦 stock: ${prod.stock > 500 ? '∞' : prod.stock}</div>
-      `;
+      card.innerHTML = `<div class="product-icon">${prod.icon}</div><div class="product-name">${prod.name}</div><div class="product-price">₱${prod.price.toFixed(2)}</div>`;
       card.addEventListener("click", () => addToCart(prod));
       grid.appendChild(card);
     });
   }
 
-  // add product to cart (handling stock simulation, but stock just UI helper)
   function addToCart(product) {
     const existing = cart.find(item => item.id === product.id);
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: 1,
-        category: product.category,
-        icon: product.icon
-      });
-    }
+    if (existing) existing.quantity += 1;
+    else cart.push({ ...product, quantity: 1 });
     renderCart();
   }
 
-  // modify quantity / remove
   function updateQty(id, delta) {
     const idx = cart.findIndex(item => item.id === id);
     if (idx === -1) return;
     const newQty = cart[idx].quantity + delta;
-    if (newQty <= 0) {
-      cart.splice(idx, 1);
-    } else {
-      cart[idx].quantity = newQty;
-    }
+    if (newQty <= 0) cart.splice(idx, 1);
+    else cart[idx].quantity = newQty;
     renderCart();
   }
 
-  function removeItem(id) {
-    cart = cart.filter(item => item.id !== id);
-    renderCart();
-  }
+  function removeItem(id) { cart = cart.filter(item => item.id !== id); renderCart(); }
+  function clearCart() { cart = []; renderCart(); document.getElementById("cashInput").value = "0"; updateChangeDisplay(); }
 
-  function clearCart() {
-    cart = [];
-    renderCart();
-    document.getElementById("cashInput").value = "0";
-    document.getElementById("changeAmount").innerText = "₱0.00";
-  }
-
-  function getTotal() {
-    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  }
+  function getTotal() { return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); }
 
   function renderCart() {
     const container = document.getElementById("cartItemsContainer");
@@ -586,35 +519,22 @@
     totalSpan.innerText = `₱${total.toFixed(2)}`;
 
     if (cart.length === 0) {
-      container.innerHTML = `<div class="empty-cart-message">🧺 Cart is empty. Tap products to add.</div>`;
+      container.innerHTML = `<div class="empty-cart-message" style="text-align:center; padding:20px;">🧺 Cart is empty</div>`;
       updateChangeDisplay();
       return;
     }
-
     container.innerHTML = "";
     cart.forEach(item => {
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "cart-item";
-      itemDiv.innerHTML = `
-        <div class="cart-item-info">
-          <div class="cart-item-name">${item.icon || "💧"} ${item.name}</div>
-          <div class="cart-item-meta">₱${item.price.toFixed(2)} each</div>
-        </div>
-        <div class="cart-item-actions">
-          <button class="qty-btn" data-action="dec" data-id="${item.id}">−</button>
-          <span class="item-qty">${item.quantity}</span>
-          <button class="qty-btn" data-action="inc" data-id="${item.id}">+</button>
-          <span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span>
-          <button class="remove-item" data-action="remove" data-id="${item.id}">✕</button>
-        </div>
+      const div = document.createElement("div");
+      div.className = "cart-item";
+      div.innerHTML = `
+        <div class="cart-item-info"><div class="cart-item-name">${item.icon || "💧"} ${item.name}</div><div class="cart-item-meta">₱${item.price.toFixed(2)} each</div></div>
+        <div class="cart-item-actions"><button class="qty-btn" data-action="dec" data-id="${item.id}">−</button><span class="item-qty">${item.quantity}</span><button class="qty-btn" data-action="inc" data-id="${item.id}">+</button><span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span><button class="remove-item" data-action="remove" data-id="${item.id}">✕</button></div>
       `;
-      container.appendChild(itemDiv);
+      container.appendChild(div);
     });
-
-    // attach events dynamically
     document.querySelectorAll(".qty-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
-        e.stopPropagation();
         const id = parseInt(btn.getAttribute("data-id"));
         const action = btn.getAttribute("data-action");
         if (action === "inc") updateQty(id, 1);
@@ -623,7 +543,6 @@
     });
     document.querySelectorAll(".remove-item").forEach(btn => {
       btn.addEventListener("click", (e) => {
-        e.stopPropagation();
         const id = parseInt(btn.getAttribute("data-id"));
         removeItem(id);
       });
@@ -632,128 +551,166 @@
   }
 
   function updateChangeDisplay() {
-    const cash = parseFloat(document.getElementById("cashInput").value) || 0;
     const total = getTotal();
-    const change = cash - total;
-    if (change >= 0) {
-      document.getElementById("changeAmount").innerText = `₱${change.toFixed(2)}`;
+    const cashInput = parseFloat(document.getElementById("cashInput").value) || 0;
+    if (selectedPaymentMethod === "cash") {
+      const change = cashInput - total;
+      if (change >= 0) document.getElementById("changeAmount").innerHTML = `₱${change.toFixed(2)} (Change)`;
+      else document.getElementById("changeAmount").innerHTML = `₱${Math.abs(change).toFixed(2)} (Short)`;
     } else {
-      document.getElementById("changeAmount").innerText = `₱${change.toFixed(2)} (insufficient)`;
+      document.getElementById("changeAmount").innerHTML = `Via ${getPaymentLabel()} — total: ₱${total.toFixed(2)}`;
     }
   }
 
-  // checkout with receipt
+  function getPaymentLabel() {
+    if (selectedPaymentMethod === "gcash") return "GCash";
+    if (selectedPaymentMethod === "paymaya") return "PayMaya";
+    if (selectedPaymentMethod === "card") return "Card";
+    return "Cash";
+  }
+
+  // Customer search and selection
+  function renderCustomerSearch(query) {
+    const container = document.getElementById("searchResultsContainer");
+    if (!query.trim()) { container.innerHTML = ""; return; }
+    const filtered = customers.filter(c => c.name.toLowerCase().includes(query.toLowerCase()) || c.phone.includes(query));
+    if (filtered.length === 0) { container.innerHTML = "<div class='search-result-item'>No customers found. Tap 'Add New'</div>"; return; }
+    container.innerHTML = filtered.map(c => `<div class="search-result-item" data-id="${c.id}" data-name="${c.name}" data-phone="${c.phone}" data-address="${c.address || ''}">${c.name} - ${c.phone}</div>`).join('');
+    document.querySelectorAll('.search-result-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = parseInt(el.getAttribute('data-id'));
+        const name = el.getAttribute('data-name');
+        const phone = el.getAttribute('data-phone');
+        const address = el.getAttribute('data-address');
+        selectedCustomer = { id, name, phone, address, type: "existing" };
+        document.getElementById("selectedCustomerDisplay").innerHTML = `👤 ${name} (${phone})`;
+        document.getElementById("customerSearchInput").value = "";
+        container.innerHTML = "";
+      });
+    });
+  }
+
+  function setWalkInDefault() {
+    selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" };
+    document.getElementById("selectedCustomerDisplay").innerHTML = "🚶 Walk-In Customer (default)";
+  }
+
+  // Add new customer modal
+  const addModal = document.getElementById("addCustomerModal");
+  function openAddCustomerModal() { addModal.style.display = "flex"; }
+  function closeAddCustomerModal() { addModal.style.display = "none"; }
+
+  document.getElementById("addCustomerBtn").addEventListener("click", openAddCustomerModal);
+  document.getElementById("cancelCustomerBtn").addEventListener("click", closeAddCustomerModal);
+  document.getElementById("saveCustomerBtn").addEventListener("click", () => {
+    const name = document.getElementById("newCustomerName").value.trim();
+    const phone = document.getElementById("newCustomerPhone").value.trim();
+    const address = document.getElementById("newCustomerAddress").value.trim();
+    if (!name || !phone) { alert("Please enter name and phone number."); return; }
+    const newId = customers.length + 1;
+    const newCust = { id: newId, name, phone, address: address || "" };
+    customers.push(newCust);
+    selectedCustomer = { id: newId, name, phone, address, type: "existing" };
+    document.getElementById("selectedCustomerDisplay").innerHTML = `👤 ${name} (${phone})`;
+    document.getElementById("newCustomerName").value = "";
+    document.getElementById("newCustomerPhone").value = "";
+    document.getElementById("newCustomerAddress").value = "";
+    closeAddCustomerModal();
+    alert("Customer added successfully!");
+  });
+
+  // Checkout logic with multiple payments
   function checkout() {
-    if (cart.length === 0) {
-      alert("Cart is empty. Add items before checkout.");
-      return;
-    }
+    if (cart.length === 0) { alert("Cart is empty."); return; }
     const total = getTotal();
-    const cashInputElem = document.getElementById("cashInput");
-    let cash = parseFloat(cashInputElem.value);
-    if (isNaN(cash)) cash = 0;
-    if (cash < total) {
-      alert(`Insufficient cash! Total is ₱${total.toFixed(2)}. Received ₱${cash.toFixed(2)}.`);
-      return;
+    if (selectedPaymentMethod === "cash") {
+      const cashGiven = parseFloat(document.getElementById("cashInput").value) || 0;
+      if (cashGiven < total) { alert(`Insufficient cash! Total ₱${total.toFixed(2)}`); return; }
+      processSale(total, cashGiven, `Cash: ₱${cashGiven.toFixed(2)} | Change: ₱${(cashGiven - total).toFixed(2)}`);
+    } else {
+      // For GCash, PayMaya, Card: assume full payment
+      processSale(total, total, `Payment via ${getPaymentLabel()} (Reference: ${Math.floor(Math.random()*1000000)})`);
     }
-    const change = cash - total;
-    // Generate Receipt content
+  }
+
+  function processSale(total, amountPaid, paymentDetail) {
     const now = new Date();
     const dateStr = now.toLocaleString();
-    let itemsList = "";
-    cart.forEach(item => {
-      itemsList += `${item.name} x ${item.quantity}  = ₱${(item.price * item.quantity).toFixed(2)}\n`;
-    });
-    const receiptContent = `--------------------------------
+    let itemsList = cart.map(item => `${item.name} x ${item.quantity} = ₱${(item.price * item.quantity).toFixed(2)}`).join("\n");
+    const customerInfo = selectedCustomer.type === "walkin" ? "Walk-In Customer" : `${selectedCustomer.name} | ${selectedCustomer.phone}`;
+    const receipt = `--------------------------------
 💧 AQUAFLOW REFILLING STATION
-📍 Purok 1, San Vicente
+📍 #22 Waterlane St., San Vicente
 📅 ${dateStr}
 --------------------------------
-ITEMS:
+CUSTOMER: ${customerInfo}
+--------------------------------
 ${itemsList}
 --------------------------------
-TOTAL:         ₱${total.toFixed(2)}
-CASH:          ₱${cash.toFixed(2)}
-CHANGE:        ₱${change.toFixed(2)}
+TOTAL:        ₱${total.toFixed(2)}
+PAYMENT:      ${paymentDetail}
+AMOUNT PAID:  ₱${amountPaid.toFixed(2)}
 --------------------------------
 Thank you for choosing clean water!
 🌊 Keep Hydrated 🌊
 `;
-
-    document.getElementById("receiptDetails").innerHTML = receiptContent.replace(/\n/g,'<br>');
-    const modal = document.getElementById("receiptModal");
-    modal.style.display = "flex";
-    // After sale clear cart and reset cash field
+    document.getElementById("receiptDetails").innerHTML = receipt.replace(/\n/g,'<br>');
+    document.getElementById("receiptModal").style.display = "flex";
+    // reset cart & cash
     cart = [];
     renderCart();
-    cashInputElem.value = "0";
+    document.getElementById("cashInput").value = "0";
+    setWalkInDefault();  // reset to walk-in after sale
     updateChangeDisplay();
   }
 
-  // Event Listeners + category + cash input
+  // Payment method switching UI
+  function setPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll(".method-btn").forEach(btn => {
+      if (btn.getAttribute("data-method") === method) btn.classList.add("active");
+      else btn.classList.remove("active");
+    });
+    const cashSection = document.getElementById("cashSection");
+    if (method === "cash") cashSection.style.display = "block";
+    else cashSection.style.display = "none";
+    updateChangeDisplay();
+  }
+
+  // Event binding
   function init() {
     renderProducts("all");
     renderCart();
 
-    // category switching
-    const catBtns = document.querySelectorAll(".cat-btn");
-    catBtns.forEach(btn => {
+    document.querySelectorAll(".cat-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        catBtns.forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
-        const cat = btn.getAttribute("data-cat");
-        renderProducts(cat);
+        renderProducts(btn.getAttribute("data-cat"));
       });
     });
 
-    document.getElementById("cashInput").addEventListener("input", () => updateChangeDisplay());
+    document.getElementById("searchCustomerBtn").addEventListener("click", () => {
+      const query = document.getElementById("customerSearchInput").value;
+      renderCustomerSearch(query);
+    });
+    document.getElementById("customerSearchInput").addEventListener("keyup", (e) => renderCustomerSearch(e.target.value));
     document.getElementById("clearCartBtn").addEventListener("click", clearCart);
     document.getElementById("checkoutBtn").addEventListener("click", checkout);
+    document.getElementById("cashInput").addEventListener("input", updateChangeDisplay);
+    document.querySelectorAll(".method-btn").forEach(btn => {
+      btn.addEventListener("click", () => setPaymentMethod(btn.getAttribute("data-method")));
+    });
 
-    // close modal
     const modal = document.getElementById("receiptModal");
     const closeBtn = document.getElementById("closeModalBtn");
-    closeBtn.onclick = () => { modal.style.display = "none"; };
+    closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
-
-    // set current date
-    const today = new Date();
-    const dateOpt = { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' };
-    document.getElementById("currentDate").innerText = today.toLocaleDateString(undefined, dateOpt);
+    document.getElementById("currentDate").innerText = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' });
+    setWalkInDefault();
   }
 
-  // extra: also update change total on cart renders
-  const origRenderCart = renderCart;
-  window.renderCart = function() {
-    origRenderCart();
-    updateChangeDisplay();
-  };
-  renderCart = function() {
-    origRenderCart();
-    updateChangeDisplay();
-  }.bind(this);
-
-  // override
-  const superRender = renderCart;
-  renderCart = function() {
-    superRender();
-    updateChangeDisplay();
-  };
-  window.renderCart = renderCart;
-
   init();
-  // patch functions to ensure change updates
-  const originalUpdate = updateQty;
-  window.updateQty = function(id, delta) { originalUpdate(id, delta); updateChangeDisplay(); };
-  updateQty = function(id, delta) { originalUpdate(id, delta); updateChangeDisplay(); };
-  removeItem = function(id) { cart = cart.filter(item => item.id !== id); renderCart(); updateChangeDisplay(); };
-  clearCart = function() { cart = []; renderCart(); updateChangeDisplay(); };
-  // reassign to ensure updated
-  window.updateQty = updateQty;
-  window.removeItem = removeItem;
-  window.clearCart = clearCart;
-  // final binding recalc
-  document.getElementById("cashInput")?.addEventListener("input", () => updateChangeDisplay());
 </script>
 </body>
 </html>
