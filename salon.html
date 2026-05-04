@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Gupitan Barber & Salon POS | Modern Grooming Studio</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8f0e7 0%, #f0e4d8 100%);
+      min-height: 100vh;
+      padding: 28px 24px;
+    }
+
+    /* barber/salon theme - warm dark & gold / leather tones */
+    .pos-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      gap: 28px;
+    }
+
+    /* LEFT PANEL (SERVICES) */
+    .products-panel {
+      background: rgba(255, 252, 248, 0.96);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 25px 40px -12px rgba(70, 40, 20, 0.25);
+      padding: 1.8rem;
+      border: 1px solid rgba(200, 150, 100, 0.25);
+    }
+
+    .station-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 3px solid #c27a3e;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      background: linear-gradient(145deg, #c27a3e, #a05e2c);
+      width: 48px;
+      height: 48px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 12px rgba(160, 80, 30, 0.3);
+    }
+
+    .logo-icon i { font-size: 26px; color: white; }
+    .station-header h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a05e2c, #c27a3e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .date-badge {
+      background: #fcf5ed;
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #a05e2c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* category tabs */
+    .category-tabs {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .cat-btn {
+      background: #fcf5ef;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: #a05e2c;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cat-btn i { font-size: 1rem; }
+    .cat-btn.active {
+      background: #c27a3e;
+      color: white;
+      box-shadow: 0 8px 18px -8px #c27a3e;
+    }
+
+    /* services grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      max-height: 560px;
+      overflow-y: auto;
+      padding: 4px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.25s;
+      border: 1px solid #f3e6db;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: #e2b68a;
+      box-shadow: 0 16px 22px -10px rgba(160, 90, 40, 0.2);
+      background: #fffdfb;
+    }
+
+    .product-icon { font-size: 2.4rem; margin-bottom: 12px; color: #c27a3e; }
+    .product-name { font-weight: 700; color: #6b3f1c; margin-bottom: 8px; font-size: 0.95rem; }
+    .product-price { font-weight: 800; background: #f8ede3; display: inline-block; padding: 5px 14px; border-radius: 50px; font-size: 0.9rem; color: #b5672a; }
+
+    /* RIGHT PANEL */
+    .cart-panel {
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 25px 40px -12px rgba(70, 40, 20, 0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #f0e0d2;
+    }
+
+    .cart-header {
+      background: linear-gradient(105deg, #a05e2c, #c27a3e);
+      padding: 1.3rem 1.6rem;
+    }
+
+    .cart-header h2 {
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* customer section */
+    .customer-section {
+      padding: 1.2rem 1.4rem;
+      background: #fefbf8;
+      border-bottom: 1px solid #f0e0d2;
+    }
+
+    .customer-label {
+      font-weight: 700;
+      color: #a05e2c;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .customer-control {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .customer-control input {
+      flex: 2;
+      padding: 11px 15px;
+      border-radius: 60px;
+      border: 1px solid #e7d5c7;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .customer-control input:focus {
+      border-color: #c27a3e;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(194,122,62,0.1);
+    }
+
+    .customer-control button {
+      background: #faf0e8;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #a05e2c;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .customer-control button:hover { background: #f3e5da; }
+    .customer-badge {
+      background: #f7ede4;
+      padding: 8px 14px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #8b562c;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-results {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      max-height: 180px;
+      overflow-y: auto;
+      margin-top: 8px;
+    }
+
+    .search-result-item {
+      padding: 10px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0e0d2;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-result-item i { color: #c27a3e; width: 20px; }
+    .search-result-item:hover { background: #fff5ed; }
+
+    /* cart items */
+    .cart-items {
+      padding: 1rem 1.2rem;
+      max-height: 250px;
+      overflow-y: auto;
+      background: #ffffff;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fffcf9;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 1.2rem;
+      border-left: 6px solid #e2b68a;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .cart-item-info { flex: 2; }
+    .cart-item-name { font-weight: 700; color: #6b3f1c; display: flex; align-items: center; gap: 8px; }
+    .cart-item-meta { font-size: 0.7rem; color: #b88f68; margin-top: 4px; }
+
+    .cart-item-actions { display: flex; align-items: center; gap: 12px; }
+    .qty-btn {
+      background: #f5ede6;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #a05e2c;
+    }
+    .qty-btn:hover { background: #ede0d6; }
+    .item-price { font-weight: 800; color: #c27a3e; min-width: 70px; text-align: right; }
+    .remove-item { background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #dbc3ae; }
+    .remove-item:hover { color: #e86b5e; }
+
+    .cart-summary {
+      padding: 1rem 1.2rem;
+      background: #fefaf5;
+      margin: 0.6rem;
+      border-radius: 1.5rem;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #8c5a33;
+    }
+    .total-line {
+      font-size: 1.4rem;
+      font-weight: 800;
+      border-top: 2px solid #f0e0d2;
+      padding-top: 12px;
+      margin-top: 6px;
+      color: #a05e2c;
+    }
+
+    /* payment methods */
+    .payment-methods { padding: 0 1.2rem; }
+    .method-title { font-size: 0.8rem; font-weight: 700; color: #a05e2c; margin-bottom: 12px; }
+    .method-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .method-btn {
+      background: #fcf5ef;
+      border: 1px solid #eddacb;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #a05e2c;
+    }
+    .method-btn.active {
+      background: #c27a3e;
+      color: white;
+      border-color: #c27a3e;
+    }
+    .digital-payment-section {
+      background: #fef8f3;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      margin-bottom: 16px;
+      border: 1px solid #eddacb;
+    }
+    .qr-code-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 14px;
+      background: white;
+      padding: 14px;
+      border-radius: 1.2rem;
+    }
+    .qr-placeholder {
+      width: 110px;
+      height: 110px;
+      background: #fff8f2;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      border: 1px solid #eddacb;
+    }
+    .qr-placeholder i { font-size: 3rem; color: #c27a3e; margin-bottom: 6px; }
+    .reference-input input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 60px;
+      border: 1px solid #eddacb;
+      font-size: 0.85rem;
+    }
+    .cash-input {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .cash-input label { font-weight: 700; color: #a05e2c; }
+    .cash-input input { flex: 1; padding: 12px; border-radius: 60px; border: 1px solid #eddacb; }
+    .change-display {
+      background: #fef6ef;
+      padding: 10px 16px;
+      border-radius: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+      padding-bottom: 1.6rem;
+    }
+    .btn-checkout {
+      background: linear-gradient(95deg, #c27a3e, #a05e2c);
+      border: none;
+      padding: 14px;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .btn-checkout:hover { background: #a05e2c; transform: scale(0.98); }
+    .btn-clear {
+      background: #fcf5ef;
+      border: 1px solid #eddacb;
+      padding: 11px;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #8c5a33;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      max-width: 460px;
+      width: 90%;
+      border-radius: 2rem;
+      padding: 1.8rem;
+    }
+    .receipt-text {
+      background: #fefbf8;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      white-space: pre-line;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .close-modal { background: #c27a3e; border: none; padding: 10px 26px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
+    @media (max-width: 900px) { .pos-container { grid-template-columns: 1fr; } body { padding: 16px; } }
+  </style>
+</head>
+<body>
+
+<div class="pos-container">
+  <!-- LEFT PANEL: Barber & Salon Services -->
+  <div class="products-panel">
+    <div class="station-header">
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-cut"></i></div>
+        <h1>Gupitan Barber & Salon</h1>
+      </div>
+      <div class="date-badge"><i class="far fa-calendar-alt"></i> <span id="currentDate"></span></div>
+    </div>
+
+    <div class="category-tabs" id="categoryTabs">
+      <button class="cat-btn active" data-cat="all"><i class="fas fa-scissors"></i> All Services</button>
+      <button class="cat-btn" data-cat="barber"><i class="fas fa-beard"></i> Barber</button>
+      <button class="cat-btn" data-cat="salon"><i class="fas fa-female"></i> Salon</button>
+      <button class="cat-btn" data-cat="spa"><i class="fas fa-spa"></i> Spa & Grooming</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- RIGHT PANEL: Cart + Customer + Payment -->
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2><i class="fas fa-cash-register"></i> Grooming Counter</h2>
+    </div>
+    <div class="customer-section">
+      <div class="customer-label"><i class="fas fa-user-friends"></i> Customer Info</div>
+      <div class="customer-control">
+        <input type="text" id="customerSearchInput" placeholder="Search by name or phone...">
+        <button id="searchCustomerBtn"><i class="fas fa-search"></i> Search</button>
+        <button id="addCustomerBtn"><i class="fas fa-user-plus"></i> New</button>
+      </div>
+      <div id="searchResultsContainer"></div>
+      <div id="selectedCustomerDisplay" class="customer-badge"><i class="fas fa-person-walking-arrow-right"></i> Walk-In Customer</div>
+    </div>
+
+    <div class="cart-items" id="cartItemsContainer">
+      <div style="text-align:center; padding:30px; color:#c9aa8a;"><i class="fas fa-chair"></i> No services added</div>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-line"><span><i class="fas fa-receipt"></i> Subtotal</span><span id="subtotalAmount">₱0.00</span></div>
+      <div class="summary-line total-line"><span><i class="fas fa-coins"></i> Total</span><span id="totalAmount">₱0.00</span></div>
+    </div>
+
+    <div class="payment-methods">
+      <div class="method-title"><i class="fas fa-credit-card"></i> Payment method</div>
+      <div class="method-buttons" id="paymentMethodsContainer">
+        <button class="method-btn active" data-method="cash"><i class="fas fa-money-bill-wave"></i> Cash</button>
+        <button class="method-btn" data-method="gcash"><i class="fab fa-gcash"></i> GCash</button>
+        <button class="method-btn" data-method="paymaya"><i class="fas fa-mobile-alt"></i> PayMaya</button>
+        <button class="method-btn" data-method="card"><i class="fas fa-credit-card"></i> Card</button>
+      </div>
+
+      <div id="cashSection">
+        <div class="cash-input"><label><i class="fas fa-coins"></i> Cash amount</label><input type="number" id="cashInput" placeholder="0.00" step="any" value="0"></div>
+        <div class="change-display"><span><i class="fas fa-exchange-alt"></i> Change / Status</span><span id="changeAmount">₱0.00</span></div>
+      </div>
+
+      <div id="digitalPaymentSection" style="display: none;">
+        <div class="digital-payment-section">
+          <div class="qr-code-container" id="qrContainer"></div>
+          <div class="reference-input"><label><i class="fas fa-hashtag"></i> Transaction Reference *</label><input type="text" id="transactionRefInput" placeholder="GCash ref / card last4 digits"></div>
+          <div class="change-display"><span><i class="fas fa-check-circle"></i> Payment status</span><span id="digitalPaymentStatus">Awaiting reference</span></div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-checkout" id="checkoutBtn"><i class="fas fa-check-double"></i> Complete Sale</button>
+        <button class="btn-clear" id="clearCartBtn"><i class="fas fa-trash-alt"></i> Clear Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Receipt Modal -->
+<div id="receiptModal" class="modal"><div class="modal-content"><h3><i class="fas fa-receipt"></i> Gupitan Receipt</h3><div id="receiptDetails" class="receipt-text"></div><button class="close-modal" id="closeModalBtn"><i class="fas fa-print"></i> Close</button></div></div>
+<!-- Add Customer Modal -->
+<div id="addCustomerModal" class="modal"><div class="modal-content"><h3><i class="fas fa-user-plus"></i> New Customer</h3><input type="text" id="newCustomerName" placeholder="Full name" style="width:100%; padding:12px; margin:12px 0; border-radius:60px;"><input type="text" id="newCustomerPhone" placeholder="Phone number" style="width:100%; padding:12px; margin:12px 0; border-radius:60px;"><input type="text" id="newCustomerAddress" placeholder="Address (optional)" style="width:100%; padding:12px; margin:12px 0; border-radius:60px;"><div style="display:flex; gap:12px;"><button id="saveCustomerBtn" style="flex:1; background:#c27a3e; color:white; border:none; border-radius:60px; padding:12px;"><i class="fas fa-save"></i> Save</button><button id="cancelCustomerBtn" style="flex:1; background:#fcf5ef; border:none; border-radius:60px;"><i class="fas fa-times"></i> Cancel</button></div></div></div>
+
+<script>
+  // BARBER & SALON SERVICES DATABASE
+  const services = [
+    // Barber Services
+    { id: 1, name: "Classic Haircut (Men)", price: 120, category: "barber", icon: "fa-scissors", duration: "30min" },
+    { id: 2, name: "Fade / Undercut", price: 150, category: "barber", icon: "fa-cut", duration: "35min" },
+    { id: 3, name: "Beard Trim & Shape", price: 80, category: "barber", icon: "fa-beard", duration: "20min" },
+    { id: 4, name: "Hot Towel Shave", price: 100, category: "barber", icon: "fa-towel", duration: "25min" },
+    { id: 5, name: "Kid's Haircut (below 12)", price: 90, category: "barber", icon: "fa-child", duration: "25min" },
+    // Salon Services
+    { id: 6, name: "Ladies Haircut (Wash/Cut)", price: 200, category: "salon", icon: "fa-female", duration: "45min" },
+    { id: 7, name: "Hair Color (Full)", price: 450, category: "salon", icon: "fa-palette", duration: "90min" },
+    { id: 8, name: "Hair Rebonding", price: 800, category: "salon", icon: "fa-curl", duration: "2hrs" },
+    { id: 9, name: "Blow Dry & Style", price: 150, category: "salon", icon: "fa-wind", duration: "40min" },
+    // Spa & Grooming
+    { id: 10, name: "Facial Treatment", price: 300, category: "spa", icon: "fa-face-smile", duration: "45min" },
+    { id: 11, name: "Manicure & Pedicure", price: 180, category: "spa", icon: "fa-hand-peace", duration: "50min" },
+    { id: 12, name: "Full Body Massage (1hr)", price: 400, category: "spa", icon: "fa-spa", duration: "60min" },
+    { id: 13, name: "Eyebrow Threading", price: 50, category: "spa", icon: "fa-eye", duration: "15min" }
+  ];
+
+  let customers = [
+    { id: 1, name: "Ramon Gutierrez", phone: "09123456789", address: "Poblacion, Barber St." },
+    { id: 2, name: "Sofia Reyes", phone: "09234567890", address: "San Roque" }
+  ];
+  let selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" };
+  let cart = [];
+  let selectedPaymentMethod = "cash";
+
+  function renderServices(activeCat = "all") {
+    const grid = document.getElementById("productsGrid");
+    const filtered = activeCat === "all" ? services : services.filter(s => s.category === activeCat);
+    grid.innerHTML = filtered.map(serv => `
+      <div class="product-card" data-id="${serv.id}">
+        <div class="product-icon"><i class="fas ${serv.icon}"></i></div>
+        <div class="product-name">${serv.name}</div>
+        <div class="product-price">₱${serv.price.toFixed(2)}</div>
+        <div style="font-size:10px; color:#c9aa8a;">⏱️ ${serv.duration}</div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".product-card").forEach(card => {
+      const id = parseInt(card.dataset.id);
+      const service = services.find(s => s.id === id);
+      card.addEventListener("click", () => addToCart(service));
+    });
+  }
+
+  function addToCart(service) {
+    const existing = cart.find(i => i.id === service.id);
+    if (existing) existing.quantity++;
+    else cart.push({ ...service, quantity: 1 });
+    renderCart();
+  }
+
+  function updateQty(id, delta) {
+    const idx = cart.findIndex(i => i.id === id);
+    if (idx === -1) return;
+    cart[idx].quantity += delta;
+    if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function getTotal() { return cart.reduce((s, i) => s + i.price * i.quantity, 0); }
+
+  function renderCart() {
+    const container = document.getElementById("cartItemsContainer");
+    const total = getTotal();
+    document.getElementById("subtotalAmount").innerHTML = `₱${total.toFixed(2)}`;
+    document.getElementById("totalAmount").innerHTML = `₱${total.toFixed(2)}`;
+    if (cart.length === 0) { container.innerHTML = `<div style="text-align:center; padding:30px; color:#c9aa8a;"><i class="fas fa-chair"></i> No services added</div>`; updateChangeDisplay(); return; }
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-info"><div class="cart-item-name"><i class="fas ${item.icon}"></i> ${item.name}</div><div class="cart-item-meta">₱${item.price.toFixed(2)} | ${item.duration}</div></div>
+        <div class="cart-item-actions">
+          <button class="qty-btn" data-id="${item.id}" data-delta="-1"><i class="fas fa-minus"></i></button>
+          <span class="item-qty">${item.quantity}</span>
+          <button class="qty-btn" data-id="${item.id}" data-delta="1"><i class="fas fa-plus"></i></button>
+          <span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span>
+          <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash-can"></i></button>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".qty-btn").forEach(btn => btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const delta = parseInt(btn.dataset.delta); updateQty(id, delta); }));
+    document.querySelectorAll(".remove-item").forEach(btn => btn.addEventListener("click", (e) => { const id = parseInt(btn.dataset.id); const idx = cart.findIndex(i => i.id === id); if(idx !== -1) cart.splice(idx,1); renderCart(); }));
+    updateChangeDisplay();
+  }
+
+  function updateChangeDisplay() {
+    const total = getTotal();
+    if (selectedPaymentMethod === "cash") {
+      const cash = parseFloat(document.getElementById("cashInput")?.value) || 0;
+      const diff = cash - total;
+      document.getElementById("changeAmount").innerHTML = diff >= 0 ? `₱${diff.toFixed(2)} change` : `₱${Math.abs(diff).toFixed(2)} short`;
+    } else {
+      const ref = document.getElementById("transactionRefInput")?.value.trim();
+      document.getElementById("digitalPaymentStatus").innerHTML = ref ? "<i class='fas fa-check-circle'></i> Reference OK" : "<i class='fas fa-exclamation-triangle'></i> Reference required";
+      document.getElementById("changeAmount").innerHTML = `Total: ₱${total.toFixed(2)} (${selectedPaymentMethod.toUpperCase()})`;
+    }
+  }
+
+  function setPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll(".method-btn").forEach(btn => btn.classList.remove("active"));
+    document.querySelector(`.method-btn[data-method="${method}"]`).classList.add("active");
+    const cashDiv = document.getElementById("cashSection"), digitalDiv = document.getElementById("digitalPaymentSection");
+    if (method === "cash") { cashDiv.style.display = "block"; digitalDiv.style.display = "none"; }
+    else { cashDiv.style.display = "none"; digitalDiv.style.display = "block"; updateQrByMethod(method); }
+    updateChangeDisplay();
+  }
+  function updateQrByMethod(method) {
+    const container = document.getElementById("qrContainer");
+    if (method === "gcash") container.innerHTML = `<div class="qr-placeholder"><i class="fab fa-gcash fa-3x"></i><span>GCash</span></div><div style="font-size:12px;">Scan: 0915-678-1234<br>GupitanBSalon</div>`;
+    else if (method === "paymaya") container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-mobile-alt fa-3x"></i><span>PayMaya</span></div><div style="font-size:12px;">gupitan@paymaya.com</div>`;
+    else container.innerHTML = `<div class="qr-placeholder"><i class="fas fa-credit-card fa-3x"></i><span>Card</span></div><div style="font-size:12px;">Tap / Insert card terminal</div>`;
+  }
+
+  function checkout() {
+    if (cart.length === 0) return alert("Add grooming services first.");
+    const total = getTotal();
+    if (selectedPaymentMethod === "cash") {
+      const cashGiven = parseFloat(document.getElementById("cashInput").value) || 0;
+      if (cashGiven < total) return alert(`Insufficient cash. Total: ₱${total.toFixed(2)}`);
+      processSale(total, cashGiven, `Cash: ₱${cashGiven.toFixed(2)} | Change: ₱${(cashGiven - total).toFixed(2)}`);
+    } else {
+      const ref = document.getElementById("transactionRefInput").value.trim();
+      if (!ref) return alert(`Please provide transaction reference for ${selectedPaymentMethod.toUpperCase()}`);
+      processSale(total, total, `${selectedPaymentMethod.toUpperCase()} payment | Ref: ${ref}`);
+    }
+  }
+
+  function processSale(total, paid, details) {
+    const now = new Date();
+    const itemsList = cart.map(i => `${i.name} x ${i.quantity} = ₱${(i.price*i.quantity).toFixed(2)}`).join("\n");
+    const cust = selectedCustomer.type === "walkin" ? "Walk-In Customer" : `${selectedCustomer.name} | ${selectedCustomer.phone}`;
+    const receipt = `--------------------------------
+✂️ GUPITAN BARBER & SALON 💈
+📍 13 Grooming Ave., Barangay Glow
+📅 ${now.toLocaleString()}
+--------------------------------
+CUSTOMER: ${cust}
+--------------------------------
+${itemsList}
+--------------------------------
+TOTAL:        ₱${total.toFixed(2)}
+PAYMENT:      ${details}
+AMOUNT PAID:  ₱${paid.toFixed(2)}
+--------------------------------
+Next appointment? Ask our stylist!
+Look sharp, feel great. ✨
+`;
+    document.getElementById("receiptDetails").innerHTML = receipt.replace(/\n/g,'<br>');
+    document.getElementById("receiptModal").style.display = "flex";
+    cart = []; renderCart();
+    document.getElementById("cashInput").value = "0";
+    if (document.getElementById("transactionRefInput")) document.getElementById("transactionRefInput").value = "";
+    setWalkInDefault();
+  }
+
+  function setWalkInDefault() { selectedCustomer = { id: null, name: "Walk-In Customer", type: "walkin" }; document.getElementById("selectedCustomerDisplay").innerHTML = `<i class="fas fa-person-walking-arrow-right"></i> Walk-In Customer`; }
+  function renderCustomerSearch(q) {
+    const container = document.getElementById("searchResultsContainer");
+    if (!q.trim()) { container.innerHTML = ""; return; }
+    const filtered = customers.filter(c => c.name.toLowerCase().includes(q.toLowerCase()) || c.phone.includes(q));
+    if (!filtered.length) { container.innerHTML = "<div class='search-result-item'>No customers</div>"; return; }
+    container.innerHTML = filtered.map(c => `<div class='search-result-item' data-id='${c.id}' data-name='${c.name}' data-phone='${c.phone}'><i class='fas fa-user'></i> ${c.name} - ${c.phone}</div>`).join("");
+    document.querySelectorAll(".search-result-item").forEach(el => el.addEventListener("click", () => { selectedCustomer = { id: parseInt(el.dataset.id), name: el.dataset.name, phone: el.dataset.phone, type: "existing" }; document.getElementById("selectedCustomerDisplay").innerHTML = `<i class='fas fa-user-check'></i> ${el.dataset.name} (${el.dataset.phone})`; container.innerHTML = ""; document.getElementById("customerSearchInput").value = ""; }));
+  }
+
+  function init() {
+    renderServices("all"); renderCart();
+    document.querySelectorAll(".cat-btn").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderServices(btn.dataset.cat); }));
+    document.getElementById("searchCustomerBtn").addEventListener("click",()=>renderCustomerSearch(document.getElementById("customerSearchInput").value));
+    document.getElementById("customerSearchInput").addEventListener("keyup",e=>renderCustomerSearch(e.target.value));
+    document.getElementById("clearCartBtn").addEventListener("click",()=>{cart=[]; renderCart();});
+    document.getElementById("checkoutBtn").addEventListener("click",checkout);
+    document.getElementById("cashInput").addEventListener("input",updateChangeDisplay);
+    document.querySelectorAll(".method-btn").forEach(btn=>btn.addEventListener("click",()=>setPaymentMethod(btn.dataset.method)));
+    document.getElementById("addCustomerBtn").addEventListener("click",()=>document.getElementById("addCustomerModal").style.display="flex");
+    document.getElementById("cancelCustomerBtn").addEventListener("click",()=>document.getElementById("addCustomerModal").style.display="none");
+    document.getElementById("saveCustomerBtn").addEventListener("click",()=>{ let name=document.getElementById("newCustomerName").value.trim(), phone=document.getElementById("newCustomerPhone").value.trim(); if(!name||!phone) return alert("Enter name & phone"); let newId=customers.length+1; customers.push({id:newId,name,phone,address:document.getElementById("newCustomerAddress").value}); selectedCustomer={id:newId,name,phone,type:"existing"}; document.getElementById("selectedCustomerDisplay").innerHTML=`<i class='fas fa-user-check'></i> ${name} (${phone})`; document.getElementById("addCustomerModal").style.display="none"; document.getElementById("newCustomerName").value=""; document.getElementById("newCustomerPhone").value=""; alert("Customer added"); });
+    const modal=document.getElementById("receiptModal"), closeBtn=document.getElementById("closeModalBtn");
+    closeBtn.onclick=()=>modal.style.display="none"; window.onclick=(e)=>{if(e.target===modal)modal.style.display="none";};
+    document.getElementById("currentDate").innerText=new Date().toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});
+    setWalkInDefault(); setPaymentMethod("cash");
+  }
+  init();
+</script>
+</body>
+</html>
